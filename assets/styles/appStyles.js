@@ -52,7 +52,7 @@ export const commons = StyleSheet.create({
         maxWidth:Dimensions.get('window').width/2.2
     },signContainer:{
         flex: 1,
-        backgroundColor: styles.colors.darkCyan
+        backgroundColor: colors.darkCyan
     }, 
     header: {
       flex: 1,
