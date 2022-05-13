@@ -5,7 +5,19 @@ import * as Animatable from 'react-native-animatable'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
 import * as styles from '../../assets/styles/appStyles'
+import { validateEmail } from '../services/Validations'
+import { LoadingOverlay } from '../components/LoadingOverlay'
+import { ModalInfoError } from '../components/ModalInfoError'
+
 export const SignInScreen = ({ navigation }) => {
+  const [modalVisible, setModalVisible] = React.useState(false);
+  const [modalVisibleError, setModalVisibleError] = React.useState(false);
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [messageError, setMessageError] = React.useState("");
+
+
+  let component = <LoadingOverlay isVisible={isLoading} setIsLoading={setIsLoading} setModalVisibleError={setModalVisibleError} setMessageError={setMessageError} />
+
   const [data, setData] = React.useState({
     email: '',
     password: '',
@@ -13,7 +25,7 @@ export const SignInScreen = ({ navigation }) => {
     secureTextEntry: true
   })
   const textInputChange = (val) => {
-    if (val.length != 0 && val.length>15) {
+    if (val.length != 0 && val.length > 15) {
       setData({
         ...data,
         email: val,
@@ -43,7 +55,7 @@ export const SignInScreen = ({ navigation }) => {
 
   return (
     <View style={styles.commons.signContainer}>
-      <StatusBar backgroundColor={styles.colors.darkCyan} barStyle="light-content"/>
+      <StatusBar backgroundColor={styles.colors.darkCyan} barStyle="light-content" />
       <View style={styles.commons.header}>
         <Text style={styles.commons.text_header}>Welcome</Text>
 
@@ -105,15 +117,39 @@ export const SignInScreen = ({ navigation }) => {
         {/* A button. */}
 
         <View style={styles.commons.button}>
-          <LinearGradient colors={["#08d4c4", "#01ab9d"]} style={styles.commons.signIn}>
-            <Text style={[styles.commons.textSign, { color: "#fff" }]}>Sign In</Text>
-          </LinearGradient>
+          <TouchableOpacity style={styles.commons.signIn} onPress={() => {
+            if (data.email != null && data.password != null && data.password != '' && data.email != '') {
+              let validator = validateEmail(data.email);
+              if (validator.Result) {
+                setIsLoading(true);
+              } else {
+                setModalVisibleError(true)
+                setMessageError(validator.message);
+              }
+            } else {
+              setModalVisibleError(true)
+              setMessageError("Verifique las credenciales de acceso");
+            }
+          }}>
+
+            <LinearGradient colors={["#08d4c4", "#01ab9d"]} style={styles.commons.signIn}>
+              <Text style={[styles.commons.textSign, { color: "#fff" }]}>Sign In</Text>
+            </LinearGradient>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.navigate("SIGNUP")}
-            style={[styles.commons.signIn, { borderColor: "#009387", borderWidth: 1, marginTop: 15 }]}>
+            style={[styles.commons.signIn, { borderColor: styles.colors.darkCyan, borderWidth: 1, marginTop: 15 }]}>
             <Text style={[styles.commons.textSign, { color: styles.colors.darkCyan }]}>Sign Up</Text>
           </TouchableOpacity>
         </View>
+        {isLoading ? component : <View></View>}
+        <ModalInfoError
+          modalVisible={modalVisibleError}
+          setModalVisible={setModalVisibleError}
+          message={messageError}
+        >
+        </ModalInfoError>
+
       </Animatable.View>
     </View>
   )

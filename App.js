@@ -27,7 +27,8 @@ function RootNav() {
       <Drawer.Screen name="VIDEOS" component={VideosScreen} />
       <Drawer.Screen name="BADGES" component={BadgesScreen} />
       <Drawer.Screen name="SUGGESTIONS" component={SuggestionsScreen} />
-    </Drawer.Navigator>);
+    </Drawer.Navigator>
+  );
 }
 
 export default function App() {
