@@ -1,4 +1,3 @@
-import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import { HomeScreen } from '../screens/HomeScreen';
@@ -9,10 +8,19 @@ import { MapScreen } from '../screens/MapScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { SuggestionsScreen } from '../screens/SuggestionsScreen';
 import { DrawerContent } from '../screens/DrawerContent';
-const RootDrawer = createDrawerNavigator();
+import * as styles from '../../assets/styles/appStyles';
+import { useWindowDimensions } from 'react-native';
 
+
+const RootDrawer = createDrawerNavigator();
 export const RootDrawerScreen = ({ navigation }) => (
-    <RootDrawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
+    <RootDrawer.Navigator drawerContent={props => <DrawerContent {...props} />} screenOptions={{
+        headerStyle: { backgroundColor: styles.colors.darkCyan },
+        headerTintColor: styles.colors.cultured,
+        drawerType: useWindowDimensions().width >= 768 ? "permanent" : "back",
+        drawerStyle: useWindowDimensions().width >= 768? null : { width: "75%" },
+        overlayColor: "transparent",
+    }}>
         <RootDrawer.Screen name="HOME" component={HomeScreen} />
         <RootDrawer.Screen name="PROFILE" component={ProfileScreen} />
         <RootDrawer.Screen name="MAP" component={MapScreen} />
@@ -24,4 +32,3 @@ export const RootDrawerScreen = ({ navigation }) => (
 )
 
 
-const styles = StyleSheet.create({})

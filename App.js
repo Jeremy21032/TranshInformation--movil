@@ -1,56 +1,93 @@
+import React from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
+import { NavigationContainer, DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
+import { Provider as PaperProvider, DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme } from 'react-native-paper'
 import { DrawerContent } from './app/screens/DrawerContent';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { HomeScreen } from './app/screens/HomeScreen';
-import { VideosScreen } from './app/screens/VideosScreen';
-import { BadgesScreen } from './app/screens/BadgesScreen';
-import { NoticesScreen } from './app/screens/NoticesScreen';
-import { MapScreen } from './app/screens/MapScreen';
-import { ProfileScreen } from './app/screens/ProfileScreen';
-import { SuggestionsScreen } from './app/screens/SuggestionsScreen';
+import { AuthContext } from './app/components/context'
 import { loadFirebaseConfiguration } from './app/util/FirebaseConfiguration';
-import React from 'react';
 import { RootStackScreen } from './app/navs/RootStackScreen';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { RootDrawerScreen } from './app/navs/RootDrawerScreen';
+import { getPersonalRol } from './app/services/InfoServicesPersonal';
+import * as styles from './assets/styles/appStyles';
 const Drawer = createDrawerNavigator();
-function LoginNav() {
 
+const CustomDefaultTheme = {
+  ...NavigationDefaultTheme,
+  ...PaperDefaultTheme,
+  color: {
+    ...NavigationDefaultTheme.colors,
+    ...PaperDefaultTheme.colors,
+    background:styles.colors.cultured,
+    text:styles.colors.black
+  }
 }
-function RootNav() {
-  return (
-    <Drawer.Navigator drawerContent={props => <DrawerContent {...props} />}>
-      <Drawer.Screen name="HOME" component={HomeScreen} />
-      <Drawer.Screen name="PROFILE" component={ProfileScreen} />
-      <Drawer.Screen name="MAP" component={MapScreen} />
-      <Drawer.Screen name="NOTICES" component={NoticesScreen} />
-      <Drawer.Screen name="VIDEOS" component={VideosScreen} />
-      <Drawer.Screen name="BADGES" component={BadgesScreen} />
-      <Drawer.Screen name="SUGGESTIONS" component={SuggestionsScreen} />
-    </Drawer.Navigator>
-  );
+const CustomDarkTheme = {
+  ...NavigationDarkTheme,
+  ...PaperDarkTheme,
+  color: {
+    ...NavigationDarkTheme.colors,
+    ...PaperDarkTheme.colors,
+    text:styles.colors.cultured,
+    background:styles.colors.black
+  }
 }
 
-export default function App() {
+const App = () => {
+  const [isDarkTheme, setIsDarkTheme] = React.useState(false);
+  const authContext = React.useMemo(() => ({
+    toggleTheme: () => {
+      setIsDarkTheme(isDarkTheme => !isDarkTheme);
+    }
+  }), []);
+
   const [login, setLogin] = React.useState(false);
+  const theme = isDarkTheme ? CustomDefaultTheme : CustomDarkTheme;
   loadFirebaseConfiguration();
+  const auth = getAuth();
+  onAuthStateChanged(auth, async (user) => {
+    if (user) {
+      const uid = user.uid;
+      const email = user.email;
+      global.email = email;
+      let userData = await getPersonalRol(global.email);
+      global.rol = userData.rol;
+      global.name = userData.name;
+      global.lastName = userData.lastName;
+      global.profilePic = userData.profilePic;
+      if (global.rol == null) {
+        setLogin(false);
+        console.log("rol null");
+      } else {
+        setLogin(true);
+      }
+    } else {
+      setLogin(false);
+    }
+  });
 
 
 
 
   return (
-    <NavigationContainer>
-      {/* <RootNav /> */}
-      <RootStackScreen />
-    </NavigationContainer>
+    <PaperProvider theme={theme}>
+      <AuthContext.Provider value={authContext}>
+
+        <NavigationContainer theme={theme}>
+          {login == true ?
+            (global.rol == "cliente" ? (
+              <RootDrawerScreen />
+            ) : (
+              <RootStackScreen />)
+            ) : (
+              <RootStackScreen />)}
+          {/* <RootStackScreen /> */}
+        </NavigationContainer>
+      </AuthContext.Provider>
+    </PaperProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;

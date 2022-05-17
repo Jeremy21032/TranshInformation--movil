@@ -8,7 +8,7 @@ import * as styles from '../../assets/styles/appStyles'
 import { validateEmail } from '../services/Validations'
 import { LoadingOverlay } from '../components/LoadingOverlay'
 import { ModalInfoError } from '../components/ModalInfoError'
-
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
 export const SignInScreen = ({ navigation }) => {
   const [modalVisible, setModalVisible] = React.useState(false);
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
@@ -22,29 +22,44 @@ export const SignInScreen = ({ navigation }) => {
     email: '',
     password: '',
     check_textInputChange: false,
-    secureTextEntry: true
+    secureTextEntry: true,
+    isvalidEmail: true,
+    isvalidPassword: true
   })
   const textInputChange = (val) => {
-    if (val.length != 0 && val.length > 15) {
+    let validator = validateEmail(val);
+
+    if (validator.Result && val.trim().length >= 6) {
       setData({
         ...data,
         email: val,
-        check_textInputChange: true
+        check_textInputChange: true,
+        isvalidEmail: true,
       })
     } else {
       setData({
         ...data,
         email: val,
-        check_textInputChange: false
+        check_textInputChange: false,
+        isvalidEmail: false
       })
     }
   }
   const handlePasswordChange = (val) => {
-    setData({
-      ...data,
-      password: val
+    if (val.trim().length >= 6) {
+      setData({
+        ...data,
+        password: val,
+        isvalidPassword: true
 
-    })
+      })
+    } else {
+      setData({
+        ...data,
+        password: val,
+        isvalidPassword: false
+      })
+    }
   }
   const updateSecureTextInput = () => {
     setData({
@@ -52,7 +67,39 @@ export const SignInScreen = ({ navigation }) => {
       secureTextEntry: !data.secureTextEntry
     })
   }
+  const auth = getAuth();
+  const singIn = async (mail) => {
+    setIsLoading(true);
+    console.log(mail);
+    console.log("ENTRA A AUT");
+    try {
+      handleSignIn();
+    } catch (error) {
+      setIsLoading(false);
+      setText("Correo electrónico incorrecto.");
+      setModalVisibleError(true);
+    }
 
+  };
+  const handleSignIn = async () => {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        console.log("Sign in!");
+        setIsLoading(false);
+        setModalVisibleError(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setModalVisibleError(true);
+        setMessageError(errorMessage);
+        console.log("Error>>>>: ", (errorCode, errorMessage));
+      });
+  };
   return (
     <View style={styles.commons.signContainer}>
       <StatusBar backgroundColor={styles.colors.darkCyan} barStyle="light-content" />
@@ -86,6 +133,11 @@ export const SignInScreen = ({ navigation }) => {
               />
             </Animatable.View> : <></>}
         </View>
+        {data.isvalidEmail ? null :
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.commons.errorMsg}>Email must have the correct format</Text>
+          </Animatable.View>
+        }
 
 
         {       /* A password input field. */}
@@ -114,6 +166,11 @@ export const SignInScreen = ({ navigation }) => {
             />
           </TouchableOpacity>
         </View>
+        {data.isvalidPassword ? null :
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.commons.errorMsg}>Password must be at least 6 characters</Text>
+          </Animatable.View>
+        }
         {/* A button. */}
 
         <View style={styles.commons.button}>
@@ -121,7 +178,10 @@ export const SignInScreen = ({ navigation }) => {
             if (data.email != null && data.password != null && data.password != '' && data.email != '') {
               let validator = validateEmail(data.email);
               if (validator.Result) {
-                setIsLoading(true);
+                // setIsLoading(true);
+                // navigation.navigate("HOMEIN")
+                singIn(data.email);
+
               } else {
                 setModalVisibleError(true)
                 setMessageError(validator.message);
@@ -142,6 +202,12 @@ export const SignInScreen = ({ navigation }) => {
             <Text style={[styles.commons.textSign, { color: styles.colors.darkCyan }]}>Sign Up</Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("FORGOT")}
+          style={{alignSelf: "center", marginVertical:20}}
+        >
+          <Text style={[styles.commons.textSign, { color: styles.colors.darkCyan }]}>Forgot Password?</Text>
+        </TouchableOpacity>
         {isLoading ? component : <View></View>}
         <ModalInfoError
           modalVisible={modalVisibleError}

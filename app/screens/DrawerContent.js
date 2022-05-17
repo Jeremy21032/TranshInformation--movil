@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet } from 'react-native';
 import { DrawerContentScrollView, DrawerItem } from '@react-navigation/drawer';
 import {
+    useTheme,
     Avatar,
     Title,
     Caption,
@@ -12,26 +13,40 @@ import {
     Switch
 } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
+import { getAuth } from "firebase/auth";
+import { AuthContext } from '../components/context';
 export function DrawerContent(props) {
-
-    const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-    const toggleTheme =()=>{
-        setIsDarkTheme(!isDarkTheme);
-    }
-
+    const {toggleTheme} = React.useContext(AuthContext);
+    const paperTheme=useTheme();
+    function cerrar() {
+        const auth = getAuth();
+        auth
+          .signOut()
+          .then(function () {
+            global.rol = "";
+            global.login=false;
+            console.log("Log Out");
+          })
+          .catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+      
+            console.log("Error: ", (errorCode, errorMessage));
+          });
+      }
     return (
-        <View style={{ flex: 1, }}>
-            <DrawerContentScrollView>
+        <View style={{ flex: 1,backgroundColor:paperTheme.colors.background}} >
+            <DrawerContentScrollView  >
                 <View style={styles.drawerContent}>
                     <View style={styles.userInfoSection}>
                         <View style={{ flexDirection: 'row', marginTop: 15 }}>
                             <Avatar.Image
-                                source={{ uri: "https://images.unsplash.com/photo-1499996860823-5214fcc65f8f?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=466&q=80" }}
+                                source={{ uri: global.profilePic }}
                                 size={50}
                             />
                             <View style={{ marginLeft: 10, flexDirection: 'column' }}>
-                                <Title style={styles.title}>Jeremy León</Title>
-                                <Caption style={styles.caption}>jeremisma2001@hotmail.com</Caption>
+                                <Title style={styles.title}>{global.name} {global.lastName}</Title>
+                                <Caption style={styles.caption}>{global.email}</Caption>
                             </View>
                         </View>
 
@@ -79,7 +94,7 @@ export function DrawerContent(props) {
                             <View style={styles.preference}>
                                 <Text>Dark Theme</Text>
                                 <View pointerEvents="none">
-                                    <Switch value={isDarkTheme} />
+                                    <Switch value={paperTheme.dark} />
                                 </View>
                             </View>
 
@@ -91,7 +106,7 @@ export function DrawerContent(props) {
                 <DrawerItem
                     label="Sing Out"
                     icon={({ color, size }) => (<Icon name="exit-to-app" color={color} size={size} />)}
-                    onPress={() => { }}
+                    onPress={() => { cerrar()}}
                 />
             </Drawer.Section>
         </View>
