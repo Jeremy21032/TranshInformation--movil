@@ -10,8 +10,9 @@ import { loadFirebaseConfiguration } from './app/util/FirebaseConfiguration';
 import { RootStackScreen } from './app/navs/RootStackScreen';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { RootDrawerScreen } from './app/navs/RootDrawerScreen';
-import { getPersonalRol } from './app/services/InfoServicesPersonal';
+import { getPersonalInfomation, getPersonalRol } from './app/services/InfoServicesPersonal';
 import * as styles from './assets/styles/appStyles';
+import { KnowStackScreen } from './app/navs/KnowStackScreen';
 const Drawer = createDrawerNavigator();
 
 const CustomDefaultTheme = {
@@ -20,8 +21,8 @@ const CustomDefaultTheme = {
   color: {
     ...NavigationDefaultTheme.colors,
     ...PaperDefaultTheme.colors,
-    background:styles.colors.cultured,
-    text:styles.colors.black
+    background: styles.colors.cultured,
+    text: styles.colors.black
   }
 }
 const CustomDarkTheme = {
@@ -30,8 +31,8 @@ const CustomDarkTheme = {
   color: {
     ...NavigationDarkTheme.colors,
     ...PaperDarkTheme.colors,
-    text:styles.colors.cultured,
-    background:styles.colors.black
+    text: styles.colors.cultured,
+    background: styles.colors.black
   }
 }
 
@@ -57,6 +58,8 @@ const App = () => {
       global.name = userData.name;
       global.lastName = userData.lastName;
       global.profilePic = userData.profilePic;
+      let verify = await getPersonalInfomation();
+      global.direccionBase = verify.direccionBase;
       if (global.rol == null) {
         setLogin(false);
         console.log("rol null");
@@ -78,7 +81,9 @@ const App = () => {
         <NavigationContainer theme={theme}>
           {login == true ?
             (global.rol == "cliente" ? (
-              <RootDrawerScreen />
+              (global.direccionBase == null)
+                ? (<KnowStackScreen />
+                ) : (<RootDrawerScreen />)
             ) : (
               <RootStackScreen />)
             ) : (

@@ -31,4 +31,37 @@ export const savePersonal = async (person) => {
 
 export const savePersonalRol = async (person) => {
     await setDoc(doc(global.dbCon, "/Roles", person.email), person);
-  };
+};
+
+export const getPersonalInfomation = async () => {
+    const q = doc(global.dbCon, "/Personas/" + global.email);
+    const docSnap = await getDoc(q);
+    let person = docSnap.data();
+    console.log("------- TRAE LA INFORMACION ---------");
+    console.log(person)
+    return person;
+};
+
+export const getPlaces = async (refreshFN) => {
+    const q = doc(global.dbCon, "/Mapa/Direcciones");
+    const docSnap = await getDoc(q);
+    let places = docSnap.data();
+    console.log(places.lugares)
+    return (places.lugares);
+
+}
+
+
+export const aniadirDireccionBase = async (direccion) => {
+
+
+    const docRef = doc(global.dbCon, "/Personas/" + global.email);
+
+    const docSnapresult = await getDoc(docRef);
+
+    let docResultData = docSnapresult.data();
+
+    await updateDoc(docRef, {
+        direccionBase: direccion,
+    });
+};
