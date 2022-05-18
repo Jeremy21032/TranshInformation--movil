@@ -15,6 +15,7 @@ export const colors = {
     black: "#000000",
     blue: "#124E99",
     darkCyan:"#009387",
+    lightGray: "#9697B7"
 
 
 };
@@ -82,7 +83,9 @@ export const commons = StyleSheet.create({
       marginTop: 10,
       borderBottomWidth: 1,
       borderBottomColor: '#f2f2f2',
-      paddingBottom: 5
+      paddingBottom: 5,
+      alignItems: 'center',
+      alignContent:'center',
     },
     actionError: {
       flexDirection: 'row',
@@ -115,5 +118,9 @@ export const commons = StyleSheet.create({
     textSign: {
       fontSize: 18,
       fontWeight: 'bold'
+    },
+    description: {
+      color:colors.lightGray,
+      fontSize: 20,
     }
 });
