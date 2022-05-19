@@ -32,7 +32,6 @@ export const ModalInfoCorrect = ({ modalVisible, setModalVisible,message}) => {
               />
             </View>
           </View>
-          <Text style={styles.modalTitle}>MENSAJE</Text>
           <View style={[styles.viewFlex]}>
             <Text style={styles.textMessage}>
                {message}

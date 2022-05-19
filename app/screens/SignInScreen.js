@@ -5,7 +5,7 @@ import * as Animatable from 'react-native-animatable'
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
 import * as styles from '../../assets/styles/appStyles'
-import { validateEmail } from '../services/Validations'
+import { validateCorrectEmail } from '../services/Validate'
 import { LoadingOverlay } from '../components/LoadingOverlay'
 import { ModalInfoError } from '../components/ModalInfoError'
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'
@@ -27,9 +27,8 @@ export const SignInScreen = ({ navigation }) => {
     isvalidPassword: true
   })
   const textInputChange = (val) => {
-    let validator = validateEmail(val);
-
-    if (validator.Result && val.trim().length >= 6) {
+    let validator = validateCorrectEmail(val);
+    if (validator && val.trim().length >= 6) {
       setData({
         ...data,
         email: val,
@@ -96,7 +95,7 @@ export const SignInScreen = ({ navigation }) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         setModalVisibleError(true);
-        setMessageError(errorMessage);
+        setMessageError("Constraseña incorrecta.");
         console.log("Error>>>>: ", (errorCode, errorMessage));
       });
   };
@@ -176,15 +175,13 @@ export const SignInScreen = ({ navigation }) => {
         <View style={styles.commons.button}>
           <TouchableOpacity style={styles.commons.signIn} onPress={() => {
             if (data.email != null && data.password != null && data.password != '' && data.email != '') {
-              let validator = validateEmail(data.email);
-              if (validator.Result) {
-                // setIsLoading(true);
-                // navigation.navigate("HOMEIN")
+              let validator = validateCorrectEmail(data.email);
+              if (validator) {
                 singIn(data.email);
 
               } else {
                 setModalVisibleError(true)
-                setMessageError(validator.message);
+                setMessageError("El correo No consta con el formato correcto");
               }
             } else {
               setModalVisibleError(true)

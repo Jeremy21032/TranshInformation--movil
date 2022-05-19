@@ -50,9 +50,17 @@ export const getPlaces = async (refreshFN) => {
     return (places.lugares);
 
 }
+export const getDireccionBase = async (refreshFn) => {
+    const q = doc(global.dbCon, "/Personas/" + global.email);
+    const docSnap = await getDoc(q);
+    let person = docSnap.data();
+    console.log("------- TRAE LA INFORMACION ---------");
+    console.log(person.direccionBase)
+    refreshFn(person.direccionBase);
+};
 
 
-export const aniadirDireccionBase = async (direccion) => {
+export const aniadirDireccionBase = async (direccion,birthdate) => {
 
 
     const docRef = doc(global.dbCon, "/Personas/" + global.email);
@@ -63,5 +71,6 @@ export const aniadirDireccionBase = async (direccion) => {
 
     await updateDoc(docRef, {
         direccionBase: direccion,
+        birthdate:birthdate,
     });
 };

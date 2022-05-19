@@ -4,37 +4,40 @@ import * as Animatable from 'react-native-animatable'
 import { useTheme } from 'react-native-paper';
 import * as styles from '../../assets/styles/appStyles'
 import { LinearGradient } from 'expo-linear-gradient';
-import { aniadirDireccionBase, getPersonalInfomation, getPlaces } from '../services/InfoServicesPersonal';
+import { aniadirDireccionBase, getDireccionBase, getPersonalInfomation, getPlaces } from '../services/InfoServicesPersonal';
 import DropDownPicker from 'react-native-dropdown-picker';
 import Feather from 'react-native-vector-icons/Feather';
 import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Button } from 'react-native-elements';
+import { LoadingOverlay } from '../components/LoadingOverlay';
+import { ModalInfoError } from '../components/ModalInfoError';
+import { ModalInfoCorrect } from '../components/ModalInfoCorrect';
 
 
 export const KnowScreen = ({ navigation }) => {
-    const [selectedDate, setSelectedDate] = React.useState('');
     const [show, setShow] = React.useState(false);
     const [open, setOpen] = React.useState(false);
     const [value, setValue] = React.useState(null);
     const [items, setItems] = React.useState([]);
-    const [selected, setSelected] = React.useState(null);
     const { colors } = useTheme();
     const [mode, setMode] = React.useState('date');
     const [date2, setDate2] = React.useState(new Date());
-    const [date, setDate] = React.useState("00-00-0000");
+    const [modalVisibleError, setModalVisibleError] = React.useState(false);
+    const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
+    const [messageCorrect, setMessageCorrect] = React.useState("");
+    const [isLoading, setIsLoading] = React.useState(false);
+    const [messageError, setMessageError] = React.useState("");
+    const [direction, setDirection] = React.useState(null);
     const [data, setData] = React.useState({
-        email: '',
-        password: '',
-        check_textInputChange: false,
-        secureTextEntry: true,
-        isvalidEmail: true,
-        isvalidPassword: true
+        date: '',
+        direcionBase: null,
     })
+    let component = <LoadingOverlay isVisible={isLoading} setIsLoading={setIsLoading} setModalVisibleError={setModalVisibleError} setMessageError={setMessageError} />
+
     let getItems = async () => {
-        while (items.length) {
-            items.pop();
-        }
+
+
         let places = await getPlaces();
         for (let i = 0; i < places.length; i++) {
             if (items.includes(places[i])) {
@@ -59,7 +62,7 @@ export const KnowScreen = ({ navigation }) => {
             (tempDate.getMonth() + 1) +
             "-" +
             tempDate.getFullYear();
-        setDate(fDate);
+        setData({ ...data, date: fDate });
     };
     const showMode = (currentMode) => {
         setShow(true);
@@ -67,14 +70,44 @@ export const KnowScreen = ({ navigation }) => {
     };
 
     React.useEffect(() => {
+        if (items.length > 0) {
+
+            setItems([]);
+        }
         getItems();
     }, [])
-    let aniadirDireccion = async () => {
-        await aniadirDireccionBase(selected);
-        let usuario = await getPersonalInfomation();
-        if (usuario.direcionBase != null) {
-            navigation.navigate("HOMEKN");
+    React.useEffect(() => {
+        if (direction != null) {
+            canContinue();
         }
+    }, [direction])
+
+    let validate = async () => {
+        setIsLoading(true)
+        if (data.direcionBase != null && data.date != null && data.direcionBase != '' && data.date != '') {
+            actualizarInformacion().then(() => {
+                setModalVisibleCorrect(true);
+                setMessageCorrect("Información actualizada con éxito")
+                setIsLoading(false);
+            }).catch((error) => {
+                setModalVisibleError(true);
+                setMessageError(error.message)
+                setIsLoading(false);
+            });
+        } else {
+            setModalVisibleError(true);
+            setMessageError("Verifica que los campos estén llenos")
+            setIsLoading(false);
+
+        }
+    }
+    let actualizarInformacion = async () => {
+
+        await aniadirDireccionBase(data.direcionBase, data.date);
+        await getDireccionBase(setDirection);
+    }
+    let canContinue = () => {
+        navigation.navigate("HOMEKN")
     }
     return (
         <View style={styles.commons.signContainer}>
@@ -98,9 +131,10 @@ export const KnowScreen = ({ navigation }) => {
                         color="#05375a"
                         size={20} />
                     <TextInput
-                        placeholder={date}
+                        placeholder={data.date != '' ? data.date : "Ingresa tu fecha de nacimiento"}
                         style={styles.commons.textInput}
                         autoCapitalize="none"
+                        editable={false}
                     />
                     <TouchableOpacity onPress={() => showMode("date")}>
                         <Feather
@@ -116,9 +150,10 @@ export const KnowScreen = ({ navigation }) => {
                         value={date2}
                         mode={mode}
                         is24Hour={true}
-                        display="default"
+                        display="calendar"
                         onChange={onChange}
                         maximumDate={new Date()}
+
                     />
                 )}
                 <Text style={styles.commons.description}>Selecciona  el sector donde vives.</Text>
@@ -131,13 +166,14 @@ export const KnowScreen = ({ navigation }) => {
                     setItems={setItems}
                     onSelectItem={(item) => {
                         console.log(item);
-                        setSelected(item.label);
+                        setData({ ...data, direcionBase: item.label });
 
                     }}
                 />
-                <Text style={{ color: colors.text }}>{selected}</Text>
+                <Text style={styles.commons.description}>{"\n"}</Text>
                 <TouchableOpacity
-                    onPress={() => { if (selected != null) { aniadirDireccion() } else { Alert.alert("asdasd", "asdasd") } }}
+                    // onPress={() => { if (selected != null) { aniadirDireccion() } else { Alert.alert("asdasd", "asdasd") } }}
+                    onPress={() => validate()}
                     style={{ width: '100%' }}
                 >
                     <LinearGradient colors={["#08d4c4", "#01ab9d"]} style={styles.commons.signIn}>
@@ -145,6 +181,19 @@ export const KnowScreen = ({ navigation }) => {
                     </LinearGradient>
                 </TouchableOpacity>
             </Animatable.View>
+            {isLoading ? component : <View></View>}
+            <ModalInfoError
+                modalVisible={modalVisibleError}
+                setModalVisible={setModalVisibleError}
+                message={messageError}
+            >
+            </ModalInfoError>
+            <ModalInfoCorrect
+                modalVisible={modalVisibleCorrect}
+                setModalVisible={setModalVisibleCorrect}
+                message={messageCorrect}
+            >
+            </ModalInfoCorrect>
 
         </View>
     )

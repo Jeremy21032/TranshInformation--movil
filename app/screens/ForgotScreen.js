@@ -6,6 +6,7 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
 import * as styles from '../../assets/styles/appStyles'
 import { validateEmail } from '../services/Validations'
+import {validateCorrectEmail} from '../services/Validate'
 import { LoadingOverlay } from '../components/LoadingOverlay'
 import { ModalInfoError } from '../components/ModalInfoError'
 import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
@@ -15,7 +16,6 @@ export const ForgotScreen = ({ navigation }) => {
     const [modalVisibleError, setModalVisibleError] = React.useState(false);
     const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
     const [messageCorrect, setMessageCorrect] = React.useState("");
-
     const [isLoading, setIsLoading] = React.useState(false);
     const [messageError, setMessageError] = React.useState("");
     const auth = getAuth();
