@@ -13,6 +13,7 @@ import { Button } from 'react-native-elements';
 import { LoadingOverlay } from '../components/LoadingOverlay';
 import { ModalInfoError } from '../components/ModalInfoError';
 import { ModalInfoCorrect } from '../components/ModalInfoCorrect';
+import { getLocation } from '../services/GeoServices';
 
 
 export const KnowScreen = ({ navigation }) => {
@@ -29,6 +30,7 @@ export const KnowScreen = ({ navigation }) => {
     const [isLoading, setIsLoading] = React.useState(false);
     const [messageError, setMessageError] = React.useState("");
     const [direction, setDirection] = React.useState(null);
+    const [map, setMap] = React.useState();
     const [data, setData] = React.useState({
         date: '',
         direcionBase: null,
@@ -40,7 +42,7 @@ export const KnowScreen = ({ navigation }) => {
 
         let places = await getPlaces();
         for (let i = 0; i < places.length; i++) {
-            if (items.includes(places[i])) {
+            if (items.includes(places[i].value)) {
 
             } else {
                 items.push(places[i]);
@@ -104,10 +106,11 @@ export const KnowScreen = ({ navigation }) => {
     let actualizarInformacion = async () => {
 
         await aniadirDireccionBase(data.direcionBase, data.date);
-        await getDireccionBase(setDirection);
+        await getLocation(setMap,data.direcionBase);
+        await getDireccionBase(setDirection,canContinue);
     }
     let canContinue = () => {
-        navigation.navigate("HOMEKN")
+        navigation.navigate("HOMEKN",{items:map})
     }
     return (
         <View style={styles.commons.signContainer}>
@@ -135,6 +138,7 @@ export const KnowScreen = ({ navigation }) => {
                         style={styles.commons.textInput}
                         autoCapitalize="none"
                         editable={false}
+                        placeholderTextColor={data.date != ''? styles.colors.black : styles.colors.lightGray}
                     />
                     <TouchableOpacity onPress={() => showMode("date")}>
                         <Feather
