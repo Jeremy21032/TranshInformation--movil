@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, ActivityIndicator, Dimensions } from 'react-native'
 import { useTheme, Sc } from '@react-navigation/native';
 import React from 'react'
-import { getLocation } from '../services/GeoServices';
+import { getLocation, getLocation2 } from '../services/GeoServices';
 import MapView, { Callout, Polygon, PROVIDER_GOOGLE } from 'react-native-maps'
 import { Modal } from 'react-native-paper';
 import SceneView from 'react-native-scene-view';
@@ -14,39 +14,49 @@ export const HomeScreen = ({ route }) => {
   const { colors } = useTheme();
   const [visible, setVisible] = React.useState(false);
   const [visibleCallOut, setVisibleCallOut] = React.useState(true);
-  const [coordinates, setCoordinates] = React.useState(null);
+  const [name, setName] = React.useState("Un placer verte de nuevo");
+  const [coordinates, setCoordinates] = React.useState([]);
   const [data, setData] = React.useState({
-    coordinates: [],
+    coordinatesM: [],
 
   })
   let final = null;
   if (route != null && route.params != null && route.params.items != null) {
-    console.log(route.params)
+    console.log("params" + route.params)
     setCoordinates(route.params.items);
     final = coordinates.sort((a, b) => a.id - b.id);
   }
-  const refreshFn = (val) => {
-    setData({ ...data, coordinates: val })
-  }
+
   React.useEffect(() => {
-    getLocation(refreshFn, global.direccionBase);
-  }, [])
-  const showCallout = () => {
-    setVisibleCallOut(true);
-  }
-  const hideCallout = () => {
-    setVisibleCallOut(false);
-  }
+    async function getData() {
+      await getLocation(setCoordinates, global.direccionBase).then(() => {
+
+        // setData({ ...data, coordinatesM: coordinates });
+        console.log("coordinatesM: " + data.coordinatesM.length);
+        console.log("coordinates: " + coordinates.length)
+        // setVisible(true);
+        setName("Hola")
+      })
+        .catch((error) => { console.log("error: " + error) })
+
+      console.log("------------coordinates----------" + coordinates)
+    }
+    getData();
+  }, [name]);
+
   const funcion = () => {
     console.log("PRESSED", visible);
 
   }
   return (
     <View>
-      {data.coordinates == null ? <ActivityIndicator size="large" /> :
+      {coordinates.length <= 0 ? <>
+        <Text style={{ color: colors.text }}>{name}</Text><ActivityIndicator size="large" />
+      </> :
         <>
-          <Text style={{ color: colors.text }}>HomeScreen</Text>
-          <Text style={{ color: colors.text }}>{data.coordinates.length}</Text>
+          <Text style={{ color: colors.text }}>{name}{global.lastName}</Text>
+          <Text style={{ color: colors.text }}>{coordinates.length}</Text>
+          <Text style={{ color: colors.text }}>{data.coordinatesM.length}</Text>
           <MapView
             provider={PROVIDER_GOOGLE}
             style={styles.map}
@@ -54,14 +64,14 @@ export const HomeScreen = ({ route }) => {
             showsUserLocation={true}
             zoomTapEnabled={true}
             region={{
-              latitude: data.coordinates[0].latitude,
-              longitude: data.coordinates[0].longitude,
+              latitude: -0.2755586,
+              longitude: -78.5433207,
               latitudeDelta: 0.00922,
               longitudeDelta: 0.00421,
             }}
           >
             <Polygon
-              coordinates={data.coordinates.sort((a, b) => a.id - b.id)}
+              coordinates={coordinates.sort((a, b) => a.id - b.id)}
               fillColor={'rgba(100,200,200,0.3)'}
               strokeColor="coral"
               strokeWidth={3}
@@ -78,13 +88,13 @@ export const HomeScreen = ({ route }) => {
             >
 
               <Callout>
-                <Text>Ruta: {data.coordinates[0].ruta}</Text>
-                <Text>Horario: {data.coordinates[0].horario}</Text>
-                <Text>Frecuencia: {data.coordinates[0].frecuencia}</Text>
-                <Text>Servicio: {data.coordinates[0].servicio}</Text>
-                <Text>ADM_ZONAL: {data.coordinates[0].adm_zonal}</Text>
-                <Text>Horas: {data.coordinates[0].horas}</Text>
-                <Text>Centro Logístico: {data.coordinates[0].centroLogistico}</Text>
+                <Text>Ruta: {coordinates[0].ruta}</Text>
+                <Text>Horario: {coordinates[0].horario}</Text>
+                <Text>Frecuencia: {coordinates[0].frecuencia}</Text>
+                <Text>Servicio: {coordinates[0].servicio}</Text>
+                <Text>ADM_ZONAL: {coordinates[0].adm_zonal}</Text>
+                <Text>Horas: {coordinates[0].horas}</Text>
+                <Text>Centro Logístico: {coordinates[0].centroLogistico}</Text>
               </Callout>
             </MapView.Marker>
           </MapView>

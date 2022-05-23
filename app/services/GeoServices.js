@@ -23,4 +23,16 @@ export const getLocation = async (refreshFn,location) => {
         locationTmp.push(doc.data());
     });
     refreshFn(locationTmp);
+    console.log(locationTmp);
+    return locationTmp;
+};
+export const getLocation2 = async (location) => {
+
+    const queryLocation = collection(global.dbCon, "/Mapa/Direcciones",location)
+    const querySnapshot = await getDocs(queryLocation);
+    let locationTmp = [];
+    querySnapshot.forEach((doc) => {
+        locationTmp.push(doc.data());
+    });
+    return locationTmp;
 };

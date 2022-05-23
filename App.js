@@ -13,6 +13,8 @@ import { RootDrawerScreen } from './app/navs/RootDrawerScreen';
 import { getPersonalInfomation, getPersonalRol } from './app/services/InfoServicesPersonal';
 import * as styles from './assets/styles/appStyles';
 import { KnowStackScreen } from './app/navs/KnowStackScreen';
+import { getLocation } from './app/services/GeoServices';
+import NetInfo from '@react-native-community/netinfo';
 const Drawer = createDrawerNavigator();
 
 const CustomDefaultTheme = {
@@ -45,6 +47,7 @@ const App = () => {
   }), []);
 
   const [login, setLogin] = React.useState(false);
+  const [logCoordinates, setLogCoordinates] = React.useState(null);
   const theme = isDarkTheme ? CustomDefaultTheme : CustomDarkTheme;
   loadFirebaseConfiguration();
   const auth = getAuth();
@@ -66,12 +69,20 @@ const App = () => {
       } else {
         setLogin(true);
       }
+      // if(global.direccionBase!=null){
+      //   await getLocation(setLogCoordinates,global.direccionBase);
+      //   global.coordinates=logCoordinates;
+      //   console.log("-------------",logCoordinates)
+      // }
     } else {
       setLogin(false);
     }
   });
 
-
+  NetInfo.fetch().then(state => {
+    console.log('Connection type', state.type);
+    console.log('Is connected?', state.isConnected);
+  });
 
 
   return (
