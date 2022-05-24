@@ -10,7 +10,6 @@ import SceneView from 'react-native-scene-view';
 
 const height = Dimensions.get('window').height;
 export const HomeScreen = ({ route }) => {
-
   const { colors } = useTheme();
   const [visible, setVisible] = React.useState(false);
   const [visibleCallOut, setVisibleCallOut] = React.useState(true);
