@@ -1,216 +1,238 @@
-import { Dimensions, StyleSheet, Text, View, TextInput, TouchableOpacity, StatusBar, Alert, Modal } from 'react-native'
-import React from 'react'
-import * as Animatable from 'react-native-animatable'
-import { useTheme } from 'react-native-paper';
-import * as styles from '../../assets/styles/appStyles'
-import { LinearGradient } from 'expo-linear-gradient';
-import { aniadirDireccionBase, getDireccionBase, getPersonalInfomation, getPlaces } from '../services/InfoServicesPersonal';
-import DropDownPicker from 'react-native-dropdown-picker';
-import Feather from 'react-native-vector-icons/Feather';
-import FontAwesome from 'react-native-vector-icons/FontAwesome'
-import DateTimePicker from "@react-native-community/datetimepicker";
-import { Button } from 'react-native-elements';
-import { LoadingOverlay } from '../components/LoadingOverlay';
-import { ModalInfoError } from '../components/ModalInfoError';
-import { ModalInfoCorrect } from '../components/ModalInfoCorrect';
-import { getLocation } from '../services/GeoServices';
-
+import {
+  StyleSheet,
+  Text,
+  View,
+  TextInput,
+  TouchableOpacity,
+  Platform,
+} from "react-native";
+import React, { useState, useEffect } from "react";
+import * as Animatable from "react-native-animatable";
+import * as styles from "../../assets/styles/appStyles";
+import { LinearGradient } from "expo-linear-gradient";
+import {
+  aniadirDireccionBase,
+  getDireccionBase,
+  getPlaces,
+} from "../services/InfoServicesPersonal";
+import DropDownPicker from "react-native-dropdown-picker";
+import Feather from "react-native-vector-icons/Feather";
+import FontAwesome from "react-native-vector-icons/FontAwesome";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { LoadingOverlay } from "../components/LoadingOverlay";
+import { ModalInfoError } from "../components/ModalInfoError";
+import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
+import { getLocation } from "../services/GeoServices";
+import { formattedDate } from "../Functions";
 
 export const KnowScreen = ({ navigation }) => {
-    const [show, setShow] = React.useState(false);
-    const [open, setOpen] = React.useState(false);
-    const [value, setValue] = React.useState(null);
-    const [items, setItems] = React.useState([]);
-    const { colors } = useTheme();
-    const [mode, setMode] = React.useState('date');
-    const [date2, setDate2] = React.useState(new Date());
-    const [modalVisibleError, setModalVisibleError] = React.useState(false);
-    const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
-    const [messageCorrect, setMessageCorrect] = React.useState("");
-    const [isLoading, setIsLoading] = React.useState(false);
-    const [messageError, setMessageError] = React.useState("");
-    const [direction, setDirection] = React.useState(null);
-    const [map, setMap] = React.useState();
-    const [data, setData] = React.useState({
-        date: '',
-        direcionBase: null,
-    })
-    let component = <LoadingOverlay isVisible={isLoading} setIsLoading={setIsLoading} setModalVisibleError={setModalVisibleError} setMessageError={setMessageError} />
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([]);
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [modalVisibleError, setModalVisibleError] = useState(false);
+  const [modalVisibleCorrect, setModalVisibleCorrect] = useState(false);
+  const [messageCorrect, setMessageCorrect] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [messageError, setMessageError] = useState("");
+  const [direction, setDirection] = useState(null);
+  const [map, setMap] = useState();
+  const [data, setData] = useState({
+    date: null,
+    direcionBase: null,
+  });
 
-    let getItems = async () => {
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
 
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
 
-        let places = await getPlaces();
-        for (let i = 0; i < places.length; i++) {
-            if (items.includes(places[i].value)) {
+  const handleConfirm = (date) => {
+    let pickedDate = new Date(date);
+    let finalDate =formattedDate(pickedDate)
+    console.warn("A date has been picked: ", finalDate);
+    setData({ ...data, date: finalDate });
+    hideDatePicker();
+  };
+  let component = (
+    <LoadingOverlay
+      isVisible={isLoading}
+      setIsLoading={setIsLoading}
+      setModalVisibleError={setModalVisibleError}
+      setMessageError={setMessageError}
+    />
+  );
 
-            } else {
-                items.push(places[i]);
+  let getItems = async () => {
+    let places = await getPlaces();
+    for (const element of places) {
+      if (!items.includes(element.value)) {
+        items.push(element);
+      }
+    }
+    console.log("items", items);
+  };
+
+  useEffect(() => {
+    if (items.length > 0) {
+      setItems([]);
+    }
+    getItems();
+  }, [items]);
+  useEffect(() => {
+    if (direction != null) {
+      canContinue();
+    }
+  }, [direction]);
+
+  let validate = async () => {
+    setIsLoading(true);
+    if (
+      data.direcionBase != null &&
+      data.date != null &&
+      data.direcionBase != "" &&
+      data.date != ""
+    ) {
+      actualizarInformacion()
+        .then(() => {
+          setModalVisibleCorrect(true);
+          setMessageCorrect("Información actualizada con éxito");
+          setIsLoading(false);
+        })
+        .catch((error) => {
+          setModalVisibleError(true);
+          setMessageError(error.message);
+          setIsLoading(false);
+        });
+        setIsLoading(false);
+    } else {
+      setModalVisibleError(true);
+      setMessageError("Verifica que los campos estén llenos");
+      setIsLoading(false);
+    }
+  };
+  let actualizarInformacion = async () => {
+    await aniadirDireccionBase(data.direcionBase, data.date);
+    await getLocation(setMap, data.direcionBase);
+    await getDireccionBase(setDirection, canContinue);
+  };
+  let canContinue = () => {
+    navigation.navigate("HOMEKN", { items: map });
+  };
+  return (
+    <View style={styles.commons.signContainer}>
+      <View style={styles.commons.header}>
+        <Text style={styles.commons.text_header}></Text>
+        <Text style={styles.commons.text_header}>Hola, {global.name}.</Text>
+        <Text style={styles.commons.text_header}>
+          Antes de continuar, queremos conocerte un poco más.
+        </Text>
+      </View>
+      <Animatable.View style={stylesK.footer} animation="fadeInUpBig">
+        <Text style={styles.commons.description}>
+          Por que para nosotros eres importante, queremos formar parte de tus
+          momentos importantes
+        </Text>
+        <Text
+          style={[
+            styles.commons.text_footer,
+            {
+              marginTop: 35,
+            },
+          ]}
+        >
+          Fecha de Nacimiento
+        </Text>
+        <View style={[styles.commons.action, { marginBottom: 35 }]}>
+          <FontAwesome name="birthday-cake" color="#05375a" size={20} />
+          <TextInput
+            placeholder={
+              data.date != "" && data.date != null
+                ? data.date
+                : "Ingresa tu fecha de nacimiento"
             }
-        }
-        console.log("items", items)
-
-    }
-    const onChange = (event, selectedDate) => {
-        const currentDate = selectedDate || date2;
-        setShow(Platform.OS === "windows");
-        setDate2(currentDate);
-        let tempDate = new Date(currentDate);
-        let fDate =
-            (tempDate.getDate() < 10 ? "0" : "") +
-            tempDate.getDate() +
-            "-" +
-            (tempDate.getMonth() < 9 ? "0" : "") +
-            (tempDate.getMonth() + 1) +
-            "-" +
-            tempDate.getFullYear();
-        setData({ ...data, date: fDate });
-    };
-    const showMode = (currentMode) => {
-        setShow(true);
-        setMode(currentMode);
-    };
-
-    React.useEffect(() => {
-        if (items.length > 0) {
-
-            setItems([]);
-        }
-        getItems();
-    }, [])
-    React.useEffect(() => {
-        if (direction != null) {
-            canContinue();
-        }
-    }, [direction])
-
-    let validate = async () => {
-        setIsLoading(true)
-        if (data.direcionBase != null && data.date != null && data.direcionBase != '' && data.date != '') {
-            actualizarInformacion().then(() => {
-                setModalVisibleCorrect(true);
-                setMessageCorrect("Información actualizada con éxito")
-                setIsLoading(false);
-            }).catch((error) => {
-                setModalVisibleError(true);
-                setMessageError(error.message)
-                setIsLoading(false);
-            });
-        } else {
-            setModalVisibleError(true);
-            setMessageError("Verifica que los campos estén llenos")
-            setIsLoading(false);
-
-        }
-    }
-    let actualizarInformacion = async () => {
-
-        await aniadirDireccionBase(data.direcionBase, data.date);
-        await getLocation(setMap,data.direcionBase);
-        await getDireccionBase(setDirection,canContinue);
-    }
-    let canContinue = () => {
-        navigation.navigate("HOMEKN",{items:map})
-    }
-    return (
-        <View style={styles.commons.signContainer}>
-            <View style={styles.commons.header}>
-                <Text style={styles.commons.text_header}>Hola, {global.name}.</Text>
-                <Text style={styles.commons.text_header}></Text>
-                <Text style={styles.commons.text_header}>Antes de continuar, queremos conocerte un poco más.</Text>
-
-            </View>
-            <Animatable.View
-                style={stylesK.footer}
-                animation="fadeInUpBig"
-            >
-                <Text style={styles.commons.description}>Por que para nosotros eres importante, queremos formar parte de tus momentos importantes</Text>
-                <Text style={[styles.commons.text_footer, {
-                    marginTop: 35
-                }]}>Fecha de Nacimiento</Text>
-                <View style={[styles.commons.action, { marginBottom: 35 }]}>
-                    <FontAwesome
-                        name="birthday-cake"
-                        color="#05375a"
-                        size={20} />
-                    <TextInput
-                        placeholder={data.date != '' ? data.date : "Ingresa tu fecha de nacimiento"}
-                        style={styles.commons.textInput}
-                        autoCapitalize="none"
-                        editable={false}
-                        placeholderTextColor={data.date != ''? styles.colors.black : styles.colors.lightGray}
-                    />
-                    <TouchableOpacity onPress={() => showMode("date")}>
-                        <Feather
-                            name="calendar"
-                            color="grey"
-                            size={20}
-                        />
-                    </TouchableOpacity>
-                </View>
-                {show && (
-                    <DateTimePicker
-                        testID="dateTimePicker"
-                        value={date2}
-                        mode={mode}
-                        is24Hour={true}
-                        display="calendar"
-                        onChange={onChange}
-                        maximumDate={new Date()}
-
-                    />
-                )}
-                <Text style={styles.commons.description}>Selecciona  el sector donde vives.</Text>
-                <DropDownPicker
-                    open={open}
-                    value={value}
-                    items={items}
-                    setOpen={setOpen}
-                    setValue={setValue}
-                    setItems={setItems}
-                    onSelectItem={(item) => {
-                        console.log(item);
-                        setData({ ...data, direcionBase: item.label });
-
-                    }}
-                />
-                <Text style={styles.commons.description}>{"\n"}</Text>
-                <TouchableOpacity
-                    // onPress={() => { if (selected != null) { aniadirDireccion() } else { Alert.alert("asdasd", "asdasd") } }}
-                    onPress={() => validate()}
-                    style={{ width: '100%' }}
-                >
-                    <LinearGradient colors={["#08d4c4", "#01ab9d"]} style={styles.commons.signIn}>
-                        <Text style={[styles.commons.textSign, { color: "#fff" }]}>Continuar</Text>
-                    </LinearGradient>
-                </TouchableOpacity>
-            </Animatable.View>
-            {isLoading ? component : <View></View>}
-            <ModalInfoError
-                modalVisible={modalVisibleError}
-                setModalVisible={setModalVisibleError}
-                message={messageError}
-            >
-            </ModalInfoError>
-            <ModalInfoCorrect
-                modalVisible={modalVisibleCorrect}
-                setModalVisible={setModalVisibleCorrect}
-                message={messageCorrect}
-            >
-            </ModalInfoCorrect>
-
+            style={styles.commons.textInput}
+            autoCapitalize="none"
+            editable={false}
+            placeholderTextColor={
+              data.date != "" ? styles.colors.black : styles.colors.lightGray
+            }
+          />
+          <TouchableOpacity onPress={showDatePicker}>
+            <Feather name="calendar" color="grey" size={20} />
+          </TouchableOpacity>
         </View>
-    )
-}
-
+        {/*<DateTimePicker
+               testID="dateTimePicker"
+               value={date2}
+               mode={mode}
+               is24Hour={true}
+               display={Platform.OS === "ios" ? "spinner" : "default"}
+               onChange={onChange}
+               maximumDate={new Date()}
+               minimumDate={new Date("01/01/1920")}
+           />*/}
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+          maximumDate={new Date()}
+          minimumDate={new Date("01/01/1920")}
+          display={Platform.OS === "ios" ? "spinner" : "default"}
+        />
+        <Text style={styles.commons.description}>
+          Selecciona el sector donde vives.
+        </Text>
+        <DropDownPicker
+          open={open}
+          value={value}
+          items={items}
+          setOpen={setOpen}
+          setValue={setValue}
+          setItems={setItems}
+          onSelectItem={(item) => {
+            console.log(item);
+            setData({ ...data, direcionBase: item.label });
+          }}
+        />
+        <Text style={styles.commons.description}>{"\n"}</Text>
+        <TouchableOpacity onPress={() => validate()} style={{ width: "100%" }}>
+          <LinearGradient
+            colors={["#08d4c4", "#01ab9d"]}
+            style={styles.commons.signIn}
+          >
+            <Text style={[styles.commons.textSign, { color: "#fff" }]}>
+              Continuar
+            </Text>
+          </LinearGradient>
+        </TouchableOpacity>
+      </Animatable.View>
+      {isLoading ? component : <View></View>}
+      <ModalInfoError
+        modalVisible={modalVisibleError}
+        setModalVisible={setModalVisibleError}
+        message={messageError}
+      ></ModalInfoError>
+      <ModalInfoCorrect
+        modalVisible={modalVisibleCorrect}
+        setModalVisible={setModalVisibleCorrect}
+        message={messageCorrect}
+      ></ModalInfoCorrect>
+    </View>
+  );
+};
 
 export const stylesK = StyleSheet.create({
-    footer: {
-        flex: 2,
-        backgroundColor: '#fff',
-        borderTopLeftRadius: 30,
-        borderTopRightRadius: 30,
-        paddingHorizontal: 20,
-        paddingVertical: 30
-    }
-})
+  footer: {
+    flex: 2,
+    backgroundColor: "#fff",
+    borderTopLeftRadius: 30,
+    borderTopRightRadius: 30,
+    paddingHorizontal: 20,
+    paddingVertical: 30,
+  },
+});

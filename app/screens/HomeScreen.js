@@ -5,8 +5,6 @@ import { getLocation, getLocation2 } from '../services/GeoServices';
 import MapView, { Callout, Polygon, PROVIDER_GOOGLE } from 'react-native-maps'
 import { Modal } from 'react-native-paper';
 import SceneView from 'react-native-scene-view';
-// import  SceneView  from 'react-navigation';
-
 
 const height = Dimensions.get('window').height;
 export const HomeScreen = ({ route }) => {
@@ -29,7 +27,6 @@ export const HomeScreen = ({ route }) => {
   React.useEffect(() => {
     async function getData() {
       await getLocation(setCoordinates, global.direccionBase).then(() => {
-
         // setData({ ...data, coordinatesM: coordinates });
         console.log("coordinatesM: " + data.coordinatesM.length);
         console.log("coordinates: " + coordinates.length)
