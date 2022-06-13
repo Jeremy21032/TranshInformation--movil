@@ -11,6 +11,7 @@ import * as styles from '../../assets/styles/appStyles';
 import { useWindowDimensions } from 'react-native';
 import { VideoStackScreen } from './VideosStackScreen';
 import NoticesBottomScreen from './NoticesBottomScreen';
+import { EditProfile } from '../screens/EditProfile';
 
 
 const RootDrawer = createDrawerNavigator();
@@ -23,7 +24,8 @@ export const RootDrawerScreen = ({ navigation }) => (
         overlayColor: "transparent",
     }}>
         <RootDrawer.Screen name="HOME" component={HomeScreen} />
-        <RootDrawer.Screen name="PROFILE" component={ProfileScreen} />
+        {/* <RootDrawer.Screen name="PROFILE" component={ProfileScreen} /> */}
+        <RootDrawer.Screen name="PROFILE" component={EditProfile} />
         <RootDrawer.Screen name="MAP" component={MapScreen} />
         <RootDrawer.Screen name="NOTICES" component={NoticesBottomScreen} />
         <RootDrawer.Screen name="VIDEOS" component={VideoStackScreen} />

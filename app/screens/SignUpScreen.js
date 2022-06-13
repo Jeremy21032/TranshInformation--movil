@@ -158,6 +158,7 @@ export const SignUpScreen = ({ navigation }) => {
         lastName: data.lastName,
         profilePic: "https://ui-avatars.com/api/?background=0B2460&color=fff&size=600&font-size=0.4&name=" + data.name + "+" + data.lastName,
         direccionBase:null,
+        birthdate:null
       }
       let personaRol = {
         email: data.email,

@@ -1,32 +1,76 @@
-import { View, TextInput, Dimensions } from "react-native";
-import React from "react";
+import {
+  View,
+  TextInput,
+  Dimensions,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
+import React, { useState } from "react";
 import { Avatar } from "react-native-elements";
 import { useTheme, Text } from "react-native-paper";
 import * as styles from "../../assets/styles/appStyles";
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import * as Animatable from "react-native-animatable";
-import { TextInput as InputPaper } from "react-native-paper";
+import { validateEmail } from "../services/Validations";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { formattedDate } from "../Functions";
 
 export const ProfileScreen = () => {
   const paperTheme = useTheme();
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+
   const [data, setData] = React.useState({
     name: global.name,
-    lastName: "",
-    email: "",
+    lastName: global.lastName,
+    email: global.email,
     password: "",
     confirmPassword: "",
     check_textInputChange: false,
     check_nameInputChange: false,
     check_lastnameInputChange: false,
-    secureTextEntry: true,
-    confirmSecureTextEntry: true,
     isvalidName: true,
     isvalidLastName: true,
     isvalidEmail: true,
     isvalidPassword: true,
     isEqualsPassword: true,
+    date:null
   });
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const handleConfirm = (date) => {
+    let pickedDate = new Date(date);
+    let finalDate = formattedDate(pickedDate);
+    console.warn("A date has been picked: ", finalDate);
+    setData({ ...data, date: finalDate });
+    hideDatePicker();
+  };
+  const textInputChange = (val) => {
+    let validator = validateEmail(val);
+
+    if (validator.Result && val.trim().length >= 6) {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: true,
+        isvalidEmail: true,
+      });
+    } else {
+      setData({
+        ...data,
+        email: val,
+        check_textInputChange: false,
+        isvalidEmail: false,
+      });
+    }
+  };
   const nameInputChange = (val) => {
     if (val.length != 0 && val.length >= 3) {
       setData({
@@ -69,187 +113,146 @@ export const ProfileScreen = () => {
         marginHorizontal: 20,
       }}
     >
-      <Text>ProfileScreen</Text>
-      <Avatar
-        size="xlarge"
-        rounded
-        containerStyle={{ alignSelf: "center" }}
-        source={{
-          uri: global.profilePic,
-        }}
-      >
-        <Avatar.Accessory size={40} onPress={() => console.log("Works!")} />
-      </Avatar>
-      <Text
-        style={[
-          styles.commons.text_footer,
-          {
-            marginTop: 35,
-            color: paperTheme.dark ? "white" : "#05375a",
-          },
-        ]}
-      >
-        Nombre
-      </Text>
-      <View style={styles.commons.action}>
-        <FontAwesome name="user-o" color="#05375a" size={20} />
-        {/* <TextInput
-          placeholder="Your Name"
-          style={styles.commons.textInput}
-          autoCapitalize="none"
-          onChangeText={(val) => nameInputChange(val)}
-          value={data.name}
-        /> */}
-        <TextInput
-          label="Your Name"
-          value={data.name}
-          onChangeText={(val) => nameInputChange(val)}
-          mode="outlined"
-        />
-        {data.check_nameInputChange ? (
-          <Animatable.View animation="bounceIn">
-            <Feather name="check-circle" color="green" size={20} />
-          </Animatable.View>
-        ) : (
-          <></>
-        )}
-      </View>
-      {data.isvalidName ? null : (
-        <Animatable.View
-          animation="fadeInLeft"
-          duration={500}
-          style={{ maxWidth: Dimensions.get("window").width }}
+      <ScrollView>
+        <Text>ProfileScreen</Text>
+        <Avatar
+          size="xlarge"
+          rounded
+          containerStyle={{ alignSelf: "center" }}
+          source={{
+            uri: global.profilePic,
+          }}
         >
-          <Text style={styles.commons.errorMsg}>
-            {" "}
-            Name must be at least 3 characters
-          </Text>
-        </Animatable.View>
-      )}
-      <Text
-        style={[
-          styles.commons.text_footer,
-          {
-            marginTop: 35,
-            color: paperTheme.dark ? "white" : "#05375a",
-          },
-        ]}
-      >
-        Apellido
-      </Text>
-
-      <View style={styles.commons.action}>
-        <Feather
-          name="lock"
-          color={paperTheme.dark == true ? styles.colors.cultured : "#05375a"}
-          size={20}
-        />
-        <TextInput
-          placeholder="Your Password"
-          placeholderTextColor={
-            paperTheme.dark == true
-              ? styles.colors.cultured
-              : styles.colors.lightGray
-          }
+          <Avatar.Accessory size={40} onPress={() => console.log("Works!")} />
+        </Avatar>
+        <Text
           style={[
-            styles.commons.textInput,
+            styles.commons.text_footer,
             {
-              color:
-                paperTheme.dark == true
-                  ? styles.colors.cultured
-                  : styles.colors.lightGray,
+              marginTop: 35,
+              color: paperTheme.dark ? "white" : "#05375a",
             },
           ]}
-          autoCapitalize="none"
-        />
-      </View>
-      <Text
-        style={[
-          styles.commons.text_footer,
-          {
-            marginTop: 35,
-            color: paperTheme.dark == true ? "white" : "#05375a",
-          },
-        ]}
-      >
-        Email
-      </Text>
-      <View style={styles.commons.action}>
-        <FontAwesome
-          name="user-o"
-          color={paperTheme.dark == true ? styles.colors.cultured : "#05375a"}
-          size={20}
-        />
-        <TextInput
-          placeholder="Your Password"
-          placeholderTextColor={
-            paperTheme.dark == true
-              ? styles.colors.cultured
-              : styles.colors.lightGray
-          }
-          style={[
-            styles.commons.textInput,
-            {
-              color:
-                paperTheme.dark == true
-                  ? styles.colors.cultured
-                  : styles.colors.lightGray,
-            },
-          ]}
-          autoCapitalize="none"
-        />
-        {data.check_textInputChange ? (
-          <Animatable.View animation="bounceIn">
-            <Feather name="check-circle" color="green" size={20} />
+        >
+          Nombre
+        </Text>
+        <View style={styles.commons.action}>
+          <FontAwesome name="user-o" color="#05375a" size={20} />
+          <TextInput
+            placeholder="Your Name"
+            style={styles.commons.textInput}
+            autoCapitalize="none"
+            onChangeText={(val) => nameInputChange(val)}
+            value={data.name}
+          />
+          {data.check_nameInputChange ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="check-circle" color="green" size={20} />
+            </Animatable.View>
+          ) : (
+            <></>
+          )}
+        </View>
+        {data.isvalidName ? null : (
+          <Animatable.View
+            animation="fadeInLeft"
+            duration={500}
+            style={{ maxWidth: Dimensions.get("window").width }}
+          >
+            <Text style={styles.commons.errorMsg}>
+              {" "}
+              Name must be at least 3 characters
+            </Text>
           </Animatable.View>
-        ) : (
-          <></>
         )}
-      </View>
-      <Text
-        style={[
-          styles.commons.text_footer,
-          {
-            marginTop: 35,
-            color: paperTheme.dark == true ? "white" : "#05375a",
-          },
-        ]}
-      >
-        Nombre
-      </Text>
-
-      <View style={styles.commons.action}>
-        <Feather
-          name="lock"
-          color={paperTheme.dark == true ? styles.colors.cultured : "#05375a"}
-          size={20}
+        <Text style={[styles.commons.text_footer, { marginTop: 20 }]}>
+          Last Name
+        </Text>
+        <View style={styles.commons.action}>
+          <FontAwesome name="user-o" color="#05375a" size={20} />
+          <TextInput
+            placeholder="Your Last Name"
+            style={styles.commons.textInput}
+            autoCapitalize="none"
+            value={data.lastName}
+            onChangeText={(val) => lastnameInputChange(val)}
+          />
+          {data.check_lastnameInputChange ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="check-circle" color="green" size={20} />
+            </Animatable.View>
+          ) : (
+            <></>
+          )}
+        </View>
+        {data.isvalidLastName ? null : (
+          <Animatable.View
+            animation="fadeInLeft"
+            duration={500}
+            style={{ maxWidth: Dimensions.get("window").width / 2.2 }}
+          >
+            <Text style={styles.commons.errorMsg}>
+              {" "}
+              Last Name must be at least 4 characters
+            </Text>
+          </Animatable.View>
+        )}
+        <Text style={[styles.commons.text_footer, { marginTop: 20 }]}>
+          Email
+        </Text>
+        <View style={styles.commons.action}>
+          <Feather name="mail" color="#05375a" size={20} />
+          <TextInput
+            placeholder="Your Email"
+            style={styles.commons.textInput}
+            autoCapitalize="none"
+            value={data.email}
+            onChangeText={(val) => textInputChange(val)}
+          />
+          {data.check_textInputChange ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="check-circle" color="green" size={20} />
+            </Animatable.View>
+          ) : (
+            <></>
+          )}
+        </View>
+        {data.isvalidEmail ? null : (
+          <Animatable.View animation="fadeInLeft" duration={500}>
+            <Text style={styles.commons.errorMsg}>
+              Email must have the correct format
+            </Text>
+          </Animatable.View>
+        )}
+        <View style={[styles.commons.action, {  marginTop: 20  }]}>
+          <FontAwesome name="birthday-cake" color="#05375a" size={20} />
+          <TextInput
+            placeholder={
+              data.date != "" && data.date != null
+                ? data.date
+                : "Ingresa tu fecha de nacimiento"
+            }
+            style={styles.commons.textInput}
+            autoCapitalize="none"
+            editable={false}
+            placeholderTextColor={
+              data.date != "" ? styles.colors.black : styles.colors.lightGray
+            }
+          />
+          <TouchableOpacity onPress={showDatePicker}>
+            <Feather name="calendar" color="grey" size={20} />
+          </TouchableOpacity>
+        </View>
+        <DateTimePickerModal
+          isVisible={isDatePickerVisible}
+          mode="date"
+          onConfirm={handleConfirm}
+          onCancel={hideDatePicker}
+          maximumDate={new Date()}
+          minimumDate={new Date("01/01/1920")}
+          display={Platform.OS === "ios" ? "spinner" : "default"}
         />
-        <TextInput
-          placeholder="Your Password"
-          placeholderTextColor={
-            paperTheme.dark == true
-              ? styles.colors.cultured
-              : styles.colors.lightGray
-          }
-          style={[
-            styles.commons.textInput,
-            {
-              color:
-                paperTheme.dark == true
-                  ? styles.colors.cultured
-                  : styles.colors.lightGray,
-            },
-          ]}
-          autoCapitalize="none"
-        />
-      </View>
-      {data.isvalidPassword ? null : (
-        <Animatable.View animation="fadeInLeft" duration={500}>
-          <Text style={styles.commons.errorMsg}>
-            Password must be at least 6 characters
-          </Text>
-        </Animatable.View>
-      )}
+      </ScrollView>
     </View>
   );
 };

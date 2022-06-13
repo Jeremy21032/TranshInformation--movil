@@ -6,6 +6,7 @@ import MapView, { Callout, Polygon, PROVIDER_GOOGLE } from 'react-native-maps'
 import { Modal } from 'react-native-paper';
 import SceneView from 'react-native-scene-view';
 
+
 const height = Dimensions.get('window').height;
 export const HomeScreen = ({ route }) => {
   const { colors } = useTheme();
@@ -27,6 +28,7 @@ export const HomeScreen = ({ route }) => {
   React.useEffect(() => {
     async function getData() {
       await getLocation(setCoordinates, global.direccionBase).then(() => {
+
         // setData({ ...data, coordinatesM: coordinates });
         console.log("coordinatesM: " + data.coordinatesM.length);
         console.log("coordinates: " + coordinates.length)

@@ -62,7 +62,7 @@ export const commons = StyleSheet.create({
       paddingBottom: 50
     },
     footer: {
-      flex: 3,
+      flex: 4,
       backgroundColor: '#fff',
       borderTopLeftRadius: 30,
       borderTopRightRadius: 30,

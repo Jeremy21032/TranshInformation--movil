@@ -1,9 +1,6 @@
 import React from 'react';
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer, DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
 import { Provider as PaperProvider, DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme } from 'react-native-paper'
-import { DrawerContent } from './app/screens/DrawerContent';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AuthContext } from './app/components/context'
 import { loadFirebaseConfiguration } from './app/util/FirebaseConfiguration';
@@ -13,7 +10,6 @@ import { RootDrawerScreen } from './app/navs/RootDrawerScreen';
 import { getPersonalInfomation, getPersonalRol } from './app/services/InfoServicesPersonal';
 import * as styles from './assets/styles/appStyles';
 import { KnowStackScreen } from './app/navs/KnowStackScreen';
-import { getLocation } from './app/services/GeoServices';
 import NetInfo from '@react-native-community/netinfo';
 const Drawer = createDrawerNavigator();
 
@@ -47,7 +43,6 @@ const App = () => {
   }), []);
 
   const [login, setLogin] = React.useState(false);
-  const [logCoordinates, setLogCoordinates] = React.useState(null);
   const theme = isDarkTheme ? CustomDefaultTheme : CustomDarkTheme;
   loadFirebaseConfiguration();
   const auth = getAuth();
@@ -63,17 +58,14 @@ const App = () => {
       global.profilePic = userData.profilePic;
       let verify = await getPersonalInfomation();
       global.direccionBase = verify.direccionBase;
+      global.birthdate = verify.birthdate;
       if (global.rol == null) {
         setLogin(false);
         console.log("rol null");
       } else {
         setLogin(true);
       }
-      // if(global.direccionBase!=null){
-      //   await getLocation(setLogCoordinates,global.direccionBase);
-      //   global.coordinates=logCoordinates;
-      //   console.log("-------------",logCoordinates)
-      // }
+      
     } else {
       setLogin(false);
     }
@@ -90,7 +82,7 @@ const App = () => {
       <AuthContext.Provider value={authContext}>
 
         <NavigationContainer theme={theme}>
-          {login == true ?
+          {login?
             (global.rol == "cliente" ? (
               (global.direccionBase == null)
                 ? (<KnowStackScreen />

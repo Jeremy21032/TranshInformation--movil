@@ -8,7 +8,7 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -18,6 +18,7 @@ import { validateCorrectEmail } from "../services/Validate";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoError } from "../components/ModalInfoError";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { getPersonalInfomation, getPersonalRol } from "../services/InfoServicesPersonal";
 export const SignInScreen = ({ navigation }) => {
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -98,6 +99,11 @@ export const SignInScreen = ({ navigation }) => {
         const user = userCredential.user;
         console.log(user);
         console.log("Sign in!");
+        let userData = await getPersonalRol(user.email);
+        let verify = await getPersonalInfomation();
+        var userFinal = await Object.assign({}, userData, verify);
+
+        loginAction({type: 'sign-in',data:userFinal});
         setIsLoading(false);
         setModalVisibleError(false);
       })

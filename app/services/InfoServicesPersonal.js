@@ -17,8 +17,6 @@ export const getPersonalRol = async (email) => {
     const q = doc(global.dbCon, "/Roles", email);
     const docSnap = await getDoc(q);
     let tempRol = docSnap.data();
-
-    // console.log("DOC SNAP", docSnap);
     console.log("TEMP ROL", tempRol);
     return tempRol;
 };
@@ -37,7 +35,7 @@ export const getPersonalInfomation = async () => {
     const q = doc(global.dbCon, "/Personas/" + global.email);
     const docSnap = await getDoc(q);
     let person = docSnap.data();
-    console.log("------- TRAE LA INFORMACION ---------");
+    console.log("------- TRAE LA INFORMACION PERSONAL ---------");
     console.log(person)
     return person;
 };
@@ -54,7 +52,7 @@ export const getDireccionBase = async (refreshFn, continueFn) => {
     const q = doc(global.dbCon, "/Personas/" + global.email);
     const docSnap = await getDoc(q);
     let person = docSnap.data();
-    console.log("------- TRAE LA INFORMACION ---------");
+    console.log("------- TRAE LA INFORMACION DIRECCION  ---------");
     console.log(person.direccionBase)
     refreshFn(person.direccionBase);
     continueFn();

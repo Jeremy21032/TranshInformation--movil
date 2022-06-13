@@ -96,6 +96,7 @@ export const KnowScreen = ({ navigation }) => {
       data.direcionBase != "" &&
       data.date != ""
     ) {
+      global.birthday=data.date;
       actualizarInformacion()
         .then(() => {
           setModalVisibleCorrect(true);
@@ -165,16 +166,6 @@ export const KnowScreen = ({ navigation }) => {
             <Feather name="calendar" color="grey" size={20} />
           </TouchableOpacity>
         </View>
-        {/*<DateTimePicker
-               testID="dateTimePicker"
-               value={date2}
-               mode={mode}
-               is24Hour={true}
-               display={Platform.OS === "ios" ? "spinner" : "default"}
-               onChange={onChange}
-               maximumDate={new Date()}
-               minimumDate={new Date("01/01/1920")}
-           />*/}
         <DateTimePickerModal
           isVisible={isDatePickerVisible}
           mode="date"
