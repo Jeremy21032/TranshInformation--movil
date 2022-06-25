@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import React from "react";
-import * as stylesA from "../../assets/styles/appStyles";
+import * as commonStyles from "../../assets/styles/appStyles";
 import { useTheme } from "react-native-paper";
 import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
@@ -11,7 +11,7 @@ export const SuggestionsScreen = () => {
     title: null,
     description: null,
     isValidTitle: true,
-    isValidDescription: true
+    isValidDescription: true,
   });
   const handleChangeTitle = (val) => {
     if (val.trim().length >= 6) {
@@ -52,7 +52,7 @@ export const SuggestionsScreen = () => {
       </Text>
       <Text
         style={[
-          stylesA.commons.text_footer,
+          commonStyles.commons.text_footer,
           {
             marginTop: 35,
           },
@@ -61,18 +61,29 @@ export const SuggestionsScreen = () => {
         Title
       </Text>
 
-      <View style={stylesA.commons.action}>
-        <Feather name="file-text" color="#05375a" size={20} />
+      <View style={commonStyles.commons.action}>
+        <Feather
+          name="file-text"
+          color={commonStyles.colors.darkBlue}
+          size={20}
+        />
         <TextInput
           placeholder="Your Password"
-          style={stylesA.commons.textInput}
+          style={[
+            commonStyles.commons.textInput,
+            {
+              color: paperTheme.dark
+                ? commonStyles.colors.white
+                : commonStyles.colors.darkBlue,
+            },
+          ]}
           autoCapitalize="none"
           onChangeText={(val) => handleChangeTitle(val)}
         />
       </View>
       {data.isValidTitle ? null : (
         <Animatable.View animation="fadeInLeft" duration={500}>
-          <Text style={stylesA.commons.errorMsg}>
+          <Text style={commonStyles.commons.errorMsg}>
             Password must be at least 6 characters
           </Text>
         </Animatable.View>
@@ -85,9 +96,9 @@ export const SuggestionsScreen = () => {
         onChangeText={(val) => handleChangeTitle(val)}
         placeholder="useless placeholder"
       /> */}
-       <Text
+      <Text
         style={[
-          stylesA.commons.text_footer,
+          commonStyles.commons.text_footer,
           {
             marginTop: 35,
           },
@@ -96,23 +107,33 @@ export const SuggestionsScreen = () => {
         Descripción
       </Text>
 
-      <View style={stylesA.commons.action}>
-        <Feather name="file-text" color="#05375a" size={20} />
+      <View style={commonStyles.commons.action}>
+        <Feather
+          name="file-text"
+          color={commonStyles.colors.darkBlue}
+          size={20}
+        />
         <TextInput
           placeholder="Your Password"
-          style={stylesA.commons.textInput}
+          style={[
+            commonStyles.commons.textInput,
+            {
+              color: paperTheme.dark
+                ? commonStyles.colors.white
+                : commonStyles.colors.darkBlue,
+            },
+          ]}
           autoCapitalize="none"
           onChangeText={(val) => handleChangeDescription(val)}
         />
       </View>
       {data.isValidDescription ? null : (
         <Animatable.View animation="fadeInLeft" duration={500}>
-          <Text style={stylesA.commons.errorMsg}>
+          <Text style={commonStyles.commons.errorMsg}>
             Password must be at least 6 characters
           </Text>
         </Animatable.View>
       )}
-
     </View>
   );
 };

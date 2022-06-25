@@ -5,6 +5,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as Animatable from 'react-native-animatable'
 import {colors} from '../../assets/styles/appStyles'
+import * as commonStyles from '../../assets/styles/appStyles'
 const height_logo = height * 0.28;
 export const SplashScreen = ({ navigation }) => {
     return (
@@ -20,14 +21,14 @@ export const SplashScreen = ({ navigation }) => {
                     resizeMode="stretch" />
             </View>
             <Animatable.View style={styles.footer} animation="fadeInUpBig">
-                <Text style={styles.title}>Aprende la mejor forma de hacer lo que te gusta hacer!</Text>
-                <Text style={styles.text}>Sign in with account</Text>
+                <Text style={styles.title}>¡Fomentemos juntos una cultura ambiental responsable!</Text>
+                <Text style={styles.text}>Ingresa con tus credenciales</Text>
                 <View style={styles.button}>
                     <TouchableOpacity onPress={() => { navigation.navigate("SIGNIN") }}>
                         <LinearGradient
-                            colors={['#08d4c4', '#01ab9d']}
+                           colors={[commonStyles.colors.gradient2,commonStyles.colors.gradient1]}
                             style={styles.signIn}>
-                            <Text style={styles.textSign}>Get Started</Text>
+                            <Text style={styles.textSign}>Comencemos</Text>
                             <MaterialIcons name="navigate-next" color="#fff" size={20} />
                         </LinearGradient>
                     </TouchableOpacity>
@@ -60,7 +61,7 @@ const styles = StyleSheet.create({
         height: height_logo
     },
     title: {
-        color: '#05375a',
+        color: commonStyles.colors.darkBlue,
         fontSize: 30,
         fontWeight: 'bold'
     },

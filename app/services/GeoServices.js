@@ -1,38 +1,27 @@
-import {
-    doc,
-    setDoc,
-    deleteDoc,
-    collection,
-    query,
-    where,
-    getDocs,
-    orderBy,
-    collectionGroup,
-    getDoc,
-    updateDoc,
-} from "firebase/firestore";
-import React from "react";
+import { collection, getDocs } from "firebase/firestore";
 
-
-export const getLocation = async (refreshFn,location) => {
-
-    const queryLocation = collection(global.dbCon, "/Mapa/Direcciones",location)
-    const querySnapshot = await getDocs(queryLocation);
-    let locationTmp = [];
-    querySnapshot.forEach((doc) => {
-        locationTmp.push(doc.data());
-    });
-    refreshFn(locationTmp);
-    console.log(locationTmp);
-    return locationTmp;
+export const getLocation = async (direccion) => {
+  const queryData = collection(global.dbCon, "/Mapa/Direcciones/", direccion);
+  const queryLocation = await getDocs(queryData);
+  let tmpMapa = [];
+  queryLocation.forEach((document) => {
+    tmpMapa.push(document.data());
+  });
+  if (tmpMapa.length > 0) {
+    global.coordenadas = tmpMapa;
+    if (global.coordenadas != null && global.coordenadas.length > 0) {
+      console.log(tmpMapa);
+      return tmpMapa;
+    }
+  }
 };
-export const getLocation2 = async (location) => {
 
-    const queryLocation = collection(global.dbCon, "/Mapa/Direcciones",location)
-    const querySnapshot = await getDocs(queryLocation);
-    let locationTmp = [];
-    querySnapshot.forEach((doc) => {
-        locationTmp.push(doc.data());
-    });
-    return locationTmp;
+export const getLocation2 = async (location) => {
+  const queryLocation = collection(global.dbCon, "/Mapa/Direcciones", location);
+  const querySnapshot = await getDocs(queryLocation);
+  let locationTmp = [];
+  querySnapshot.forEach((document) => {
+    locationTmp.push(document.data());
+  });
+  return locationTmp;
 };

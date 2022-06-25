@@ -8,13 +8,12 @@ import SceneView from 'react-native-scene-view';
 
 
 const height = Dimensions.get('window').height;
-export const HomeScreen = ({ route }) => {
+export const HomeScreen = ({ route },items) => {
   const { colors } = useTheme();
-  const [visible, setVisible] = React.useState(false);
-  const [visibleCallOut, setVisibleCallOut] = React.useState(true);
+  const [visible,] = React.useState(false);
   const [name, setName] = React.useState("Un placer verte de nuevo");
   const [coordinates, setCoordinates] = React.useState([]);
-  const [data, setData] = React.useState({
+  const [data] = React.useState({
     coordinatesM: [],
 
   })
@@ -26,21 +25,19 @@ export const HomeScreen = ({ route }) => {
   }
 
   React.useEffect(() => {
+    console.log("_:::::::::::::ITEMS:::::::::::::::::",items)
     async function getData() {
       await getLocation(setCoordinates, global.direccionBase).then(() => {
-
-        // setData({ ...data, coordinatesM: coordinates });
         console.log("coordinatesM: " + data.coordinatesM.length);
         console.log("coordinates: " + coordinates.length)
-        // setVisible(true);
         setName("Hola")
       })
         .catch((error) => { console.log("error: " + error) })
 
-      console.log("------------coordinates----------" + coordinates)
+      console.log("------------coordinates----------", coordinates)
     }
     getData();
-  }, [name]);
+  }, []);
 
   const funcion = () => {
     console.log("PRESSED", visible);

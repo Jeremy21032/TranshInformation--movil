@@ -1,24 +1,27 @@
 import {
-  Dimensions,
-  StyleSheet,
   Text,
   View,
-  Platform,
   TextInput,
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import React, { useContext } from "react";
+import React from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import * as styles from "../../assets/styles/appStyles";
-import { validateCorrectEmail } from "../services/Validate";
+import {
+  validateCorrectEmail,
+  validateCorrectPassword,
+} from "../services/Validate";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoError } from "../components/ModalInfoError";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import { getPersonalInfomation, getPersonalRol } from "../services/InfoServicesPersonal";
+import {
+  getPersonalInfomation,
+  getPersonalRol,
+} from "../services/InfoServicesPersonal";
 export const SignInScreen = ({ navigation }) => {
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -60,7 +63,8 @@ export const SignInScreen = ({ navigation }) => {
     }
   };
   const handlePasswordChange = (val) => {
-    if (val.trim().length >= 6) {
+    let passwordValidator = validateCorrectPassword(val);
+    if (passwordValidator && val.trim().length >= 6) {
       setData({
         ...data,
         password: val,
@@ -103,7 +107,7 @@ export const SignInScreen = ({ navigation }) => {
         let verify = await getPersonalInfomation();
         var userFinal = await Object.assign({}, userData, verify);
 
-        loginAction({type: 'sign-in',data:userFinal});
+        loginAction({ type: "sign-in", data: userFinal });
         setIsLoading(false);
         setModalVisibleError(false);
       })
@@ -124,16 +128,16 @@ export const SignInScreen = ({ navigation }) => {
         barStyle="light-content"
       />
       <View style={styles.commons.header}>
-        <Text style={styles.commons.text_header}>Welcome</Text>
+        <Text style={styles.commons.text_header}>Bienvenido</Text>
       </View>
       <Animatable.View style={styles.commons.footer} animation="fadeInUpBig">
         {/* A email input field. */}
-        <Text style={styles.commons.text_footer}>Email</Text>
+        <Text style={styles.commons.text_footer}>Correo Electrónico</Text>
         <View style={styles.commons.action}>
-          <FontAwesome name="user-o" color="#05375a" size={20} />
+          <FontAwesome name="user-o" color={styles.colors.darkBlue} size={20} />
           <TextInput
-            placeholder="Your Email"
-            style={styles.commons.textInput}
+            placeholder="Tu correo electrónico"
+            style={[styles.commons.textInput,{color: styles.colors.darkBlue,}]}
             autoCapitalize="none"
             onChangeText={(val) => textInputChange(val)}
           />
@@ -148,7 +152,7 @@ export const SignInScreen = ({ navigation }) => {
         {data.isvalidEmail ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.commons.errorMsg}>
-              Email must have the correct format
+              El correo debe tener el formato correcto
             </Text>
           </Animatable.View>
         )}
@@ -162,14 +166,14 @@ export const SignInScreen = ({ navigation }) => {
             },
           ]}
         >
-          Password
+          Contraseña
         </Text>
 
         <View style={styles.commons.action}>
-          <Feather name="lock" color="#05375a" size={20} />
+          <Feather name="lock" color={styles.colors.darkBlue}size={20} />
           <TextInput
-            placeholder="Your Password"
-            style={styles.commons.textInput}
+            placeholder="Tu Contraseña"
+             style={[styles.commons.textInput,{color: styles.colors.darkBlue,}]}
             autoCapitalize="none"
             secureTextEntry={data.secureTextEntry ? true : false}
             onChangeText={(val) => handlePasswordChange(val)}
@@ -189,7 +193,9 @@ export const SignInScreen = ({ navigation }) => {
         {data.isvalidPassword ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.commons.errorMsg}>
-              Password must be at least 6 characters
+            La contraseña debe tener al menos 1 numero, minimo 6 caracteres y 1 símbolo
+                obligatorio.{"\n"}
+                Los simbolos obligatorios son !$%&?@
             </Text>
           </Animatable.View>
         )}
@@ -221,11 +227,11 @@ export const SignInScreen = ({ navigation }) => {
             }}
           >
             <LinearGradient
-              colors={["#08d4c4", "#01ab9d"]}
+              colors={[styles.colors.gradient2, styles.colors.gradient1]}
               style={styles.commons.signIn}
             >
-              <Text style={[styles.commons.textSign, { color: "#fff" }]}>
-                Sign In
+              <Text style={[styles.commons.textSign, { color: styles.colors.white }]}>
+                Iniciar sesión
               </Text>
             </LinearGradient>
           </TouchableOpacity>
@@ -246,7 +252,7 @@ export const SignInScreen = ({ navigation }) => {
                 { color: styles.colors.darkCyan },
               ]}
             >
-              Sign Up
+              Registrarse
             </Text>
           </TouchableOpacity>
         </View>
@@ -257,7 +263,7 @@ export const SignInScreen = ({ navigation }) => {
           <Text
             style={[styles.commons.textSign, { color: styles.colors.darkCyan }]}
           >
-            Forgot Password?
+            Olvidaste tu contraseña?
           </Text>
         </TouchableOpacity>
         {isLoading ? component : <View></View>}

@@ -130,17 +130,17 @@ export const ProfileScreen = () => {
             styles.commons.text_footer,
             {
               marginTop: 35,
-              color: paperTheme.dark ? "white" : "#05375a",
+              color: paperTheme.dark ? styles.colors.white: styles.colors.darkBlue,
             },
           ]}
         >
           Nombre
         </Text>
         <View style={styles.commons.action}>
-          <FontAwesome name="user-o" color="#05375a" size={20} />
+          <FontAwesome name="user-o" color={styles.colors.darkBlue}size={20} />
           <TextInput
             placeholder="Your Name"
-            style={styles.commons.textInput}
+            style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
             autoCapitalize="none"
             onChangeText={(val) => nameInputChange(val)}
             value={data.name}
@@ -169,10 +169,10 @@ export const ProfileScreen = () => {
           Last Name
         </Text>
         <View style={styles.commons.action}>
-          <FontAwesome name="user-o" color="#05375a" size={20} />
+          <FontAwesome name="user-o" color={styles.colors.darkBlue} size={20} />
           <TextInput
             placeholder="Your Last Name"
-            style={styles.commons.textInput}
+            style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
             autoCapitalize="none"
             value={data.lastName}
             onChangeText={(val) => lastnameInputChange(val)}
@@ -201,10 +201,10 @@ export const ProfileScreen = () => {
           Email
         </Text>
         <View style={styles.commons.action}>
-          <Feather name="mail" color="#05375a" size={20} />
+          <Feather name="mail" color={styles.colors.darkBlue} size={20} />
           <TextInput
             placeholder="Your Email"
-            style={styles.commons.textInput}
+            style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
             autoCapitalize="none"
             value={data.email}
             onChangeText={(val) => textInputChange(val)}
@@ -225,14 +225,14 @@ export const ProfileScreen = () => {
           </Animatable.View>
         )}
         <View style={[styles.commons.action, {  marginTop: 20  }]}>
-          <FontAwesome name="birthday-cake" color="#05375a" size={20} />
+          <FontAwesome name="birthday-cake" color={styles.colors.darkBlue} size={20} />
           <TextInput
             placeholder={
               data.date != "" && data.date != null
                 ? data.date
                 : "Ingresa tu fecha de nacimiento"
             }
-            style={styles.commons.textInput}
+            style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
             autoCapitalize="none"
             editable={false}
             placeholderTextColor={
@@ -248,7 +248,7 @@ export const ProfileScreen = () => {
           mode="date"
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
-          maximumDate={new Date()}
+          maximumDate={new Date("01/01/2005")}
           minimumDate={new Date("01/01/1920")}
           display={Platform.OS === "ios" ? "spinner" : "default"}
         />

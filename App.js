@@ -1,16 +1,28 @@
-import React from 'react';
-import { NavigationContainer, DarkTheme as NavigationDarkTheme, DefaultTheme as NavigationDefaultTheme } from '@react-navigation/native';
-import { Provider as PaperProvider, DarkTheme as PaperDarkTheme, DefaultTheme as PaperDefaultTheme } from 'react-native-paper'
-import { createDrawerNavigator } from '@react-navigation/drawer';
-import { AuthContext } from './app/components/context'
-import { loadFirebaseConfiguration } from './app/util/FirebaseConfiguration';
-import { RootStackScreen } from './app/navs/RootStackScreen';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
-import { RootDrawerScreen } from './app/navs/RootDrawerScreen';
-import { getPersonalInfomation, getPersonalRol } from './app/services/InfoServicesPersonal';
-import * as styles from './assets/styles/appStyles';
-import { KnowStackScreen } from './app/navs/KnowStackScreen';
-import NetInfo from '@react-native-community/netinfo';
+import React, { useEffect } from "react";
+import {
+  NavigationContainer,
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from "@react-navigation/native";
+import {
+  Provider as PaperProvider,
+  DarkTheme as PaperDarkTheme,
+  DefaultTheme as PaperDefaultTheme,
+} from "react-native-paper";
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import { AuthContext } from "./app/components/context";
+import { loadFirebaseConfiguration } from "./app/util/FirebaseConfiguration";
+import { RootStackScreen } from "./app/navs/RootStackScreen";
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { RootDrawerScreen } from "./app/navs/RootDrawerScreen";
+import {
+  getPersonalInfomation,
+  getPersonalRol,
+} from "./app/services/InfoServicesPersonal";
+import * as styles from "./assets/styles/appStyles";
+import { KnowStackScreen } from "./app/navs/KnowStackScreen";
+import NetInfo from "@react-native-community/netinfo";
+import { getLocation } from "./app/services/GeoServices";
 const Drawer = createDrawerNavigator();
 
 const CustomDefaultTheme = {
@@ -20,9 +32,9 @@ const CustomDefaultTheme = {
     ...NavigationDefaultTheme.colors,
     ...PaperDefaultTheme.colors,
     background: styles.colors.cultured,
-    text: styles.colors.black
-  }
-}
+    text: styles.colors.black,
+  },
+};
 const CustomDarkTheme = {
   ...NavigationDarkTheme,
   ...PaperDarkTheme,
@@ -30,17 +42,20 @@ const CustomDarkTheme = {
     ...NavigationDarkTheme.colors,
     ...PaperDarkTheme.colors,
     text: styles.colors.cultured,
-    background: styles.colors.black
-  }
-}
+    background: styles.colors.black,
+  },
+};
 
 const App = () => {
   const [isDarkTheme, setIsDarkTheme] = React.useState(false);
-  const authContext = React.useMemo(() => ({
-    toggleTheme: () => {
-      setIsDarkTheme(isDarkTheme => !isDarkTheme);
-    }
-  }), []);
+  const authContext = React.useMemo(
+    () => ({
+      toggleTheme: () => {
+        setIsDarkTheme((isDarkTheme) => !isDarkTheme);
+      },
+    }),
+    []
+  );
 
   const [login, setLogin] = React.useState(false);
   const theme = isDarkTheme ? CustomDefaultTheme : CustomDarkTheme;
@@ -48,7 +63,6 @@ const App = () => {
   const auth = getAuth();
   onAuthStateChanged(auth, async (user) => {
     if (user) {
-      const uid = user.uid;
       const email = user.email;
       global.email = email;
       let userData = await getPersonalRol(global.email);
@@ -58,6 +72,9 @@ const App = () => {
       global.profilePic = userData.profilePic;
       let verify = await getPersonalInfomation();
       global.direccionBase = verify.direccionBase;
+      if (global.direccionBase != null && global.direccionBase != "") {
+        await getLocation(global.direccionBase);
+      }
       global.birthdate = verify.birthdate;
       if (global.rol == null) {
         setLogin(false);
@@ -65,37 +82,43 @@ const App = () => {
       } else {
         setLogin(true);
       }
-      
     } else {
       setLogin(false);
     }
   });
 
-  NetInfo.fetch().then(state => {
-    console.log('Connection type', state.type);
-    console.log('Is connected?', state.isConnected);
+  NetInfo.fetch().then((state) => {
+    console.log("Connection type", state.type);
+    console.log("Is connected?", state.isConnected);
   });
 
-
+  const FirstNav = () => {
+    return global.rol == "cliente" ? <SecondNav /> : <RootStackScreen />;
+  };
+  const MediumNav = () => {
+    return global.coordenadas != null && global.coordenadas.length > 0 ? (
+      <RootDrawerScreen />
+    ) : (
+      <></>
+    );
+  };
+  const SecondNav = () => {
+    return global.direccionBase == null && direccionBase != "" ? (
+      <KnowStackScreen />
+    ) : (
+      <MediumNav />
+    );
+  };
   return (
     <PaperProvider theme={theme}>
       <AuthContext.Provider value={authContext}>
-
         <NavigationContainer theme={theme}>
-          {login?
-            (global.rol == "cliente" ? (
-              (global.direccionBase == null)
-                ? (<KnowStackScreen />
-                ) : (<RootDrawerScreen />)
-            ) : (
-              <RootStackScreen />)
-            ) : (
-              <RootStackScreen />)}
+          {login ? <FirstNav /> : <RootStackScreen />}
           {/* <RootStackScreen /> */}
         </NavigationContainer>
       </AuthContext.Provider>
     </PaperProvider>
   );
-}
+};
 
 export default App;

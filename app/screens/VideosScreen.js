@@ -8,7 +8,7 @@ import React from "react";
 import { ActivityIndicator, useTheme } from "react-native-paper";
 import { Button } from "react-native-elements";
 import { ListVideos } from "./Lists/ListVideos";
-import { getVideos } from "../services/VideoSerices";
+import { getVideos } from "../services/VideoServices";
 import DropDownPicker from "react-native-dropdown-picker";
 import Feather from 'react-native-vector-icons/Feather';
 

@@ -10,8 +10,8 @@ import {
     const q = query(collection(global.dbCon, "/Videos"));
     const docSnap = await getDocs(q);
     let tempVideos = [];
-    docSnap.forEach((doc) => {
-      tempVideos.push(doc.data());
+    docSnap.forEach((docVideo) => {
+      tempVideos.push(docVideo.data());
     });
     console.log("tempVideos", tempVideos);
     return tempVideos;

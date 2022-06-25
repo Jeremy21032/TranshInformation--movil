@@ -36,7 +36,7 @@ export const KnowScreen = ({ navigation }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [messageError, setMessageError] = useState("");
   const [direction, setDirection] = useState(null);
-  const [map, setMap] = useState();
+  const [map] = useState();
   const [data, setData] = useState({
     date: null,
     direcionBase: null,
@@ -96,7 +96,7 @@ export const KnowScreen = ({ navigation }) => {
       data.direcionBase != "" &&
       data.date != ""
     ) {
-      global.birthday=data.date;
+      global.birthdate=data.date;
       actualizarInformacion()
         .then(() => {
           setModalVisibleCorrect(true);
@@ -117,7 +117,7 @@ export const KnowScreen = ({ navigation }) => {
   };
   let actualizarInformacion = async () => {
     await aniadirDireccionBase(data.direcionBase, data.date);
-    await getLocation(setMap, data.direcionBase);
+    await getLocation(data.direcionBase);
     await getDireccionBase(setDirection, canContinue);
   };
   let canContinue = () => {
@@ -148,14 +148,14 @@ export const KnowScreen = ({ navigation }) => {
           Fecha de Nacimiento
         </Text>
         <View style={[styles.commons.action, { marginBottom: 35 }]}>
-          <FontAwesome name="birthday-cake" color="#05375a" size={20} />
+          <FontAwesome name="birthday-cake" color={styles.colors.darkBlue} size={20} />
           <TextInput
             placeholder={
               data.date != "" && data.date != null
                 ? data.date
                 : "Ingresa tu fecha de nacimiento"
             }
-            style={styles.commons.textInput}
+            style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
             autoCapitalize="none"
             editable={false}
             placeholderTextColor={
@@ -171,7 +171,7 @@ export const KnowScreen = ({ navigation }) => {
           mode="date"
           onConfirm={handleConfirm}
           onCancel={hideDatePicker}
-          maximumDate={new Date()}
+          maximumDate={new Date("01/01/2005")}
           minimumDate={new Date("01/01/1920")}
           display={Platform.OS === "ios" ? "spinner" : "default"}
         />
@@ -193,10 +193,10 @@ export const KnowScreen = ({ navigation }) => {
         <Text style={styles.commons.description}>{"\n"}</Text>
         <TouchableOpacity onPress={() => validate()} style={{ width: "100%" }}>
           <LinearGradient
-            colors={["#08d4c4", "#01ab9d"]}
+            colors={[styles.colors.gradient2, styles.colors.gradient1]}
             style={styles.commons.signIn}
           >
-            <Text style={[styles.commons.textSign, { color: "#fff" }]}>
+            <Text style={[styles.commons.textSign, { color: styles.colors.white }]}>
               Continuar
             </Text>
           </LinearGradient>
@@ -220,7 +220,7 @@ export const KnowScreen = ({ navigation }) => {
 export const stylesK = StyleSheet.create({
   footer: {
     flex: 2,
-    backgroundColor: "#fff",
+    backgroundColor: styles.colors.white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
     paddingHorizontal: 20,

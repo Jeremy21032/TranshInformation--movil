@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, Text, View, Platform, TextInput, TouchableOpacity, StatusBar, Alert } from 'react-native'
+import {  Text, View, TextInput, TouchableOpacity, StatusBar } from 'react-native'
 import React from 'react'
 import { LinearGradient } from 'expo-linear-gradient'
 import * as Animatable from 'react-native-animatable'
@@ -6,13 +6,11 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome'
 import Feather from 'react-native-vector-icons/Feather'
 import * as styles from '../../assets/styles/appStyles'
 import { validateEmail } from '../services/Validations'
-import {validateCorrectEmail} from '../services/Validate'
 import { LoadingOverlay } from '../components/LoadingOverlay'
 import { ModalInfoError } from '../components/ModalInfoError'
-import { getAuth, sendPasswordResetEmail, signInWithEmailAndPassword } from 'firebase/auth'
+import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 import { ModalInfoCorrect } from '../components/ModalInfoCorrect'
 export const ForgotScreen = ({ navigation }) => {
-    const [modalVisible, setModalVisible] = React.useState(false);
     const [modalVisibleError, setModalVisibleError] = React.useState(false);
     const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
     const [messageCorrect, setMessageCorrect] = React.useState("");
@@ -70,7 +68,7 @@ export const ForgotScreen = ({ navigation }) => {
         <View style={styles.commons.signContainer}>
             <StatusBar backgroundColor={styles.colors.darkCyan} barStyle="light-content" />
             <View style={styles.commons.header}>
-                <Text style={styles.commons.text_header}>Recover Password</Text>
+                <Text style={styles.commons.text_header}>Recuperar tu contraseña</Text>
 
             </View>
             <Animatable.View
@@ -78,15 +76,16 @@ export const ForgotScreen = ({ navigation }) => {
                 animation="fadeInUpBig"
             >
                 {/* A email input field. */}
-                <Text style={styles.commons.text_footer}>Email</Text>
+                <Text style={[styles.commons.text_footer,{marginBottom:35}]}>Te enviaremos un mensaje a tu correo.</Text>
+                <Text style={styles.commons.text_footer}>Correo electrónico</Text>
                 <View style={styles.commons.action}>
                     <FontAwesome
                         name="user-o"
-                        color="#05375a"
+                        color={styles.colors.darkBlue}
                         size={20} />
                     <TextInput
-                        placeholder='Your Email'
-                        style={styles.commons.textInput}
+                        placeholder='Tu correo electrónico'
+                        style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
                         autoCapitalize="none"
                         onChangeText={(val) => textInputChange(val)}
                     />
@@ -101,7 +100,7 @@ export const ForgotScreen = ({ navigation }) => {
                 </View>
                 {data.isvalidEmail ? null :
                     <Animatable.View animation="fadeInLeft" duration={500}>
-                        <Text style={styles.commons.errorMsg}>Email must have the correct format</Text>
+                        <Text style={styles.commons.errorMsg}>El correo debe tener el formato correcto.</Text>
                     </Animatable.View>
                 }
                 {/* A button. */}
@@ -111,9 +110,8 @@ export const ForgotScreen = ({ navigation }) => {
                         if (data.email != null && data.email != '') {
                             let validator = validateEmail(data.email);
                             if (validator.Result) {
-                                // setIsLoading(true);
-                                // navigation.navigate("HOMEIN")
-                                handleForgotPassword(data.email);
+                         
+                                handleForgotPassword();
                                 console.log("llego")
 
                             } else {
@@ -126,14 +124,14 @@ export const ForgotScreen = ({ navigation }) => {
                         }
                     }}>
 
-                        <LinearGradient colors={["#08d4c4", "#01ab9d"]} style={styles.commons.signIn}>
-                            <Text style={[styles.commons.textSign, { color: "#fff" }]}>Send Email</Text>
+                        <LinearGradient olors={[styles.colors.gradient2,styles.colors.gradient1]} style={styles.commons.signIn}>
+                            <Text style={[styles.commons.textSign, { color: "#fff" }]}>Enviar correo</Text>
                         </LinearGradient>
                     </TouchableOpacity>
                     <TouchableOpacity
                         onPress={() => navigation.navigate("SIGNIN")}
                         style={[styles.commons.signIn, { borderColor: styles.colors.darkCyan, borderWidth: 1, marginTop: 15 }]}>
-                        <Text style={[styles.commons.textSign, { color: styles.colors.darkCyan }]}>Sign In</Text>
+                        <Text style={[styles.commons.textSign, { color: styles.colors.darkCyan }]}>Iniciar sesión</Text>
                     </TouchableOpacity>
                 </View>
                 {isLoading ? component : <View></View>}

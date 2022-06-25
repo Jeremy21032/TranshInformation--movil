@@ -1,6 +1,5 @@
 import { Dimensions, StyleSheet } from "react-native";
 
-
 export const colors = {
     screamingGreen: "#5DF061",
     cultured: "#F9FAF9",
@@ -15,8 +14,10 @@ export const colors = {
     black: "#000000",
     blue: "#124E99",
     darkCyan:"#009387",
-    lightGray: "#9697B7"
-
+    lightGray: "#9697B7",
+    darkBlue:"#05375a",
+    gradient1:"#01ab9d",
+    gradient2:"#08d4c4"
 
 };
 
@@ -75,7 +76,7 @@ export const commons = StyleSheet.create({
       fontSize: 30
     },
     text_footer: {
-      color: '#05375a',
+      color: colors.darkBlue,
       fontSize: 18
     },
     action: {
@@ -98,7 +99,6 @@ export const commons = StyleSheet.create({
       flex: 1,
       marginTop: Platform.OS === 'ios' ? 0 : -12,
       paddingLeft: 10,
-      color: '#05375a',
     },
     errorMsg: {
       color: '#FF0000',

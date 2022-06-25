@@ -3,7 +3,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer'
 import { HomeScreen } from '../screens/HomeScreen';
 import { VideosScreen } from '../screens/VideosScreen';
 import { BadgesScreen } from '../screens/BadgesScreen';
-import { MapScreen } from '../screens/MapScreen';
+import { ServicesScreen } from '../screens/ServicesScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
 import { SuggestionsScreen } from '../screens/SuggestionsScreen';
 import { DrawerContent } from '../screens/DrawerContent';
@@ -12,10 +12,13 @@ import { useWindowDimensions } from 'react-native';
 import { VideoStackScreen } from './VideosStackScreen';
 import NoticesBottomScreen from './NoticesBottomScreen';
 import { EditProfile } from '../screens/EditProfile';
+import { Home } from '../screens/Home';
+import { NoticesOrganicStackScreen } from './NoticesOrganicStackScreen';
+import { ProfileStackScreen } from './ProfielStack';
 
 
 const RootDrawer = createDrawerNavigator();
-export const RootDrawerScreen = ({ navigation }) => (
+export const RootDrawerScreen = ({ items }) => (
     <RootDrawer.Navigator drawerContent={props => <DrawerContent {...props} />} screenOptions={{
         headerStyle: { backgroundColor: styles.colors.darkCyan },
         headerTintColor: styles.colors.cultured,
@@ -23,14 +26,15 @@ export const RootDrawerScreen = ({ navigation }) => (
         drawerStyle: useWindowDimensions().width >= 768? null : { width: "75%" },
         overlayColor: "transparent",
     }}>
-        <RootDrawer.Screen name="HOME" component={HomeScreen} />
-        {/* <RootDrawer.Screen name="PROFILE" component={ProfileScreen} /> */}
-        <RootDrawer.Screen name="PROFILE" component={EditProfile} />
-        <RootDrawer.Screen name="MAP" component={MapScreen} />
-        <RootDrawer.Screen name="NOTICES" component={NoticesBottomScreen} />
+        {console.log(".....................ITEMS...................",items)}
+        <RootDrawer.Screen name="INICIO" component={Home} />
+        {/* <RootDrawer.Screen name="PERFIL" component={ProfileScreen} /> */}
+        <RootDrawer.Screen name="PERFIL" component={ProfileStackScreen} />
+        <RootDrawer.Screen name="SERVICIOS" component={ServicesScreen} />
+        <RootDrawer.Screen name="NOTICIAS" component={NoticesOrganicStackScreen} />
         <RootDrawer.Screen name="VIDEOS" component={VideoStackScreen} />
         <RootDrawer.Screen name="BADGES" component={BadgesScreen} />
-        <RootDrawer.Screen name="SUGGESTIONS" component={SuggestionsScreen} />
+        <RootDrawer.Screen name="SUGERENCIAS" component={SuggestionsScreen} />
     </RootDrawer.Navigator>
 )
 
