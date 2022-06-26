@@ -170,5 +170,9 @@ const styles = StyleSheet.create({
     textAlign: "center",
     fontWeight: "bold",
   },
-  map: { width: Dimensions.get("window").width, height: height / 2 },
+  map: {
+    width: Dimensions.get("window").width,
+    height: height / 2,
+    
+  },
 });

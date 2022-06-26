@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native';
 import { Avatar, useTheme } from 'react-native-paper';
 import * as styles from '../../../assets/styles/appStyles'
 
-export const ListVideos = ({ infoVideos }) => {
+export const ListVideos = ({ infoVideos,index }) => {
     const navigation = useNavigation();
     const paperTheme = useTheme();
     return (
@@ -21,6 +21,7 @@ export const ListVideos = ({ infoVideos }) => {
                 console.log("VALOR:" + infoVideos.title);
                 navigation.navigate("VIDEOSDETAIL", { items: infoVideos });
             }}
+            key={index}
         >
             <ListItem.Content style={{ flexDirection: "column" }}>
                 <Image source={{ uri: infoVideos.prevImg }} style={{ height: 170, width: Dimensions.get('window').width - 50 }} />

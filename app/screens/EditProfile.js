@@ -45,6 +45,8 @@ export const EditProfile = ({ navigation }) => {
         <RefreshControl
           refreshing={refreshing}
           onRefresh={onRefresh}
+          colors={[commonStyles.colors.gradient1]}
+          progressBackgroundColor={commonStyles.colors.white}
         />
       }>
         <View

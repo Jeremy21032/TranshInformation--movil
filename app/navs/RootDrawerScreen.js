@@ -15,6 +15,7 @@ import { EditProfile } from '../screens/EditProfile';
 import { Home } from '../screens/Home';
 import { NoticesOrganicStackScreen } from './NoticesOrganicStackScreen';
 import { ProfileStackScreen } from './ProfielStack';
+import { RecomendationsScreen } from '../screens/RecomendationsScreen';
 
 
 const RootDrawer = createDrawerNavigator();
@@ -35,6 +36,7 @@ export const RootDrawerScreen = ({ items }) => (
         <RootDrawer.Screen name="VIDEOS" component={VideoStackScreen} />
         <RootDrawer.Screen name="BADGES" component={BadgesScreen} />
         <RootDrawer.Screen name="SUGERENCIAS" component={SuggestionsScreen} />
+        <RootDrawer.Screen name="RECOMENDACIONES" component={RecomendationsScreen} />
     </RootDrawer.Navigator>
 )
 

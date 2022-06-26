@@ -96,7 +96,16 @@ export function DrawerContent(props) {
                 props.navigation.navigate("VIDEOS");
               }}
             />
-          
+
+            <DrawerItem
+              label="Recomendaciones"
+              icon={({ color, size }) => (
+                <Icon name="form-select" color={color} size={size} />
+              )}
+              onPress={() => {
+                props.navigation.navigate("RECOMENDACIONES");
+              }}
+            />
             <DrawerItem
               label="Sugerencias"
               icon={({ color, size }) => (
