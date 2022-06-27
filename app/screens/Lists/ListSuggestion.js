@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -11,10 +11,21 @@ import * as commonStyles from "../../../assets/styles/appStyles";
 import { useTheme } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { removeSuggestion } from "../../services/SuggestionsServices";
+import { ModalInformation } from "../../components/ModalInformation";
 
 export const ListSuggestion = ({ infoSuggestion, refresh }) => {
   const navigation = useNavigation();
+  const [visible, isVisible] = useState(false);
+  const [messageSelected, setMessageSelected] = useState("false");
+  const [titleSelected, setTitleSelected] = useState("false");
   const paperTheme = useTheme();
+  const showModal = () => {
+    console.log("Entra")
+    isVisible(true)
+    setMessageSelected(infoSuggestion.comment);
+    setTitleSelected(infoSuggestion.section);
+    console.log("Sale")
+  };
   return (
     <View
       style={[
@@ -40,7 +51,7 @@ export const ListSuggestion = ({ infoSuggestion, refresh }) => {
         </Text>
       </View>
       <View style={[{ flex: 1 }, styles.columnR]}>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => showModal()}>
           <MaterialCommunityIcons
             name="eye"
             size={30}
@@ -77,6 +88,12 @@ export const ListSuggestion = ({ infoSuggestion, refresh }) => {
           />
         </TouchableOpacity>
       </View>
+      <ModalInformation
+        modalVisible={visible}
+        setModalVisible={isVisible}
+        message={messageSelected}
+        title={titleSelected}
+      ></ModalInformation>
     </View>
   );
 };

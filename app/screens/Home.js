@@ -82,8 +82,8 @@ export const Home = () => {
                 latitude: location.latitude,
                 longitude: location.longitude,
               }}
-              title={"Titulo"}
-              description={"description"}
+              title={data.ruta.toUpperCase()}
+              description={data.adm_zonal.toUpperCase()}
             >
               {/* <Callout>
                 <Text>Ruta: {coordinates[0].ruta}</Text>

@@ -31,9 +31,26 @@ import {
   useMediaLibraryPermissions,
 } from "expo-image-picker";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { LoadingOverlay } from "../components/LoadingOverlay";
+import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
+import { ModalInfoError } from "../components/ModalInfoError";
 
 export const EditProfileSecond = ({ navigation }) => {
   const paperTheme = useTheme();
+  const [modalVisibleError, setModalVisibleError] = React.useState(false);
+  const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
+  const [messageCorrect, setMessageCorrect] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [messageError, setMessageError] = React.useState("");
+  let component = (
+    <LoadingOverlay
+      isVisible={isLoading}
+      setIsLoading={setIsLoading}
+      setModalVisibleError={setModalVisibleError}
+      setMessageError={setMessageError}
+    />
+  );
+
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [data, setData] = React.useState({
     name: global.name,
@@ -155,9 +172,10 @@ export const EditProfileSecond = ({ navigation }) => {
     blob.close();
     const url = await getDownloadURL(fileStorage);
     global.url = url;
-    console.log("*/*/*/*/*/*/*/*/*/*/*/*/*/",global.url)
+    console.log("*/*/*/*/*/*/*/*/*/*/*/*/*/", global.url);
   };
   const saveData = async () => {
+    setIsLoading(true);
     let actualDate = new Date();
     let year = actualDate.getFullYear().toString().substr(-2);
     let imageName =
@@ -180,14 +198,13 @@ export const EditProfileSecond = ({ navigation }) => {
     global.lastName = data.lastName;
     global.email = data.email;
     global.birthdate = data.date;
-    global.profilePic=global.url;
+    global.profilePic = global.url;
     let persona = {
       name: global.name,
       lastName: global.lastName,
       email: global.email,
       birthdate: global.birthdate,
       profilePic: global.profilePic,
-
     };
     let personaRol = {
       name: global.name,
@@ -195,8 +212,17 @@ export const EditProfileSecond = ({ navigation }) => {
       email: global.email,
       profilePic: global.profilePic,
     };
-    await updatePersona(persona);
-    await updatePersonaRol(personaRol, canContinue);
+    try {
+      await updatePersona(persona);
+      await updatePersonaRol(personaRol, canContinue);
+      setModalVisibleCorrect(true);
+      setMessageCorrect("Información actualziada con exito");
+      setIsLoading(false);
+    } catch (error) {
+      setIsLoading(false);
+      setModalVisibleError(true);
+      setMessageError(error.message);
+    }
   };
 
   return (
@@ -364,9 +390,7 @@ export const EditProfileSecond = ({ navigation }) => {
                 style={[
                   styles.commons.textInput,
                   {
-                    color: paperTheme.dark
-                      ? styles.colors.white
-                      : styles.colors.darkBlue,
+                    color: styles.colors.lightGray,
                   },
                 ]}
                 editable={false}
@@ -462,6 +486,17 @@ export const EditProfileSecond = ({ navigation }) => {
             </View>
           </ScrollView>
         </View>
+        {isLoading ? component : <View></View>}
+        <ModalInfoError
+          modalVisible={modalVisibleError}
+          setModalVisible={setModalVisibleError}
+          message={messageError}
+        ></ModalInfoError>
+        <ModalInfoCorrect
+          modalVisible={modalVisibleCorrect}
+          setModalVisible={setModalVisibleCorrect}
+          message={messageCorrect}
+        ></ModalInfoCorrect>
       </ScrollView>
     </>
   );

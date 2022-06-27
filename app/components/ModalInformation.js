@@ -1,7 +1,12 @@
 import { StyleSheet, Text, View, Modal } from "react-native";
 import { Icon } from "react-native-elements";
 
-export const ModalInformation = ({ modalVisible, setModalVisible }) => {
+export const ModalInformation = ({
+  modalVisible,
+  setModalVisible,
+  message,
+  title,
+}) => {
   return (
     <Modal
       animationType="slide"
@@ -18,7 +23,7 @@ export const ModalInformation = ({ modalVisible, setModalVisible }) => {
               <Icon
                 name="information-circle-outline"
                 type="ionicon"
-                size={90}
+                size={50}
                 color="#B2ABA4"
               />
             </View>
@@ -32,36 +37,9 @@ export const ModalInformation = ({ modalVisible, setModalVisible }) => {
               />
             </View>
           </View>
-          <Text style={styles.modalTitle}>CRÉDITO INDIVIDUAL SIMPLE</Text>
+          <Text style={styles.modalTitle}>{title}</Text>
           <View style={[styles.viewFlex]}>
-            <View style={styles.itemModalStyle}>
-              <Text style={styles.modalSubtitle}>Edad: </Text>
-              <Text style={styles.modalSubTex}> 25 a 50 años</Text>
-            </View>
-            <View style={styles.itemModalStyle}>
-              <Text style={styles.modalSubtitle}>Plazos: </Text>
-              <Text style={styles.modalSubTex}> 6 meses</Text>
-            </View>
-            <View style={styles.itemModalStyle}>
-              <Text style={styles.modalSubtitle}>Frecuencia de pagos: </Text>
-              <Text style={styles.modalSubTex}>Catorcenal y mensual</Text>
-            </View>
-            <View style={styles.itemModalStyle}>
-              <Text style={styles.modalSubtitle}>Tasa: </Text>
-              <Text style={styles.modalSubTex}> {global.rate}% + IVA</Text>
-            </View>
-            <View style={styles.itemModalStyle}>
-              <Text style={styles.modalSubtitle}>Monto: </Text>
-              <Text style={styles.modalSubTex}> Desde $5000 hasta $6000</Text>
-            </View>
-            <View style={styles.itemModalStyle}>
-              <Text style={styles.modalSubtitle}>Ingreso mínimo: </Text>
-              <Text style={styles.modalSubTex}> $1500</Text>
-            </View>
-            <View style={styles.itemModalStyle}>
-              <Text style={styles.modalSubtitle}>Comisión por atraso: </Text>
-              <Text style={styles.modalSubTex}> $180 + IVA </Text>
-            </View>
+            <Text style={styles.modalSubtitle}>{message}</Text>
           </View>
         </View>
       </View>
@@ -141,13 +119,13 @@ const styles = StyleSheet.create({
   },
   modalSubtitle: {
     marginBottom: 5,
-    color: "#979797",
-    fontWeight: "bold",
+    color: "#000000",
+    textAlign: "justify",
     fontSize: 15,
   },
   modalTitle: {
     marginBottom: 15,
-    fontSize: 20,
+    fontSize: 16,
     fontWeight: "bold",
     color: "red",
     textAlign: "center",

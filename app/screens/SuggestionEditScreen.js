@@ -15,8 +15,25 @@ import Feather from "react-native-vector-icons/Feather";
 import * as Animatable from "react-native-animatable";
 import { saveSuggestion } from "../services/SuggestionsServices";
 import { getLastItem, saveLastItem } from "../services/GlobalServices";
+import { LoadingOverlay } from "../components/LoadingOverlay";
+import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
+import { ModalInfoError } from "../components/ModalInfoError";
 
 export const SuggestionEditScreen = ({ navigation, route }) => {
+  const [modalVisibleError, setModalVisibleError] = React.useState(false);
+  const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
+  const [messageCorrect, setMessageCorrect] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+  const [messageError, setMessageError] = React.useState("");
+  let component = (
+    <LoadingOverlay
+      isVisible={isLoading}
+      setIsLoading={setIsLoading}
+      setModalVisibleError={setModalVisibleError}
+      setMessageError={setMessageError}
+    />
+  );
+
   console.log("-------------ROUTE-----------------", route);
   let suggestionSelected = null;
   let editing = useState(false);
@@ -53,7 +70,7 @@ export const SuggestionEditScreen = ({ navigation, route }) => {
     }
   };
   const handleChangeDescription = (val) => {
-    if (val.trim().length >= 50) {
+    if (val.length >= 50) {
       setData({
         ...data,
         isValidDescription: true,
@@ -71,6 +88,7 @@ export const SuggestionEditScreen = ({ navigation, route }) => {
     navigation.goBack();
   };
   const saveData = async () => {
+    setIsLoading(true);
     let lastItem = await getLastItem();
     let newLastItem = parseInt(lastItem) + 1 + "s";
     let suggestion = {
@@ -79,10 +97,20 @@ export const SuggestionEditScreen = ({ navigation, route }) => {
       section: data.title,
       name: global.name,
       lastName: global.lastName,
-      email:global.email,
+      email: global.email,
     };
-    await saveLastItem({ lasitemSuggestion: parseInt(lastItem) + 1 });
-    await saveSuggestion(suggestion, canContinue);
+    if (data.isValidDescription && data.isValidTitle) {
+      await saveLastItem({ lasitemSuggestion: parseInt(lastItem) + 1 });
+      await saveSuggestion(suggestion, canContinue);
+
+      setModalVisibleCorrect(true);
+      setMessageCorrect("Sugerencia registrada con exito");
+      setIsLoading(false);
+    } else {
+      setIsLoading(false);
+      setModalVisibleError(true);
+      setMessageError("Por favor, revisa el contenido de los campos");
+    }
   };
   return (
     <View style={styles.container}>
@@ -220,10 +248,17 @@ export const SuggestionEditScreen = ({ navigation, route }) => {
       <View style={{ marginTop: 15 }}>
         <Divider />
       </View>
-
-      <ScrollView>
-        <Text>Historial</Text>
-      </ScrollView>
+      {isLoading ? component : <View></View>}
+      <ModalInfoError
+        modalVisible={modalVisibleError}
+        setModalVisible={setModalVisibleError}
+        message={messageError}
+      ></ModalInfoError>
+      <ModalInfoCorrect
+        modalVisible={modalVisibleCorrect}
+        setModalVisible={setModalVisibleCorrect}
+        message={messageCorrect}
+      ></ModalInfoCorrect>
     </View>
   );
 };

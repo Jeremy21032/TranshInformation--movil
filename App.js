@@ -22,9 +22,10 @@ import * as styles from "./assets/styles/appStyles";
 import { KnowStackScreen } from "./app/navs/KnowStackScreen";
 import NetInfo from "@react-native-community/netinfo";
 import { getLocation } from "./app/services/GeoServices";
-import { Button, Dimensions, StyleSheet, View, Text } from "react-native";
+import { Button, Dimensions, StyleSheet, View, Text ,LogBox} from "react-native";
 import Lottie from "lottie-react-native";
-
+LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
+LogBox.ignoreAllLogs()
 const CustomDefaultTheme = {
   ...NavigationDefaultTheme,
   ...PaperDefaultTheme,
