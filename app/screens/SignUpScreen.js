@@ -22,6 +22,7 @@ import {
 import { ModalInfoError } from "../components/ModalInfoError";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { validateCorrectPassword } from "../services/Validate";
+import { useTheme } from "react-native-paper";
 export const SignUpScreen = ({ navigation }) => {
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
@@ -34,6 +35,7 @@ export const SignUpScreen = ({ navigation }) => {
       setMessageError={setMessageError}
     />
   );
+  const paperTheme = useTheme();
 
   const auth = getAuth();
   const [data, setData] = React.useState({

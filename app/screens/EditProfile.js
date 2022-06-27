@@ -37,8 +37,13 @@ export const EditProfile = ({ navigation }) => {
     });
   }, []);
   useEffect(() => {
-    onRefresh();
-  }, []);
+    const unsubscribe =navigation.addListener('focus',()=>{
+
+      onRefresh();
+      return unsubscribe;
+    });
+    
+  }, [navigation]);
   const ComponenteNormal = () => {
     return (
       <ScrollView refreshControl={

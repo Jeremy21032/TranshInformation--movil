@@ -5,7 +5,6 @@ import { VideosScreen } from '../screens/VideosScreen';
 import { BadgesScreen } from '../screens/BadgesScreen';
 import { ServicesScreen } from '../screens/ServicesScreen';
 import { ProfileScreen } from '../screens/ProfileScreen';
-import { SuggestionsScreen } from '../screens/SuggestionsScreen';
 import { DrawerContent } from '../screens/DrawerContent';
 import * as styles from '../../assets/styles/appStyles';
 import { useWindowDimensions } from 'react-native';
@@ -16,6 +15,7 @@ import { Home } from '../screens/Home';
 import { NoticesOrganicStackScreen } from './NoticesOrganicStackScreen';
 import { ProfileStackScreen } from './ProfielStack';
 import { RecomendationsScreen } from '../screens/RecomendationsScreen';
+import { SuggestionsStackScreen } from './SuggestionsStackScreen';
 
 
 const RootDrawer = createDrawerNavigator();
@@ -35,7 +35,7 @@ export const RootDrawerScreen = ({ items }) => (
         <RootDrawer.Screen name="NOTICIAS" component={NoticesOrganicStackScreen} />
         <RootDrawer.Screen name="VIDEOS" component={VideoStackScreen} />
         <RootDrawer.Screen name="BADGES" component={BadgesScreen} />
-        <RootDrawer.Screen name="SUGERENCIAS" component={SuggestionsScreen} />
+        <RootDrawer.Screen name="SUGERENCIAS" component={SuggestionsStackScreen} />
         <RootDrawer.Screen name="RECOMENDACIONES" component={RecomendationsScreen} />
     </RootDrawer.Navigator>
 )

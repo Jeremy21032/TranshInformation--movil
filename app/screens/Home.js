@@ -4,8 +4,8 @@ import {
   View,
   Button,
   ScrollView,
-  Dimensions,
   ActivityIndicator,
+  Dimensions
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "react-native-paper";

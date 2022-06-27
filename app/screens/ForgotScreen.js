@@ -10,6 +10,7 @@ import { LoadingOverlay } from '../components/LoadingOverlay'
 import { ModalInfoError } from '../components/ModalInfoError'
 import { getAuth, sendPasswordResetEmail } from 'firebase/auth'
 import { ModalInfoCorrect } from '../components/ModalInfoCorrect'
+import { useTheme } from 'react-native-paper'
 export const ForgotScreen = ({ navigation }) => {
     const [modalVisibleError, setModalVisibleError] = React.useState(false);
     const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
@@ -18,7 +19,7 @@ export const ForgotScreen = ({ navigation }) => {
     const [messageError, setMessageError] = React.useState("");
     const auth = getAuth();
     let component = <LoadingOverlay isVisible={isLoading} setIsLoading={setIsLoading} setModalVisibleError={setModalVisibleError} setMessageError={setMessageError} />
-
+const paperTheme = useTheme();
     const [data, setData] = React.useState({
         email: '',
         isvalidEmail: true,
@@ -124,7 +125,7 @@ export const ForgotScreen = ({ navigation }) => {
                         }
                     }}>
 
-                        <LinearGradient olors={[styles.colors.gradient2,styles.colors.gradient1]} style={styles.commons.signIn}>
+                        <LinearGradient colors={[styles.colors.gradient2,styles.colors.gradient1]} style={styles.commons.signIn}>
                             <Text style={[styles.commons.textSign, { color: "#fff" }]}>Enviar correo</Text>
                         </LinearGradient>
                     </TouchableOpacity>

@@ -21,9 +21,18 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import { validateEmail } from "../services/Validations";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { formattedDate } from "../Functions";
-import { updatePersona, updatePersonaRol } from "../services/InfoServicesPersonal";
+import {
+  updatePersona,
+  updatePersonaRol,
+} from "../services/InfoServicesPersonal";
+import {
+  launchImageLibraryAsync,
+  MediaTypeOptions,
+  useMediaLibraryPermissions,
+} from "expo-image-picker";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
-export const EditProfileSecond = ({navigation}) => {
+export const EditProfileSecond = ({ navigation }) => {
   const paperTheme = useTheme();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [data, setData] = React.useState({
@@ -41,7 +50,9 @@ export const EditProfileSecond = ({navigation}) => {
     isvalidPassword: true,
     isEqualsPassword: true,
     date: global.birthdate,
+    profilePic: global.profilePic,
   });
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
@@ -111,35 +122,82 @@ export const EditProfileSecond = ({navigation}) => {
     }
   };
   const canContinue = () => {
-    navigation.goBack()
+    navigation.goBack();
+  };
 
-  }
-  const saveData =()=>{
+  const chooseFile = async () => {
+    let options = {
+      mediaTypes: MediaTypeOptions.Images,
+    };
+    let response = await launchImageLibraryAsync(options);
+    console.log("Respuesta: ", response);
+    setData({ ...data, profilePic: response.uri });
+  };
+
+  const uploadFile = async (empid) => {
+    const blob = await new Promise((resolve, reject) => {
+      const xhr = new XMLHttpRequest();
+      xhr.onload = function () {
+        resolve(xhr.response);
+      };
+      xhr.onerror = function (e) {
+        console.log(e);
+        reject(new TypeError("Network request failed"));
+      };
+      xhr.responseType = "blob";
+      xhr.open("GET", data.profilePic, true);
+      xhr.send(null);
+    });
+    const storage = getStorage();
+    const fileStorage = ref(storage, "userImages/" + empid);
+    const uploadResult = await uploadBytes(fileStorage, blob);
+    // console.log("Upload Result:", uploadResult);
+    blob.close();
+    const url = await getDownloadURL(fileStorage);
+    global.url = url;
+    console.log("*/*/*/*/*/*/*/*/*/*/*/*/*/",global.url)
+  };
+  const saveData = async () => {
+    let actualDate = new Date();
+    let year = actualDate.getFullYear().toString().substr(-2);
+    let imageName =
+      global.name.toLowerCase() +
+      "_" +
+      global.lastName.toLowerCase() +
+      "_" +
+      year +
+      ".jpg";
+    await uploadFile(imageName);
     setData({
       ...data,
-      name:data.name,
+      name: data.name,
       lastName: data.lastName,
       email: data.email,
-      date:data.date,
+      date: data.date,
+      profilePic: global.url,
     });
     global.name = data.name;
-    global.lastName=data.lastName;
-    global.email=data.email;
-    global.birthdate=data.date;
-    let persona={
-      name:global.name,
+    global.lastName = data.lastName;
+    global.email = data.email;
+    global.birthdate = data.date;
+    global.profilePic=global.url;
+    let persona = {
+      name: global.name,
       lastName: global.lastName,
       email: global.email,
-      birthdate:global.birthdate,
-    }
-    let personaRol={
-      name:global.name,
+      birthdate: global.birthdate,
+      profilePic: global.profilePic,
+
+    };
+    let personaRol = {
+      name: global.name,
       lastName: global.lastName,
       email: global.email,
-    }
-    updatePersona(persona);
-    updatePersonaRol(personaRol,canContinue);
-  }
+      profilePic: global.profilePic,
+    };
+    await updatePersona(persona);
+    await updatePersonaRol(personaRol, canContinue);
+  };
 
   return (
     <>
@@ -161,17 +219,21 @@ export const EditProfileSecond = ({navigation}) => {
         >
           <Avatar
             source={{
-              uri: global.profilePic,
+              uri: data.profilePic,
             }}
             containerStyle={stylesL.profile}
             rounded
             style={stylesL.profile}
           >
-            <Avatar.Accessory
-              size={35}
-              onPress={() => console.log("Works in it")}
-            />
+            <Avatar.Accessory size={35} onPress={() => chooseFile()} />
           </Avatar>
+          <View style={stylesL.bdContainer}>
+            <Icon name="information-outline" color="black" size={20} />
+            <Text>
+              Recuerda, el único campo que no podrás modificar es tu correo
+              electrónico.
+            </Text>
+          </View>
           <ScrollView
             style={{
               width: Dimensions.get("window").width - 50,
@@ -307,6 +369,7 @@ export const EditProfileSecond = ({navigation}) => {
                       : styles.colors.darkBlue,
                   },
                 ]}
+                editable={false}
                 autoCapitalize="none"
                 value={data.email}
                 onChangeText={(val) => textInputChange(val)}
@@ -463,6 +526,6 @@ const stylesL = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    bottom: "6%",
+    bottom: "12%",
   },
 });

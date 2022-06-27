@@ -1,13 +1,13 @@
 {
   "expo": {
-    "name": "Test",
-    "slug": "Test",
-    "version": "1.0.0",
+    "name": "TrashInformation",
+    "slug": "TrashInformation",
+    "version": "0.0.1",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon_logo.png",
     "userInterfaceStyle": "automatic",
     "splash": {
-      "image": "./assets/images/logo-splash.png",
+      "image": "./assets/images/lang_logo.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -21,10 +21,12 @@
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./assets/icon_logo.png",
         "backgroundColor": "#FFFFFF"
-      }
+      },
+      "package": "com.zantycb89.TrashInformation"
     },
     "web": {
       "favicon": "./assets/favicon.png"
