@@ -125,7 +125,7 @@ const App = () => {
     );
   };
   const InternetNav = () => {
-    return login ? <FirstNav /> : <RootStackScreen />;
+    return login ==true? <FirstNav /> : <RootStackScreen />;
   };
   return (
     <PaperProvider theme={theme}>
