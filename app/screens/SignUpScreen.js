@@ -222,7 +222,7 @@ export const SignUpScreen = ({ navigation }) => {
                 <FontAwesome name="user-o" color={styles.colors.darkBlue} size={20} />
                 <TextInput
                   placeholder="Tu nombre"
-                  style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
+                  style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
                   autoCapitalize="none"
                   onChangeText={(val) => nameInputChange(val)}
                 />
@@ -253,7 +253,7 @@ export const SignUpScreen = ({ navigation }) => {
                 <FontAwesome name="user-o" color={styles.colors.darkBlue} size={20} />
                 <TextInput
                   placeholder="Tu apellido"
-                  style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
+                  style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
                   autoCapitalize="none"
                   onChangeText={(val) => lastnameInputChange(val)}
                 />
@@ -288,7 +288,7 @@ export const SignUpScreen = ({ navigation }) => {
             <Feather name="mail" color={styles.colors.darkBlue} size={20} />
             <TextInput
               placeholder="Tu correo electrónico"
-              style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
+              style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
               autoCapitalize="none"
               onChangeText={(val) => textInputChange(val)}
             />
@@ -325,7 +325,7 @@ export const SignUpScreen = ({ navigation }) => {
             <Feather name="lock" color={styles.colors.darkBlue} size={20} />
             <TextInput
               placeholder="Your Password"
-              style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
+              style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
               autoCapitalize="none"
               secureTextEntry={data.secureTextEntry ? true : false}
               onChangeText={(val) => handlePasswordChange(val)}
@@ -368,7 +368,7 @@ export const SignUpScreen = ({ navigation }) => {
             <Feather name="lock" color={styles.colors.darkBlue} size={20} />
             <TextInput
               placeholder="Confirm Your Password"
-              style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
+              style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
               autoCapitalize="none"
               secureTextEntry={data.confirmSecureTextEntry ? true : false}
               onChangeText={(val) => handleConfirmPasswordChange(val)}

@@ -106,6 +106,8 @@ export const SignInScreen = ({ navigation }) => {
         // let userData = await getPersonalRol(user.email);
         // let verify = await getPersonalInfomation();
         // var userFinal = await Object.assign({}, userData, verify);
+        setIsLoading(false);
+        setModalVisibleError(false);
       })
       .catch((error) => {
         setIsLoading(false);
