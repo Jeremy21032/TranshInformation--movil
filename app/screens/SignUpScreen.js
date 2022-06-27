@@ -35,7 +35,6 @@ export const SignUpScreen = ({ navigation }) => {
       setMessageError={setMessageError}
     />
   );
-  const paperTheme = useTheme();
 
   const auth = getAuth();
   const [data, setData] = React.useState({

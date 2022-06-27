@@ -24,8 +24,10 @@ import { ModalInfoError } from "../components/ModalInfoError";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { getLocation } from "../services/GeoServices";
 import { formattedDate } from "../Functions";
+import { useTheme } from "react-native-paper";
 
 export const KnowScreen = ({ navigation }) => {
+  const paperTheme = useTheme();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
   const [items, setItems] = useState([]);
