@@ -1,7 +1,7 @@
 import { collection, getDocs } from "firebase/firestore";
 
 export const getLocation = async (direccion) => {
-  global.coordenas=null;
+  global.coordenas = null;
   const queryData = collection(global.dbCon, "/Mapa/Direcciones/", direccion);
   const queryLocation = await getDocs(queryData);
   let tmpMapa = [];
@@ -10,10 +10,8 @@ export const getLocation = async (direccion) => {
   });
   if (tmpMapa.length > 0) {
     global.coordenadas = tmpMapa;
-    if (global.coordenadas != null && global.coordenadas.length > 0) {
-      console.log(tmpMapa);
-      return tmpMapa;
-    }
+    console.log(tmpMapa);
+    return tmpMapa;
   }
 };
 

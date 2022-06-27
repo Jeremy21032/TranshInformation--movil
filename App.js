@@ -118,7 +118,7 @@ const App = () => {
     );
   };
   const SecondNav = () => {
-    return global.direccionBase == null && direccionBase != "" ? (
+    return global.direccionBase == null  ? (
       <KnowStackScreen />
     ) : (
       <MediumNav />
