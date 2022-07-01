@@ -5,14 +5,34 @@ import {
   Button,
   ScrollView,
   ActivityIndicator,
-  Dimensions
+  Dimensions,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import { useTheme } from "react-native-paper";
 import MapView, { Polygon, PROVIDER_GOOGLE } from "react-native-maps";
 const height = Dimensions.get("window").height;
+
 export const Home = () => {
+  var language = {
+    en: require(`../json/Altamira.json`),
+    lg: require(`../json/La Granja.json`),
+  };
+
+  console.log("Direccion global", global.direccionBase);
+  const urlLocation = "../" + `json/${global.direccionBase}.json`;
+  console.log("************************", urlLocation, typeof urlLocation);
+  let coordinates;
+  if (global.direccionBase == "en") {
+    coordinates = language.en;
+  } else if (global.direccionBase == "lg") {
+    coordinates = language.lg;
+    
+  }
   const paperTheme = useTheme();
+
+  useEffect(() => {
+    coordinates = [];
+  }, [coordinates]);
   const [data, setData] = useState({
     ruta: "",
     horario: "",
@@ -27,22 +47,6 @@ export const Home = () => {
     longitude: -78.5433207,
   });
 
-  useEffect(() => {
-    setData({
-      adm_zonal: global.coordenadas[0].adm_zonal,
-      centroLogistico: global.coordenadas[0].centroLogistico,
-      frecuencia: global.coordenadas[0].frecuencia,
-      horario: global.coordenadas[0].horario,
-      horas: global.coordenadas[0].horas,
-      ruta: global.coordenadas[0].ruta,
-      servicio: global.coordenadas[0].servicio,
-    });
-    setLocation({
-      ...location,
-      latitude: global.coordenadas[0].calloutlatitude,
-      longitude: global.coordenadas[0].calloutlongitude,
-    });
-  }, []);
   const ComponenteFalso = () => {
     return <ActivityIndicator size="large" />;
   };
@@ -62,39 +66,19 @@ export const Home = () => {
             showsUserLocation={true}
             zoomTapEnabled={true}
             region={{
-              latitude: location.latitude,
-              longitude: location.longitude,
+              latitude: coordinates[0].calloutlatitude,
+              longitude: coordinates[0].calloutlongitude,
               latitudeDelta: 0.01922,
               longitudeDelta: 0.00421,
             }}
           >
             <Polygon
-              coordinates={global.coordenadas.sort((a, b) => a.id - b.id)}
+              coordinates={coordinates}
               fillColor={"rgba(100,200,200,0.3)"}
               strokeColor="coral"
               strokeWidth={3}
               tappable={true}
             ></Polygon>
-
-            <MapView.Marker
-              key={"1"}
-              coordinate={{
-                latitude: location.latitude,
-                longitude: location.longitude,
-              }}
-              title={data.ruta.toUpperCase()}
-              description={data.adm_zonal.toUpperCase()}
-            >
-              {/* <Callout>
-                <Text>Ruta: {coordinates[0].ruta}</Text>
-                <Text>Horario: {coordinates[0].horario}</Text>
-                <Text>Frecuencia: {coordinates[0].frecuencia}</Text>
-                <Text>Servicio: {coordinates[0].servicio}</Text>
-                <Text>ADM_ZONAL: {coordinates[0].adm_zonal}</Text>
-                <Text>Horas: {coordinates[0].horas}</Text>
-                <Text>Centro Logístico: {coordinates[0].centroLogistico}</Text>
-              </Callout> */}
-            </MapView.Marker>
           </MapView>
         </View>
 
@@ -114,25 +98,25 @@ export const Home = () => {
               },
             ]}
           >
-            {data.ruta.toUpperCase()}
+            {coordinates[0].ruta.toUpperCase()}
           </Text>
           <Text style={[styles.text, { color: paperTheme.colors.text }]}>
-            HORARIO: {data.horario.toUpperCase()}
+            HORARIO: {coordinates[0].horario.toUpperCase()}
           </Text>
           <Text style={[styles.text, { color: paperTheme.colors.text }]}>
-            FRECUENCIA: {data.frecuencia.toUpperCase()}
+            FRECUENCIA: {coordinates[0].frecuencia.toUpperCase()}
           </Text>
           <Text style={[styles.text, { color: paperTheme.colors.text }]}>
-            Servicio: {data.servicio.toUpperCase()}
+            Servicio: {coordinates[0].servicio.toUpperCase()}
           </Text>
           <Text style={[styles.text, { color: paperTheme.colors.text }]}>
-            ADM_ZONAL: {data.adm_zonal.toUpperCase()}
+            ADM_ZONAL: {coordinates[0].adm_zonal.toUpperCase()}
           </Text>
           <Text style={[styles.text, { color: paperTheme.colors.text }]}>
-            HORAS: {data.horas}
+            HORAS: {coordinates[0].horas}
           </Text>
           <Text style={[styles.text, { color: paperTheme.colors.text }]}>
-            CENTRO LOGÍSTICO: {data.centroLogistico.toUpperCase()}
+            CENTRO LOGÍSTICO: {coordinates[0].centroLogistico.toUpperCase()}
           </Text>
         </View>
       </ScrollView>
@@ -140,7 +124,7 @@ export const Home = () => {
   };
   return (
     <View style={{ flex: 1 }}>
-      {global.coordenadas != null && global.coordenadas.length > 0 ? (
+      {coordinates != null && coordinates.length > 0 ? (
         <ComponenteVerdadero />
       ) : (
         <ComponenteFalso />
@@ -173,6 +157,5 @@ const styles = StyleSheet.create({
   map: {
     width: Dimensions.get("window").width,
     height: height / 2,
-    
   },
 });

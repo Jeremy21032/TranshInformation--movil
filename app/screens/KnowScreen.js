@@ -22,7 +22,6 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoError } from "../components/ModalInfoError";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
-import { getLocation } from "../services/GeoServices";
 import { formattedDate } from "../Functions";
 import { useTheme } from "react-native-paper";
 
@@ -119,7 +118,6 @@ export const KnowScreen = ({ navigation }) => {
   };
   let actualizarInformacion = async () => {
     await aniadirDireccionBase(data.direcionBase, data.date);
-    await getLocation(data.direcionBase);
     await getDireccionBase(setDirection, canContinue);
   };
   let canContinue = () => {

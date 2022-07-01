@@ -21,7 +21,6 @@ import {
 import * as styles from "./assets/styles/appStyles";
 import { KnowStackScreen } from "./app/navs/KnowStackScreen";
 import NetInfo from "@react-native-community/netinfo";
-import { getLocation } from "./app/services/GeoServices";
 import { Button, Dimensions, StyleSheet, View, Text ,LogBox} from "react-native";
 import Lottie from "lottie-react-native";
 LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
@@ -93,9 +92,6 @@ const App = () => {
       global.profilePic = userData.profilePic;
       let verify = await getPersonalInfomation();
       global.direccionBase = verify.direccionBase;
-      if (global.direccionBase != null && global.direccionBase != "") {
-        await getLocation(global.direccionBase);
-      }
       global.birthdate = verify.birthdate;
       if (global.rol == null) {
         setLogin(false);
@@ -111,19 +107,12 @@ const App = () => {
   const FirstNav = () => {
     return global.rol == "cliente" ? <SecondNav /> : <RootStackScreen />;
   };
-  const MediumNav = () => {
-    return global.coordenadas != null && global.coordenadas.length > 0 ? (
-      <RootDrawerScreen />
-    ) : (
-      <></>
-    );
-  };
+  
   const SecondNav = () => {
     return global.direccionBase == null  ? (
       <KnowStackScreen />
     ) : (
-      <MediumNav />
-    );
+<RootDrawerScreen />    );
   };
   const InternetNav = () => {
     return login ==true? <FirstNav /> : <RootStackScreen />;

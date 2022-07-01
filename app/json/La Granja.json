@@ -1,0 +1,141 @@
+[
+  {
+    "servicio": "CONTENERIZACION",
+    "latitude": -0.18683,
+    "adm_zonal": "EUGENIO ESPEJO",
+    "horario": "NOCTURNO",
+    "calloutlongitude": -78.50209,
+    "centroLogistico": "COC",
+    "id": "1",
+    "ruta": "LA GRANJA",
+    "calloutlatitude": -0.18621,
+    "horas": "19h00-03h00",
+    "longitude": -78.50838,
+    "frecuencia": "LUNES-MIERCOLES-VIERNES"
+  },
+  {
+    "longitude": -78.50681,
+    "latitude": -0.18774,
+    "id": "2"
+  },
+  {
+    "longitude": -78.50508,
+    "id": "3",
+    "latitude": -0.18874
+  },
+  {
+    "longitude": -78.50378,
+    "id": "4",
+    "latitude": -0.18948
+  },
+  {
+    "longitude": -78.50231,
+    "id": "5",
+    "latitude": -0.19033
+  },
+  {
+    "longitude": -78.50109,
+    "id": "6",
+    "latitude": -0.19103
+  },
+  {
+    "longitude": -78.49902,
+    "id": "7",
+    "latitude": -0.19222
+  },
+  {
+    "id": "8",
+    "longitude": -78.49801,
+    "latitude": -0.1928
+  },
+  {
+    "id": "9",
+    "longitude": -78.49757,
+    "latitude": -0.19178
+  },
+  {
+    "id": "10",
+    "longitude": -78.49672,
+    "latitude": -0.1899
+  },
+  {
+    "longitude": -78.49628,
+    "latitude": -0.18891,
+    "id": "11"
+  },
+  {
+    "longitude": -78.49557,
+    "latitude": -0.18736,
+    "id": "12"
+  },
+  {
+    "id": "13",
+    "latitude": -0.18657,
+    "longitude": -78.49522
+  },
+  {
+    "id": "14",
+    "latitude": -0.18627,
+    "longitude": -78.4958
+  },
+  {
+    "latitude": -0.18579,
+    "longitude": -78.49696,
+    "id": "15"
+  },
+  {
+    "id": "16",
+    "latitude": -0.18462,
+    "longitude": -78.4998
+  },
+  {
+    "longitude": -78.50137,
+    "latitude": -0.18386,
+    "id": "17"
+  },
+  {
+    "latitude": -0.18388,
+    "longitude": -78.50206,
+    "id": "18"
+  },
+  {
+    "id": "19",
+    "longitude": -78.50277,
+    "latitude": -0.18373
+  },
+  {
+    "longitude": -78.50375,
+    "id": "20",
+    "latitude": -0.18284
+  },
+  {
+    "id": "21",
+    "longitude": -78.5044,
+    "latitude": -0.18212
+  },
+  {
+    "id": "22",
+    "latitude": -0.18146,
+    "longitude": -78.50507
+  },
+  {
+    "latitude": -0.18234,
+    "longitude": -78.50564,
+    "id": "23"
+  },
+  {
+    "longitude": -78.5068,
+    "latitude": -0.18411,
+    "id": "24"
+  },
+  {
+    "id": "25",
+    "longitude": -78.50723,
+    "latitude": -0.18478
+  },
+  {
+    "id": "26",
+    "latitude": -0.18606,
+    "longitude": -78.50803
+  }
+]
