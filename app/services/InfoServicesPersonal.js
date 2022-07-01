@@ -20,6 +20,8 @@ export const savePersonal = async (person) => {
 };
 
 export const savePersonalRol = async (person) => {
+  let email=person.email.toLowerCase;
+  console.log(email)
   await setDoc(doc(global.dbCon, "/Roles", person.email), person);
 };
 

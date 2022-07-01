@@ -14,7 +14,7 @@ const height = Dimensions.get("window").height;
 
 export const Home = () => {
   var language = {
-    en: require(`../json/Altamira.json`),
+    alt: require(`../json/Altamira.json`),
     lg: require(`../json/La Granja.json`),
   };
 
@@ -22,8 +22,8 @@ export const Home = () => {
   const urlLocation = "../" + `json/${global.direccionBase}.json`;
   console.log("************************", urlLocation, typeof urlLocation);
   let coordinates;
-  if (global.direccionBase == "en") {
-    coordinates = language.en;
+  if (global.direccionBase == "alt") {
+    coordinates = language.alt;
   } else if (global.direccionBase == "lg") {
     coordinates = language.lg;
     

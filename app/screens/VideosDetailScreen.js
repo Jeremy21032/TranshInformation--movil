@@ -12,10 +12,11 @@ import React, { useCallback } from "react";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useTheme } from "react-native-paper";
 import * as ScreenOrientation from "expo-screen-orientation";
+import * as commonStyles from '../../assets/styles/appStyles'
+import FontAwesome from "react-native-vector-icons/FontAwesome";
 
-
-export const VideosDetailScreen = ({ route }) => {
-  const { colors } = useTheme();
+export const VideosDetailScreen = ({ route,navigation }) => {
+  const  paperTheme = useTheme();
 
   const [videoSource, setVideoSource] = React.useState(null);
   const [ setPlaying] = React.useState(false);
@@ -73,7 +74,10 @@ export const VideosDetailScreen = ({ route }) => {
         <ActivityIndicator size="large" />
       ) : (
         <View>
-          <Text style={{ color: colors.text }}>VideosDetailScreen</Text>
+          <Text style={{ color: paperTheme.colors.text }}>VideosDetailScreen</Text>
+          <TouchableOpacity onPress={()=>{navigation.goBack()}}>
+            <FontAwesome name="reply" color={paperTheme.dark?commonStyles.colors.white:commonStyles.colors.black} size={50}/>
+          </TouchableOpacity>
           <View>
             <YoutubePlayer
               height={200}

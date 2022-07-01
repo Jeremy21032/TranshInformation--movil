@@ -173,7 +173,7 @@ export const SignUpScreen = ({ navigation }) => {
       data.isEqualsPassword
     ) {
       let persona = {
-        email: data.email,
+        email: data.email.toLowerCase(),
         name: data.name,
         lastName: data.lastName,
         profilePic:
@@ -185,7 +185,7 @@ export const SignUpScreen = ({ navigation }) => {
         birthdate: null,
       };
       let personaRol = {
-        email: data.email,
+        email: data.email.toLowerCase(),
         name: data.name,
         lastName: data.lastName,
         profilePic:

@@ -41,6 +41,7 @@ export const KnowScreen = ({ navigation }) => {
   const [data, setData] = useState({
     date: null,
     direcionBase: null,
+    direccion: null,
   });
 
   const showDatePicker = () => {
@@ -53,7 +54,7 @@ export const KnowScreen = ({ navigation }) => {
 
   const handleConfirm = (date) => {
     let pickedDate = new Date(date);
-    let finalDate =formattedDate(pickedDate)
+    let finalDate = formattedDate(pickedDate);
     console.warn("A date has been picked: ", finalDate);
     setData({ ...data, date: finalDate });
     hideDatePicker();
@@ -97,7 +98,7 @@ export const KnowScreen = ({ navigation }) => {
       data.direcionBase != "" &&
       data.date != ""
     ) {
-      global.birthdate=data.date;
+      global.birthdate = data.date;
       actualizarInformacion()
         .then(() => {
           setModalVisibleCorrect(true);
@@ -109,7 +110,7 @@ export const KnowScreen = ({ navigation }) => {
           setMessageError(error.message);
           setIsLoading(false);
         });
-        setIsLoading(false);
+      setIsLoading(false);
     } else {
       setModalVisibleError(true);
       setMessageError("Verifica que los campos estén llenos");
@@ -148,14 +149,25 @@ export const KnowScreen = ({ navigation }) => {
           Fecha de Nacimiento
         </Text>
         <View style={[styles.commons.action, { marginBottom: 35 }]}>
-          <FontAwesome name="birthday-cake" color={styles.colors.darkBlue} size={20} />
+          <FontAwesome
+            name="birthday-cake"
+            color={styles.colors.darkBlue}
+            size={20}
+          />
           <TextInput
             placeholder={
               data.date != "" && data.date != null
                 ? data.date
                 : "Ingresa tu fecha de nacimiento"
             }
-            style={[styles.commons.textInput,{color: paperTheme.dark ? styles.colors.white:styles.colors.darkBlue,}]}
+            style={[
+              styles.commons.textInput,
+              {
+                color: paperTheme.dark
+                  ? styles.colors.white
+                  : styles.colors.darkBlue,
+              },
+            ]}
             autoCapitalize="none"
             editable={false}
             placeholderTextColor={
@@ -187,7 +199,13 @@ export const KnowScreen = ({ navigation }) => {
           setItems={setItems}
           onSelectItem={(item) => {
             console.log(item);
-            setData({ ...data, direcionBase: item.label });
+            setData({
+              ...data,
+              direcionBase: item.value,
+              direccion: item.label,
+            });
+            global.direccion=item.label;
+            console.log("--------------------------",global.direccion)
           }}
         />
         <Text style={styles.commons.description}>{"\n"}</Text>
@@ -196,7 +214,9 @@ export const KnowScreen = ({ navigation }) => {
             colors={[styles.colors.gradient2, styles.colors.gradient1]}
             style={styles.commons.signIn}
           >
-            <Text style={[styles.commons.textSign, { color: styles.colors.white }]}>
+            <Text
+              style={[styles.commons.textSign, { color: styles.colors.white }]}
+            >
               Continuar
             </Text>
           </LinearGradient>

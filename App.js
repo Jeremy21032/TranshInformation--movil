@@ -21,10 +21,17 @@ import {
 import * as styles from "./assets/styles/appStyles";
 import { KnowStackScreen } from "./app/navs/KnowStackScreen";
 import NetInfo from "@react-native-community/netinfo";
-import { Button, Dimensions, StyleSheet, View, Text ,LogBox} from "react-native";
+import {
+  Button,
+  Dimensions,
+  StyleSheet,
+  View,
+  Text,
+  LogBox,
+} from "react-native";
 import Lottie from "lottie-react-native";
-LogBox.ignoreLogs(['Warning: ...']); // Ignore log notification by message
-LogBox.ignoreAllLogs()
+LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
+LogBox.ignoreAllLogs();
 const CustomDefaultTheme = {
   ...NavigationDefaultTheme,
   ...PaperDefaultTheme,
@@ -85,7 +92,10 @@ const App = () => {
     if (user) {
       const email = user.email;
       global.email = email;
-      let userData = await getPersonalRol(global.email);
+      console.log("****************************************************************")
+      console.log(global.email)
+      console.log("****************************************************************")
+      let userData = await getPersonalRol(global.email.toLowerCase());
       global.rol = userData.rol;
       global.name = userData.name;
       global.lastName = userData.lastName;
@@ -107,15 +117,16 @@ const App = () => {
   const FirstNav = () => {
     return global.rol == "cliente" ? <SecondNav /> : <RootStackScreen />;
   };
-  
+
   const SecondNav = () => {
-    return global.direccionBase == null  ? (
+    return global.direccionBase == null ? (
       <KnowStackScreen />
     ) : (
-<RootDrawerScreen />    );
+      <RootDrawerScreen />
+    );
   };
   const InternetNav = () => {
-    return login ==true? <FirstNav /> : <RootStackScreen />;
+    return login == true ? <FirstNav /> : <RootStackScreen />;
   };
   return (
     <PaperProvider theme={theme}>
@@ -135,7 +146,12 @@ const App = () => {
                   loop
                   style={{ height: "100%" }}
                 />
-                <View style={{width: Dimensions.get("window").width/2, alignSelf: "center"}}>
+                <View
+                  style={{
+                    width: Dimensions.get("window").width / 2,
+                    alignSelf: "center",
+                  }}
+                >
                   <Button
                     title="Volver a intentar"
                     color={styles.colors.gradient2}

@@ -70,7 +70,7 @@ export const EditProfile = ({ navigation }) => {
             {global.email}
           </Text>
           <Text style={[stylesL.mail, { color: paperTheme.colors.text }]}>
-            Dirección: {global.direccionBase}
+            Dirección: {global.direccion}
           </Text>
           <View style={stylesL.bdContainer}>
             <Icon name="party-popper" color="black" size={20} />
