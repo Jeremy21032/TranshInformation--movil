@@ -1,0 +1,87 @@
+[
+  {
+    "centroLogistico": "COC",
+    "horas": "19h00-03h00",
+    "adm_zonal": "Eugenio Espejo",
+    "ruta": "Rumipamba",
+    "frecuencia": "Lunes-Miércoles-Viernes",
+    "horario": "nocturno",
+    "servicio": "Pie de vereda",
+    "longitude": -78.4916,
+    "latitude": -0.17841,
+    "calloutlatitude": -78.49327,
+    "calloutlongitude": -0.18606,
+    "id": "1"
+  },
+  {
+    "longitude": -78.4925,
+    "latitude": -0.17893,
+    "id": "2"
+  },
+  {
+    "longitude": -78.49426,
+    "latitude": -0.17976,
+    "id": "3"
+  },
+  {
+    "longitude": -78.49538,
+    "latitude": -0.18587,
+    "id": "4"
+  },
+  {
+    "longitude": -78.49522,
+    "latitude": -0.18657,
+    "id": "5"
+  },
+  { "longitude": -78.49757, "latitude": -0.19178, "id": "6" },
+  {
+    "longitude": -78.49418,
+    "latitude": -0.19375,
+    "id": "7"
+  },
+  {
+    "longitude": -78.49166,
+    "latitude": -0.18756,
+    "id": "8"
+  },
+  {
+    "longitude": -78.49066,
+    "latitude": -0.1844,
+    "id": "9"
+  },
+  {
+    "longitude": -78.49053,
+    "latitude": -0.18371,
+    "id": "10"
+  },
+  {
+    "longitude": -78.49054,
+    "latitude": -0.18356,
+    "id": "11"
+  },
+  {
+    "longitude": -78.49053,
+    "latitude": -0.18329,
+    "id": "12"
+  },
+  {
+    "longitude": -78.49048,
+    "latitude": -0.18315,
+    "id": "13"
+  },
+  {
+    "longitude": -78.49024,
+    "latitude": -0.18282,
+    "id": "14"
+  },
+  {
+    "longitude": -78.49003,
+    "latitude": -0.18236,
+    "id": "15"
+  },
+  {
+    "longitude": -78.48997,
+    "latitude": -0.18214,
+    "id": "16"
+  }
+]

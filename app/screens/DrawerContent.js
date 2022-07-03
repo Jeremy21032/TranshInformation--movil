@@ -59,7 +59,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate("RECOMENDACIONES");
               }}
             />
-            {/* <DrawerItem
+            <DrawerItem
               label="Inicio"
               icon={({ color, size }) => (
                 <Icon name="home-outline" color={color} size={size} />
@@ -68,7 +68,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate("INICIO");
               }}
               activeTintColor="red"
-            /> */}
+            />
             <DrawerItem
               label="Perfil"
               icon={({ color, size }) => (
