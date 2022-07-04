@@ -223,7 +223,6 @@ export const SignUpScreen = ({ navigation }) => {
                   placeholder="Tu nombre"
                   style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
                   autoCapitalize="none"
-                  maxLength={10}
                   onChangeText={(val) => nameInputChange(val)}
                 />
                 {data.check_nameInputChange ? (
@@ -255,7 +254,6 @@ export const SignUpScreen = ({ navigation }) => {
                   placeholder="Tu apellido"
                   style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
                   autoCapitalize="none"
-                  maxLength={10}
                   onChangeText={(val) => lastnameInputChange(val)}
                 />
                 {data.check_lastnameInputChange ? (
