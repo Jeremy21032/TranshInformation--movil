@@ -92,15 +92,19 @@ const App = () => {
     if (user) {
       const email = user.email;
       global.email = email;
-      console.log("****************************************************************")
-      console.log(global.email)
-      console.log("****************************************************************")
-      let userData = await getPersonalRol(global.email.toLowerCase());
-      global.rol = userData.rol;
-      global.name = userData.name;
-      global.lastName = userData.lastName;
-      global.profilePic = userData.profilePic;
+      console.log(
+        "****************************************************************"
+      );
+      console.log(global.email);
+      console.log(
+        "****************************************************************"
+      );
+      // let userData = await getPersonalRol(global.email.toLowerCase());
       let verify = await getPersonalInfomation();
+      global.rol = verify.rol;
+      global.name = verify.name;
+      global.lastName = verify.lastName;
+      global.profilePic = verify.profilePic;
       global.direccionBase = verify.direccionBase;
       global.birthdate = verify.birthdate;
       if (global.rol == null) {

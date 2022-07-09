@@ -103,7 +103,6 @@ export const KnowScreen = ({ navigation }) => {
         .then(() => {
           setModalVisibleCorrect(true);
           setMessageCorrect("Información actualizada con éxito");
-          setIsLoading(false);
         })
         .catch((error) => {
           setModalVisibleError(true);
@@ -118,7 +117,7 @@ export const KnowScreen = ({ navigation }) => {
     }
   };
   let actualizarInformacion = async () => {
-    await aniadirDireccionBase(data.direcionBase, data.date);
+    await aniadirDireccionBase(data.direcionBase,data.direccion, data.date);
     await getDireccionBase(setDirection, canContinue);
   };
   let canContinue = () => {

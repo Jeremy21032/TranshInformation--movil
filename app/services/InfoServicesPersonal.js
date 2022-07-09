@@ -6,8 +6,12 @@ import {
 } from "firebase/firestore";
 
 export const getPersonalRol = async (email) => {
-  const q = doc(global.dbCon, "/Roles", email);
-  const docSnap = await getDoc(q);
+  console.log("EMAIL→ ",email)
+  console.log("ENTRA A VERIIFICAR EL ROL")
+  const docSnap = await getDoc(doc(global.dbCon, "/Roles", email))
+  console.log("----------------------------------------------------------------------")
+  console.log(docSnap.data())
+  console.log("----------------------------------------------------------------------")
   let tempRol = docSnap.data();
   console.log("TEMP ROL", tempRol);
   return tempRol;
@@ -51,7 +55,7 @@ export const getDireccionBase = async (refreshFn, continueFn) => {
   continueFn();
 };
 
-export const aniadirDireccionBase = async (direccion, birthdate) => {
+export const aniadirDireccionBase = async (direccionBase,direccion, birthdate) => {
   const docRef = doc(global.dbCon, "/Personas/" + global.email);
 
   const docSnapresult = await getDoc(docRef);
@@ -59,8 +63,9 @@ export const aniadirDireccionBase = async (direccion, birthdate) => {
   let docResultData = docSnapresult.data();
   console.log(docResultData);
   await updateDoc(docRef, {
-    direccionBase: direccion,
+    direccionBase: direccionBase,
     birthdate: birthdate,
+    direccion:direccion
   });
 };
 

@@ -1,0 +1,71 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "03h00-11h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "Belisario",
+        "frecuencia": "Lunes-Miércoles-Viernes",
+        "horario": "diurno",
+        "servicio": "Contenerización",
+        "longitude": -78.49801,
+        "latitude": -0.19279,
+        "calloutlatitude": -78.50496,
+        "calloutlongitude": -0.19226,
+        "id": "1"
+        
+      },
+      {
+        "longitude": -78.50838,
+        "latitude": -0.18683,
+        "id": "2"
+        
+      },
+      {
+        "longitude": -78.50877,
+        "latitude": -0.18775,
+        "id": "3"
+        
+      },
+      {
+        "longitude": -78.50903,
+        "latitude": -0.18844,
+        "id": "4"
+        
+      },
+      {
+        "longitude": -78.50924,
+        "latitude": -0.18869,
+        "id": "5"
+        
+      },
+      {
+        "longitude": -78.50967,
+        "latitude": -0.18978,
+        "id": "6"
+      },
+      {
+        "longitude": -78.5107,
+        "latitude": -0.19236,
+        "id": "7"
+      },
+      {
+        "longitude": -78.51006,
+        "latitude": -0.19277,
+        "id": "8"
+      },
+      {
+        "longitude": -78.51054,
+        "latitude": -0.19438,
+        "id": "9"
+      },
+      {
+        "longitude": -78.50196,
+        "latitude": -0.19658,
+        "id": "10"
+      },
+      {
+        "longitude": -78.5,
+        "latitude": -0.19775,
+        "id": "11"
+      }              
+]

@@ -31,6 +31,7 @@ export const EditProfile = ({ navigation }) => {
         global.lastName = userData.lastName;
         global.email = userData.email;
         global.birthdate = userData.birthdate;
+        global.direccion =userData.direccion;
       };
       getUser();
       setRefreshing(false);

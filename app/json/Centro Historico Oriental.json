@@ -1,0 +1,177 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "07h00-15h00",
+        "adm_zonal": "Manuel Saenz",
+        "ruta": "Centro Historico Oriental",
+        "frecuencia": "Diario",
+        "horario": "vespertino",
+        "servicio": "Contenerización soterrada",
+        "longitude": -78.50286,
+        "latitude": -0.2142,
+        "calloutlatitude": -78.50921,
+        "calloutlongitude": -0.21844,
+        "id": "1"
+        
+      },
+      {
+        "longitude": -78.50447,
+        "latitude": -0.21352,
+        "id": "2"
+      },
+        {
+        "longitude": -78.50606,
+        "latitude": -0.21286,
+        "id": "3"
+      },
+    {
+        "longitude": -78.50614,
+        "latitude": -0.21275,
+        "id": "4"
+      },
+     {
+        "longitude": -78.50614,
+        "latitude": -0.21275,
+        "id": "5"
+      },
+     {
+        "longitude": -78.50609,
+        "latitude": -0.21245,
+        "id": "6"
+      },
+      {
+        "longitude": -78.50616,
+        "latitude": -0.2123,
+        "id": "7"
+      },
+      {
+        "longitude": -78.50646,
+        "latitude": -0.21221,
+        "id": "8"
+      },
+      {
+        "longitude": -78.50666,
+        "latitude": -0.2123,
+        "id": "9"
+      },
+      {
+        "longitude": -78.50722,
+        "latitude": -0.21229,
+        "id": "10"
+      },
+      {
+        "longitude": -78.50722,
+        "latitude": -0.21229,
+        "id": "11"
+      },
+     {
+        "longitude": -78.50742,
+        "latitude": -0.21247,
+        "id": "12"
+      },
+      {
+        "longitude": -78.50761,
+        "latitude": -0.21361,
+        "id": "13"
+      },
+      {
+        "longitude": -78.50802,
+        "latitude": -0.21464,
+        "id": "14"
+      },
+       {
+        "longitude": -78.51492,
+        "latitude": -0.22259,
+        "id": "15"
+      },
+      {
+        "longitude": -78.51506,
+        "latitude": -0.22281,
+        "id": "16"
+      },
+      {
+        "longitude": -78.51668,
+        "latitude": -0.22464,
+        "id": "17"
+      },
+       {
+        "longitude": -78.51609,
+        "latitude": -0.22516,
+        "id": "18"
+      },
+      {
+        "longitude": -78.51409,
+        "latitude": -0.22323,
+        "id": "19"
+      },
+      {
+        "longitude": -78.51204,
+        "latitude": -0.22513,
+        "id": "20"
+      },
+      {
+        "longitude": -78.50876,
+        "latitude": -0.22094,
+        "id": "21"
+      },
+      {
+        "longitude": -78.50878,
+        "latitude": -0.22164,
+        "id": "22"
+      },
+      {
+        "longitude": -78.50883,
+        "latitude": -0.22206,
+        "id": "23"
+      },
+       {
+        "longitude": -78.50879,
+        "latitude": -0.22227,
+        "id": "24"
+      },
+       {
+        "longitude": -78.50858,
+        "latitude": -0.22253,
+        "id": "25"
+      },
+      {
+        "longitude": -78.50848,
+        "latitude": -0.22258,
+        "id": "26"
+      },
+      {
+        "longitude": -78.50935,
+        "latitude": -0.22257,
+        "id": "27"
+      },
+      {
+        "longitude": -78.50818,
+        "latitude": -0.22241,
+        "id": "28"
+      },
+      {
+        "longitude": -78.50821,
+        "latitude": -0.22177,
+        "id": "29"
+      },
+       {
+        "longitude": -78.50778,
+        "latitude": -0.22063,
+        "id": "30"
+      },
+       {
+        "longitude": -78.50688,
+        "latitude": -0.21957,
+        "id": "31"
+      },
+       {
+        "longitude": -78.50494,
+        "latitude": -0.21689,
+        "id": "32"
+      },
+       {
+        "longitude": -78.50443,
+        "latitude": -0.21642,
+        "id": "33"
+      }
+]

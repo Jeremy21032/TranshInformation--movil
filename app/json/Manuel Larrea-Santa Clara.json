@@ -1,0 +1,116 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Manuela Saenz",
+        "ruta": "Manuel Larrea-Santa Clara",
+        "frecuencia": "Diario",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.49396,
+        "latitude": -0.19894,
+        "calloutlatitude": -78.49844,
+        "calloutlongitude": -0.20193,
+        "id": "1"
+      },
+      {
+        "longitude": -78.49598,
+        "latitude": -0.19811,
+        "id": "2"
+      },
+      {
+        "longitude": -78.49418,
+        "latitude": -0.19375,
+        "id": "3"
+      },
+      {
+        "longitude": -78.49757,
+        "latitude": -0.19178,
+        "id": "4"
+      },
+      {
+        "longitude": -78.5,
+        "latitude": -0.19775,
+        "id": "5"
+      },
+      {
+        "longitude": -78.50125,
+        "latitude": -0.20165,
+        "id": "6"
+      },
+      {
+        "longitude": -78.50174,
+        "latitude": -0.2029,
+        "id": "7"
+      },
+      {
+        "longitude": -78.50415,
+        "latitude": -0.21093,
+        "id": "8"
+      },
+      {
+        "longitude": -78.50454,
+        "latitude": -0.2126,
+        "id": "9"
+      },
+      {
+        "longitude": -78.50471,
+        "latitude": -0.21305,
+        "id": "10"
+      },
+     {
+        "longitude": -78.50478,
+        "latitude": -0.21337,
+        "id": "11"
+      },
+      {
+        "longitude": -78.50447,
+        "latitude": -0.21352,
+        "id": "12"
+      },
+      {
+        "longitude": -78.50421,
+        "latitude": -0.2136,
+        "id": "13"
+      },
+      {
+        "longitude": -78.50298,
+        "latitude": -0.21413,
+        "id": "14"
+      },
+      {
+        "longitude": -78.50142,
+        "latitude": -0.21168,
+        "id": "15"
+      },
+      {
+        "longitude": -78.50106,
+        "latitude": -0.21129,
+        "id": "16"
+      },
+      {
+        "longitude": -78.49943,
+        "latitude": -0.20712,
+        "id": "17"
+      },
+      {
+        "longitude": -78.49912,
+        "latitude": -0.20665,
+        "id": "18"
+      },
+      {
+        "longitude": -78.49784,
+        "latitude": -0.20734,
+        "id": "19"
+      },
+      {
+        "longitude": -78.4951,
+        "latitude": -0.20242,
+        "id": "20"
+      },
+      {
+        "longitude": -78.49452,
+        "latitude": -0.20087,
+        "id": "21"
+      }
+]

@@ -11,10 +11,6 @@ export const CarouselCardItem = ({ item, index }) => {
       <Text style={styles.header}>{item.title}</Text>
       <Text style={styles.body}>
         {item.content}
-        {item.content}
-        {item.content}
-        {item.content}
-        {item.content}
       </Text>
     </View>
   );
@@ -25,7 +21,6 @@ const styles = StyleSheet.create({
     backgroundColor: "white",
     borderRadius: 8,
     width: ITEM_WIDTH,
-    paddingBottom: 40,
     shadowColor: "#000",
     shadowOffset: {
       width: 0,
@@ -34,6 +29,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
     elevation: 7,
+    paddingBottom: 10,
   },
   image: {
     width: ITEM_WIDTH,

@@ -5,25 +5,9 @@ import { Modal } from "react-native";
 import { sessionTimeoutLoading } from "../commons/constants";
 let colorFondo = "rgba(255,255,255,0.3)";
 export const LoadingOverlay = (props) => {
-  let timeOutL = React.useRef(0)
-  let timeInterval = React.useRef(null)
+
   const { isVisible, setIsLoading, setModalVisibleError, setMessageError } = props;
-  React.useEffect(() => {
-    timeInterval.current = setInterval(exitLoadingTimeOut, 1000)
-    global.timeIntervalSession=  timeInterval.current;
-    global.finishLoading;
-  }, [])
-  let exitLoadingTimeOut = () => {
-    timeOutL.current = timeOutL.current + 1;
-    if (timeOutL.current >= sessionTimeoutLoading) {
-      clearInterval(timeInterval.current);
-      setModalVisibleError(true);
-      setMessageError("Error de comunicación, vuelva a intentarlo")
-      timeOutL.current = 0;
-      timeInterval.current = null;
-      setIsLoading(false)
-    }
-  }
+
 
   return (
     <Overlay

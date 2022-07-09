@@ -50,7 +50,7 @@ export function DrawerContent(props) {
             </View>
           </View>
           <Drawer.Section style={styles.drawerSection}>
-          <DrawerItem
+            <DrawerItem
               label="Recomendaciones"
               icon={({ color, size }) => (
                 <Icon name="form-select" color={color} size={size} />
@@ -59,7 +59,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate("RECOMENDACIONES");
               }}
             />
-            {/* <DrawerItem
+            <DrawerItem
               label="Inicio"
               icon={({ color, size }) => (
                 <Icon name="home-outline" color={color} size={size} />
@@ -68,7 +68,7 @@ export function DrawerContent(props) {
                 props.navigation.navigate("INICIO");
               }}
               activeTintColor="red"
-            /> */}
+            />
             <DrawerItem
               label="Perfil"
               icon={({ color, size }) => (
@@ -106,7 +106,6 @@ export function DrawerContent(props) {
               }}
             />
 
-            
             <DrawerItem
               label="Sugerencias"
               icon={({ color, size }) => (

@@ -14,7 +14,7 @@ import FontAwesome from "react-native-vector-icons/FontAwesome";
 import Feather from "react-native-vector-icons/Feather";
 import * as styles from "../../assets/styles/appStyles";
 import { validateEmail } from "../services/Validations";
-import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import {
   savePersonal,
   savePersonalRol,
@@ -23,9 +23,12 @@ import { ModalInfoError } from "../components/ModalInfoError";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { validateCorrectPassword } from "../services/Validate";
 import { useTheme } from "react-native-paper";
+import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 export const SignUpScreen = ({ navigation }) => {
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
+  const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
+  const [messageCorrect, setMessageCorrect] = React.useState("");
   const [messageError, setMessageError] = React.useState("");
   let component = (
     <LoadingOverlay
@@ -151,16 +154,29 @@ export const SignUpScreen = ({ navigation }) => {
     });
   };
 
-  const handleCreateAccount = async () => {
+  const handleCreateAccount = async (persona, personaRol) => {
+    setIsLoading(true);
+
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(async (userCredential) => {
         console.log("Account created successfully");
         savePersonal();
         const user = userCredential.user;
         console.log("user created successfully", user);
+        await savePersonal(persona);
+        await savePersonalRol(personaRol);
+        setModalVisibleCorrect(true);
+        setMessageCorrect("Información registrada con éxito");
+        setIsLoading(false);
       })
       .catch((error) => {
-        console.log(error);
+        setIsLoading(false);
+        setModalVisibleError(true);
+        if(error.message=="Firebase: Error (auth/email-already-in-use)."){
+          setMessageError("Ya existe una persona registrada con este correo")
+        }else{
+          setMessageError(error.message)
+        }
       });
   };
   const validate = async () => {
@@ -183,6 +199,7 @@ export const SignUpScreen = ({ navigation }) => {
           data.lastName,
         direccionBase: null,
         birthdate: null,
+        rol: "cliente",
       };
       let personaRol = {
         email: data.email.toLowerCase(),
@@ -195,10 +212,11 @@ export const SignUpScreen = ({ navigation }) => {
           data.lastName,
         rol: "cliente",
       };
-      await savePersonal(persona);
-      await savePersonalRol(personaRol);
-      await handleCreateAccount();
-      setIsLoading(false);
+      try {
+        await handleCreateAccount(persona, personaRol);
+      } catch (e) {
+        console.log("Error saving", e);
+      }
     }
     setIsLoading(false);
   };
@@ -218,11 +236,19 @@ export const SignUpScreen = ({ navigation }) => {
             <View style={{ minWidth: Dimensions.get("window").width / 2.2 }}>
               <Text style={styles.commons.text_footer}>Nombre</Text>
               <View style={styles.commons.action}>
-                <FontAwesome name="user-o" color={styles.colors.darkBlue} size={20} />
+                <FontAwesome
+                  name="user-o"
+                  color={styles.colors.darkBlue}
+                  size={20}
+                />
                 <TextInput
                   placeholder="Tu nombre"
-                  style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
+                  style={[
+                    styles.commons.textInput,
+                    { color: styles.colors.darkBlue },
+                  ]}
                   autoCapitalize="none"
+                  maxLength={10}
                   onChangeText={(val) => nameInputChange(val)}
                 />
                 {data.check_nameInputChange ? (
@@ -240,7 +266,6 @@ export const SignUpScreen = ({ navigation }) => {
                   style={{ maxWidth: Dimensions.get("window").width / 2.2 }}
                 >
                   <Text style={styles.commons.errorMsg}>
-                    {" "}
                     El nombre debe tener al menos 3 caracteres
                   </Text>
                 </Animatable.View>
@@ -249,11 +274,19 @@ export const SignUpScreen = ({ navigation }) => {
             <View style={{ minWidth: Dimensions.get("window").width / 2.2 }}>
               <Text style={styles.commons.text_footer}>Apellido</Text>
               <View style={styles.commons.action}>
-                <FontAwesome name="user-o" color={styles.colors.darkBlue} size={20} />
+                <FontAwesome
+                  name="user-o"
+                  color={styles.colors.darkBlue}
+                  size={20}
+                />
                 <TextInput
                   placeholder="Tu apellido"
-                  style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
+                  style={[
+                    styles.commons.textInput,
+                    { color: styles.colors.darkBlue },
+                  ]}
                   autoCapitalize="none"
+                  maxLength={10}
                   onChangeText={(val) => lastnameInputChange(val)}
                 />
                 {data.check_lastnameInputChange ? (
@@ -287,7 +320,10 @@ export const SignUpScreen = ({ navigation }) => {
             <Feather name="mail" color={styles.colors.darkBlue} size={20} />
             <TextInput
               placeholder="Tu correo electrónico"
-              style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
+              style={[
+                styles.commons.textInput,
+                { color: styles.colors.darkBlue },
+              ]}
               autoCapitalize="none"
               onChangeText={(val) => textInputChange(val)}
             />
@@ -324,7 +360,10 @@ export const SignUpScreen = ({ navigation }) => {
             <Feather name="lock" color={styles.colors.darkBlue} size={20} />
             <TextInput
               placeholder="Your Password"
-              style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
+              style={[
+                styles.commons.textInput,
+                { color: styles.colors.darkBlue },
+              ]}
               autoCapitalize="none"
               secureTextEntry={data.secureTextEntry ? true : false}
               onChangeText={(val) => handlePasswordChange(val)}
@@ -344,8 +383,8 @@ export const SignUpScreen = ({ navigation }) => {
           {data.isvalidPassword ? null : (
             <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={styles.commons.errorMsg}>
-                La contraseña debe tener al menos 1 numero, minimo 6 caracteres y 1 símbolo
-                obligatorio.{"\n"}
+                La contraseña debe tener al menos 1 numero, minimo 6 caracteres
+                y 1 símbolo obligatorio.{"\n"}
                 Los simbolos obligatorios son !$%&?@
               </Text>
             </Animatable.View>
@@ -359,15 +398,17 @@ export const SignUpScreen = ({ navigation }) => {
               },
             ]}
           >
-            {" "}
-            Confirmar Contraseña{" "}
+            Confirmar Contraseña
           </Text>
 
           <View style={styles.commons.action}>
             <Feather name="lock" color={styles.colors.darkBlue} size={20} />
             <TextInput
               placeholder="Confirm Your Password"
-              style={[styles.commons.textInput,{color: styles.colors.darkBlue}]}
+              style={[
+                styles.commons.textInput,
+                { color: styles.colors.darkBlue },
+              ]}
               autoCapitalize="none"
               secureTextEntry={data.confirmSecureTextEntry ? true : false}
               onChangeText={(val) => handleConfirmPasswordChange(val)}
@@ -401,7 +442,7 @@ export const SignUpScreen = ({ navigation }) => {
               style={{ width: "100%" }}
             >
               <LinearGradient
-                colors={[styles.colors.gradient2,styles.colors.gradient1]}
+                colors={[styles.colors.gradient2, styles.colors.gradient1]}
                 style={styles.commons.signIn}
               >
                 <Text style={[styles.commons.textSign, { color: "#fff" }]}>
@@ -433,6 +474,11 @@ export const SignUpScreen = ({ navigation }) => {
           setModalVisible={setModalVisibleError}
           message={messageError}
         ></ModalInfoError>
+        <ModalInfoCorrect
+          modalVisible={modalVisibleCorrect}
+          setModalVisible={setModalVisibleCorrect}
+          message={messageCorrect}
+        ></ModalInfoCorrect>
       </Animatable.View>
     </View>
   );

@@ -1,0 +1,532 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.zantycb89.TrashInformation"
+4    android:versionCode="16"
+5    android:versionName="0.0.16" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+9        android:targetSdkVersion="31" />
+10
+11    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+11-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:6:3-75
+11-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:6:20-73
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:2:3-64
+12-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:2:20-62
+13    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+13-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:3:3-77
+13-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:3:20-75
+14    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+14-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:4:3-77
+14-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:4:20-75
+15    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+15-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:5:3-68
+15-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:5:20-66
+16    <uses-permission android:name="android.permission.VIBRATE" />
+16-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:7:3-63
+16-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:7:20-61
+17    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+17-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:8:3-78
+17-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:8:20-76
+18
+19    <queries>
+19-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:9:3-15:13
+20        <intent>
+20-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:10:5-14:14
+21            <action android:name="android.intent.action.VIEW" />
+21-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:11:7-58
+21-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:11:15-56
+22
+23            <category android:name="android.intent.category.BROWSABLE" />
+23-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:12:7-67
+23-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:12:17-65
+24
+25            <data android:scheme="https" />
+25-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:13:7-37
+25-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:13:13-35
+26        </intent>
+27        <!-- Query open documents -->
+28        <intent>
+28-->[:expo-file-system] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:9-19:18
+29            <action android:name="android.intent.action.OPEN_DOCUMENT_TREE" />
+29-->[:expo-file-system] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:13-79
+29-->[:expo-file-system] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:18:21-76
+30        </intent>
+31        <intent>
+31-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:9-20:18
+32
+33            <!-- Required for picking images from the camera roll if targeting API 30 -->
+34            <action android:name="android.media.action.IMAGE_CAPTURE" />
+34-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:13-73
+34-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:19:21-70
+35        </intent>
+36        <intent>
+36-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:21:9-25:18
+37
+38            <!-- Required for picking images from the camera if targeting API 30 -->
+39            <action android:name="android.media.action.ACTION_VIDEO_CAPTURE" />
+39-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-80
+39-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:21-77
+40        </intent>
+41    </queries>
+42
+43    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+43-->[com.facebook.flipper:flipper:0.125.0] C:\Users\jerem\.gradle\caches\transforms-3\b2ec3232205e095c09543a31d56ae642\transformed\jetified-flipper-0.125.0\AndroidManifest.xml:16:5-76
+43-->[com.facebook.flipper:flipper:0.125.0] C:\Users\jerem\.gradle\caches\transforms-3\b2ec3232205e095c09543a31d56ae642\transformed\jetified-flipper-0.125.0\AndroidManifest.xml:16:22-73
+44    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+44-->[:react-native-community_netinfo] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-79
+44-->[:react-native-community_netinfo] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\@react-native-community\netinfo\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-76
+45    <uses-permission android:name="android.permission.WAKE_LOCK" />
+45-->[:react-native-firebase] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-firebase\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-68
+45-->[:react-native-firebase] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-firebase\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-65
+46    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> <!-- Required for picking images from camera directly -->
+46-->[:react-native-maps] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-maps\lib\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:5-81
+46-->[:react-native-maps] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-maps\lib\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:22-78
+47    <uses-permission android:name="android.permission.CAMERA" />
+47-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:5-65
+47-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:9:22-62
+48    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+48-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:27:5-81
+48-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:27:22-78
+49    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+49-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:28:5-77
+49-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:28:22-74
+50
+51    <uses-feature
+51-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\8f3bc60fc8ee532802a8218b73fe568e\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:26:5-28:35
+52        android:glEsVersion="0x00020000"
+52-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\8f3bc60fc8ee532802a8218b73fe568e\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:27:9-41
+53        android:required="true" />
+53-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\8f3bc60fc8ee532802a8218b73fe568e\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:28:9-32
+54
+55    <uses-permission android:name="com.google.android.finsky.permission.BIND_GET_INSTALL_REFERRER_SERVICE" />
+55-->[com.android.installreferrer:installreferrer:1.0] C:\Users\jerem\.gradle\caches\transforms-3\05e9a3ca248cbcb0578f814f598d6028\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:5-110
+55-->[com.android.installreferrer:installreferrer:1.0] C:\Users\jerem\.gradle\caches\transforms-3\05e9a3ca248cbcb0578f814f598d6028\transformed\jetified-installreferrer-1.0\AndroidManifest.xml:9:22-107
+56
+57    <application
+57-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:16:3-35:17
+58        android:name="com.zantycb89.TrashInformation.MainApplication"
+58-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:16:16-47
+59        android:allowBackup="true"
+59-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:16:162-188
+60        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+60-->[androidx.core:core:1.6.0] C:\Users\jerem\.gradle\caches\transforms-3\5c61d7afbc1bcd99cb491da6ba2ee6c1\transformed\core-1.6.0\AndroidManifest.xml:24:18-86
+61        android:debuggable="true"
+62        android:icon="@mipmap/ic_launcher"
+62-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:16:81-115
+63        android:label="@string/app_name"
+63-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:16:48-80
+64        android:roundIcon="@mipmap/ic_launcher_round"
+64-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:16:116-161
+65        android:theme="@style/AppTheme"
+65-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:16:189-220
+66        android:usesCleartextTraffic="true" >
+66-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:16:221-256
+67        <meta-data
+67-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:17:5-82
+68            android:name="expo.modules.updates.ENABLED"
+68-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:17:16-59
+69            android:value="true" />
+69-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:17:60-80
+70        <meta-data
+70-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:18:5-93
+71            android:name="expo.modules.updates.EXPO_SDK_VERSION"
+71-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:18:16-68
+72            android:value="45.0.0" />
+72-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:18:69-91
+73        <meta-data
+73-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:19:5-105
+74            android:name="expo.modules.updates.EXPO_UPDATES_CHECK_ON_LAUNCH"
+74-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:19:16-80
+75            android:value="ALWAYS" />
+75-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:19:81-103
+76        <meta-data
+76-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:20:5-99
+77            android:name="expo.modules.updates.EXPO_UPDATES_LAUNCH_WAIT_MS"
+77-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:20:16-79
+78            android:value="0" />
+78-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:20:80-97
+79        <meta-data
+79-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:21:5-130
+80            android:name="expo.modules.updates.EXPO_UPDATE_URL"
+80-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:21:16-67
+81            android:value="https://exp.host/@zantycb89/TrashInformation" />
+81-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:21:68-128
+82
+83        <activity
+83-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:5-33:16
+84            android:name="com.zantycb89.TrashInformation.MainActivity"
+84-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:15-43
+85            android:configChanges="keyboard|keyboardHidden|orientation|screenSize|uiMode"
+85-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:77-154
+86            android:exported="true"
+86-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:276-299
+87            android:label="@string/app_name"
+87-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:44-76
+88            android:launchMode="singleTask"
+88-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:155-186
+89            android:screenOrientation="portrait"
+89-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:300-336
+90            android:theme="@style/Theme.App.SplashScreen"
+90-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:230-275
+91            android:windowSoftInputMode="adjustResize" >
+91-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:22:187-229
+92            <intent-filter>
+92-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:23:7-26:23
+93                <action android:name="android.intent.action.MAIN" />
+93-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:24:9-60
+93-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:24:17-58
+94
+95                <category android:name="android.intent.category.LAUNCHER" />
+95-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:25:9-68
+95-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:25:19-66
+96            </intent-filter>
+97            <intent-filter>
+97-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:27:7-32:23
+98                <action android:name="android.intent.action.VIEW" />
+98-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:11:7-58
+98-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:11:15-56
+99
+100                <category android:name="android.intent.category.DEFAULT" />
+100-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:29:9-67
+100-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:29:19-65
+101                <category android:name="android.intent.category.BROWSABLE" />
+101-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:12:7-67
+101-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:12:17-65
+102
+103                <data android:scheme="com.zantycb89.TrashInformation" />
+103-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:13:7-37
+103-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:13:13-35
+104            </intent-filter>
+105        </activity>
+106        <activity
+106-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:34:5-106
+107            android:name="com.facebook.react.devsupport.DevSettingsActivity"
+107-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:34:15-79
+108            android:exported="false" />
+108-->C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\android\app\src\main\AndroidManifest.xml:34:80-104
+109
+110        <service android:name="com.google.firebase.components.ComponentDiscoveryService" >
+110-->[:react-native-firebase] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-firebase\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:9-18:19
+110-->[:react-native-firebase] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-firebase\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:18-89
+111            <meta-data
+111-->[:react-native-firebase] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-firebase\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:85
+112                android:name="com.google.firebase.components:io.invertase.firebase.ReactNativeFirebaseAppRegistrar"
+112-->[:react-native-firebase] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-firebase\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-116
+113                android:value="com.google.firebase.components.ComponentRegistrar" />
+113-->[:react-native-firebase] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-firebase\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-82
+114        </service>
+115
+116        <provider
+116-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-18:20
+117            android:name="com.reactnativecommunity.webview.RNCWebViewFileProvider"
+117-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-83
+118            android:authorities="com.zantycb89.TrashInformation.fileprovider"
+118-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-64
+119            android:exported="false"
+119-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:13:13-37
+120            android:grantUriPermissions="true" >
+120-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:14:13-47
+121            <meta-data
+121-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:63
+122                android:name="android.support.FILE_PROVIDER_PATHS"
+122-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+123                android:resource="@xml/file_provider_paths" />
+123-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-60
+124        </provider>
+125        <provider
+125-->[:expo-file-system] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:23:9-32:20
+126            android:name="expo.modules.filesystem.FileSystemFileProvider"
+126-->[:expo-file-system] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:24:13-74
+127            android:authorities="com.zantycb89.TrashInformation.FileSystemFileProvider"
+127-->[:expo-file-system] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:25:13-74
+128            android:exported="false"
+128-->[:expo-file-system] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:26:13-37
+129            android:grantUriPermissions="true" >
+129-->[:expo-file-system] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-file-system\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:27:13-47
+130            <meta-data
+130-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:63
+131                android:name="android.support.FILE_PROVIDER_PATHS"
+131-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+132                android:resource="@xml/file_system_provider_paths" />
+132-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-60
+133        </provider>
+134
+135        <activity
+135-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:29:9-31:59
+136            android:name="com.canhub.cropper.CropImageActivity"
+136-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:30:13-64
+137            android:theme="@style/Base.Theme.AppCompat" /> <!-- https://developer.android.com/guide/topics/manifest/provider-element.html -->
+137-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:31:13-56
+138        <provider
+138-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:33:9-41:20
+139            android:name="expo.modules.imagepicker.ImagePickerFileProvider"
+139-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:34:13-76
+140            android:authorities="com.zantycb89.TrashInformation.ImagePickerFileProvider"
+140-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:35:13-75
+141            android:exported="false"
+141-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:36:13-37
+142            android:grantUriPermissions="true" >
+142-->[:expo-image-picker] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-image-picker\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:37:13-47
+143            <meta-data
+143-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:63
+144                android:name="android.support.FILE_PROVIDER_PATHS"
+144-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+145                android:resource="@xml/image_picker_provider_paths" />
+145-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-60
+146        </provider>
+147
+148        <meta-data
+148-->[:expo-modules-core] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:10:9-12:89
+149            android:name="org.unimodules.core.AppLoader#react-native-headless"
+149-->[:expo-modules-core] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:11:13-79
+150            android:value="expo.modules.adapters.react.apploader.RNHeadlessAppLoader" />
+150-->[:expo-modules-core] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\expo-modules-core\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:12:13-86
+151
+152        <provider
+152-->[com.github.CanHub:Android-Image-Cropper:1.1.1] C:\Users\jerem\.gradle\caches\transforms-3\16e93bdb207d6fecfd3a883fe9345c66\transformed\jetified-Android-Image-Cropper-1.1.1\AndroidManifest.xml:12:9-20:20
+153            android:name="com.canhub.cropper.CropFileProvider"
+153-->[com.github.CanHub:Android-Image-Cropper:1.1.1] C:\Users\jerem\.gradle\caches\transforms-3\16e93bdb207d6fecfd3a883fe9345c66\transformed\jetified-Android-Image-Cropper-1.1.1\AndroidManifest.xml:13:13-63
+154            android:authorities="com.zantycb89.TrashInformation.cropper.fileprovider"
+154-->[com.github.CanHub:Android-Image-Cropper:1.1.1] C:\Users\jerem\.gradle\caches\transforms-3\16e93bdb207d6fecfd3a883fe9345c66\transformed\jetified-Android-Image-Cropper-1.1.1\AndroidManifest.xml:14:13-72
+155            android:exported="false"
+155-->[com.github.CanHub:Android-Image-Cropper:1.1.1] C:\Users\jerem\.gradle\caches\transforms-3\16e93bdb207d6fecfd3a883fe9345c66\transformed\jetified-Android-Image-Cropper-1.1.1\AndroidManifest.xml:15:13-37
+156            android:grantUriPermissions="true" >
+156-->[com.github.CanHub:Android-Image-Cropper:1.1.1] C:\Users\jerem\.gradle\caches\transforms-3\16e93bdb207d6fecfd3a883fe9345c66\transformed\jetified-Android-Image-Cropper-1.1.1\AndroidManifest.xml:16:13-47
+157            <meta-data
+157-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:15:13-17:63
+158                android:name="android.support.FILE_PROVIDER_PATHS"
+158-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:16:17-67
+159                android:resource="@xml/library_file_paths" />
+159-->[:react-native-webview] C:\Users\jerem\Desktop\UNIVERSIDAD\PROGRAMAS\Tesis\TITest\node_modules\react-native-webview\android\build\intermediates\merged_manifest\debug\AndroidManifest.xml:17:17-60
+160        </provider>
+161        <provider
+161-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:31:9-39:20
+162            android:name="androidx.startup.InitializationProvider"
+162-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:32:13-67
+163            android:authorities="com.zantycb89.TrashInformation.androidx-startup"
+163-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:33:13-68
+164            android:exported="false" >
+164-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:34:13-37
+165            <meta-data
+165-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:36:13-38:52
+166                android:name="androidx.work.WorkManagerInitializer"
+166-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:37:17-68
+167                android:value="androidx.startup" />
+167-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:38:17-49
+168        </provider>
+169
+170        <service
+170-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:41:9-46:35
+171            android:name="androidx.work.impl.background.systemalarm.SystemAlarmService"
+171-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:42:13-88
+172            android:directBootAware="false"
+172-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:43:13-44
+173            android:enabled="@bool/enable_system_alarm_service_default"
+173-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:44:13-72
+174            android:exported="false" />
+174-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:45:13-37
+175        <service
+175-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:47:9-53:35
+176            android:name="androidx.work.impl.background.systemjob.SystemJobService"
+176-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:48:13-84
+177            android:directBootAware="false"
+177-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:49:13-44
+178            android:enabled="@bool/enable_system_job_service_default"
+178-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:50:13-70
+179            android:exported="true"
+179-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:51:13-36
+180            android:permission="android.permission.BIND_JOB_SERVICE" />
+180-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:52:13-69
+181        <service
+181-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:54:9-59:35
+182            android:name="androidx.work.impl.foreground.SystemForegroundService"
+182-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:55:13-81
+183            android:directBootAware="false"
+183-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:56:13-44
+184            android:enabled="@bool/enable_system_foreground_service_default"
+184-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:57:13-77
+185            android:exported="false" />
+185-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:58:13-37
+186
+187        <receiver
+187-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:61:9-66:35
+188            android:name="androidx.work.impl.utils.ForceStopRunnable$BroadcastReceiver"
+188-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:62:13-88
+189            android:directBootAware="false"
+189-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:63:13-44
+190            android:enabled="true"
+190-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:64:13-35
+191            android:exported="false" />
+191-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:65:13-37
+192        <receiver
+192-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:67:9-77:20
+193            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryChargingProxy"
+193-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:68:13-106
+194            android:directBootAware="false"
+194-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:69:13-44
+195            android:enabled="false"
+195-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:70:13-36
+196            android:exported="false" >
+196-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:71:13-37
+197            <intent-filter>
+197-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:73:13-76:29
+198                <action android:name="android.intent.action.ACTION_POWER_CONNECTED" />
+198-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:74:17-87
+198-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:74:25-84
+199                <action android:name="android.intent.action.ACTION_POWER_DISCONNECTED" />
+199-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:75:17-90
+199-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:75:25-87
+200            </intent-filter>
+201        </receiver>
+202        <receiver
+202-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:78:9-88:20
+203            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$BatteryNotLowProxy"
+203-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:79:13-104
+204            android:directBootAware="false"
+204-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:80:13-44
+205            android:enabled="false"
+205-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:81:13-36
+206            android:exported="false" >
+206-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:82:13-37
+207            <intent-filter>
+207-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:84:13-87:29
+208                <action android:name="android.intent.action.BATTERY_OKAY" />
+208-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:85:17-77
+208-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:85:25-74
+209                <action android:name="android.intent.action.BATTERY_LOW" />
+209-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:86:17-76
+209-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:86:25-73
+210            </intent-filter>
+211        </receiver>
+212        <receiver
+212-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:89:9-99:20
+213            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$StorageNotLowProxy"
+213-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:90:13-104
+214            android:directBootAware="false"
+214-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:91:13-44
+215            android:enabled="false"
+215-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:92:13-36
+216            android:exported="false" >
+216-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:93:13-37
+217            <intent-filter>
+217-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:95:13-98:29
+218                <action android:name="android.intent.action.DEVICE_STORAGE_LOW" />
+218-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:96:17-83
+218-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:96:25-80
+219                <action android:name="android.intent.action.DEVICE_STORAGE_OK" />
+219-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:97:17-82
+219-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:97:25-79
+220            </intent-filter>
+221        </receiver>
+222        <receiver
+222-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:100:9-109:20
+223            android:name="androidx.work.impl.background.systemalarm.ConstraintProxy$NetworkStateProxy"
+223-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:101:13-103
+224            android:directBootAware="false"
+224-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:102:13-44
+225            android:enabled="false"
+225-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:103:13-36
+226            android:exported="false" >
+226-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:104:13-37
+227            <intent-filter>
+227-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:106:13-108:29
+228                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+228-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:107:17-79
+228-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:107:25-76
+229            </intent-filter>
+230        </receiver>
+231        <receiver
+231-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:110:9-121:20
+232            android:name="androidx.work.impl.background.systemalarm.RescheduleReceiver"
+232-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:111:13-88
+233            android:directBootAware="false"
+233-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:112:13-44
+234            android:enabled="false"
+234-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:113:13-36
+235            android:exported="false" >
+235-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:114:13-37
+236            <intent-filter>
+236-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:116:13-120:29
+237                <action android:name="android.intent.action.BOOT_COMPLETED" />
+237-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:117:17-79
+237-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:117:25-76
+238                <action android:name="android.intent.action.TIME_SET" />
+238-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:118:17-73
+238-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:118:25-70
+239                <action android:name="android.intent.action.TIMEZONE_CHANGED" />
+239-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:119:17-81
+239-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:119:25-78
+240            </intent-filter>
+241        </receiver>
+242        <receiver
+242-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:122:9-131:20
+243            android:name="androidx.work.impl.background.systemalarm.ConstraintProxyUpdateReceiver"
+243-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:123:13-99
+244            android:directBootAware="false"
+244-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:124:13-44
+245            android:enabled="@bool/enable_system_alarm_service_default"
+245-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:125:13-72
+246            android:exported="false" >
+246-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:126:13-37
+247            <intent-filter>
+247-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:128:13-130:29
+248                <action android:name="androidx.work.impl.background.systemalarm.UpdateProxies" />
+248-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:129:17-98
+248-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:129:25-95
+249            </intent-filter>
+250        </receiver>
+251        <receiver
+251-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:132:9-142:20
+252            android:name="androidx.work.impl.diagnostics.DiagnosticsReceiver"
+252-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:133:13-78
+253            android:directBootAware="false"
+253-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:134:13-44
+254            android:enabled="true"
+254-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:135:13-35
+255            android:exported="true"
+255-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:136:13-36
+256            android:permission="android.permission.DUMP" >
+256-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:137:13-57
+257            <intent-filter>
+257-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:139:13-141:29
+258                <action android:name="androidx.work.diagnostics.REQUEST_DIAGNOSTICS" />
+258-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:140:17-88
+258-->[androidx.work:work-runtime:2.7.1] C:\Users\jerem\.gradle\caches\transforms-3\240fa09109bb1cab3d7e4bc0a1ca21b9\transformed\work-runtime-2.7.1\AndroidManifest.xml:140:25-85
+259            </intent-filter>
+260        </receiver>
+261
+262        <service
+262-->[androidx.room:room-runtime:2.2.5] C:\Users\jerem\.gradle\caches\transforms-3\20bb6ad9a4a89a9df12539425b941874\transformed\room-runtime-2.2.5\AndroidManifest.xml:25:9-28:40
+263            android:name="androidx.room.MultiInstanceInvalidationService"
+263-->[androidx.room:room-runtime:2.2.5] C:\Users\jerem\.gradle\caches\transforms-3\20bb6ad9a4a89a9df12539425b941874\transformed\room-runtime-2.2.5\AndroidManifest.xml:26:13-74
+264            android:directBootAware="true"
+264-->[androidx.room:room-runtime:2.2.5] C:\Users\jerem\.gradle\caches\transforms-3\20bb6ad9a4a89a9df12539425b941874\transformed\room-runtime-2.2.5\AndroidManifest.xml:27:13-43
+265            android:exported="false" /> <!-- Needs to be explicitly declared on P+ -->
+265-->[androidx.room:room-runtime:2.2.5] C:\Users\jerem\.gradle\caches\transforms-3\20bb6ad9a4a89a9df12539425b941874\transformed\room-runtime-2.2.5\AndroidManifest.xml:28:13-37
+266        <uses-library
+266-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\8f3bc60fc8ee532802a8218b73fe568e\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:33:9-35:40
+267            android:name="org.apache.http.legacy"
+267-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\8f3bc60fc8ee532802a8218b73fe568e\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:34:13-50
+268            android:required="false" />
+268-->[com.google.android.gms:play-services-maps:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\8f3bc60fc8ee532802a8218b73fe568e\transformed\jetified-play-services-maps-17.0.0\AndroidManifest.xml:35:13-37
+269
+270        <activity
+270-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\4c6541f5a0debbff754d3f6a1ab5ee55\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:23:9-26:75
+271            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+271-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\4c6541f5a0debbff754d3f6a1ab5ee55\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:24:13-79
+272            android:exported="false"
+272-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\4c6541f5a0debbff754d3f6a1ab5ee55\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:25:13-37
+273            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+273-->[com.google.android.gms:play-services-base:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\4c6541f5a0debbff754d3f6a1ab5ee55\transformed\jetified-play-services-base-17.0.0\AndroidManifest.xml:26:13-72
+274
+275        <meta-data
+275-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\6d07939cea62d942059014120005b689\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:23:9-25:69
+276            android:name="com.google.android.gms.version"
+276-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\6d07939cea62d942059014120005b689\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:24:13-58
+277            android:value="@integer/google_play_services_version" />
+277-->[com.google.android.gms:play-services-basement:17.0.0] C:\Users\jerem\.gradle\caches\transforms-3\6d07939cea62d942059014120005b689\transformed\jetified-play-services-basement-17.0.0\AndroidManifest.xml:25:13-66
+278    </application>
+279
+280</manifest>

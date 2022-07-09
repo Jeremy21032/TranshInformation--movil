@@ -1,0 +1,156 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "La Gasca",
+        "frecuencia": "Lunes-Miércoles-Viernes",
+        "horario": "nocturno",
+        "servicio": "Contenerización",
+        "longitude": -78.5,
+        "latitude": -0.19775,
+        "calloutlatitude": -78.50654,
+        "calloutlongitude": -0.20067,
+        "id": "1"
+      },
+      {
+        "longitude": -78.50196,
+        "latitude": -0.19658,
+        "id": "2"
+      },
+      {
+        "longitude": -78.51265,
+        "latitude": -0.19385,
+        "id": "3"
+      },
+      {
+        "longitude": -78.51265,
+        "latitude": -0.19466,
+        "id": "4"
+      },
+      {
+        "longitude": -78.51255,
+        "latitude": -0.19626,
+        "id": "5"
+      },
+      {
+        "longitude": -78.51229,
+        "latitude": -0.19745,
+        "id": "6"
+      },
+      {
+        "longitude": -78.51166,
+        "latitude": -0.19764,
+        "id": "7"
+      },
+       {
+        "longitude": -78.51179,
+        "latitude": -0.19911,
+        "id": "8"
+      },
+      {
+        "longitude": -78.51117,
+        "latitude": -0.2013,
+        "id": "9"
+      },
+      {
+        "longitude": -78.5105,
+        "latitude": -0.20366,
+        "id": "10"
+      },
+       {
+        "longitude": -78.51047,
+        "latitude": -0.2039,
+        "id": "11"
+      },
+      {
+        "longitude": -78.51053,
+        "latitude": -0.20427,
+        "id": "12"
+      },
+      {
+        "longitude": -78.51065,
+        "latitude": -0.20461,
+        "id": "13"
+      },
+      {
+        "longitude": -78.51084,
+        "latitude": -0.20497,
+        "id": "14"
+      },
+      {
+        "longitude": -78.51121,
+        "latitude": -0.20534,
+        "id": "15"
+      },
+      {
+        "longitude": -78.5116,
+        "latitude": -0.20557,
+        "id": "16"
+      },
+      {
+        "longitude": -78.51209,
+        "latitude": -0.20637,
+        "id": "17"
+      },
+       {
+        "longitude": -78.51209,
+        "latitude": -0.20641,
+        "id": "18"
+      },
+      {
+        "longitude": -78.51202,
+        "latitude": -0.2065,
+        "id": "19"
+      },
+      {
+        "longitude": -78.51164,
+        "latitude": -0.20653,
+        "id": "20"        
+      },
+      {
+        "longitude": -78.51104,
+        "latitude": -0.20636,
+        "id": "21"
+      },
+      {
+        "longitude": -78.50991,
+        "latitude": -0.2061,
+        "id": "22"
+      },
+      {
+        "longitude": -78.50913,
+        "latitude": -0.20615,
+        "id": "23"
+      },
+      {
+        "longitude": -78.50901,
+        "latitude": -0.20607,
+        "id": "24"
+      },
+      {
+        "longitude": -78.50898,
+        "latitude": -0.20665,
+        "id": "25"
+      },
+      {
+        "longitude": -78.5069,
+        "latitude": -0.20638,
+        "id": "26"
+      },
+       {
+        "longitude": -78.5069,
+        "latitude": -0.20632,
+        "id": "27"
+      },
+      {
+        "longitude": -78.50271,
+        "latitude": -0.20608,
+        "id": "28"
+      },
+      {
+        "longitude": -78.50126,
+        "latitude": -0.20174,
+        "id": "29"
+      }
+]
