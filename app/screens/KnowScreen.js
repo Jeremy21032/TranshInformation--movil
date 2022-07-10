@@ -24,6 +24,7 @@ import { ModalInfoError } from "../components/ModalInfoError";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { formattedDate } from "../Functions";
 import { useTheme } from "react-native-paper";
+import { getAuth } from "firebase/auth";
 
 export const KnowScreen = ({ navigation }) => {
   const paperTheme = useTheme();
@@ -89,7 +90,22 @@ export const KnowScreen = ({ navigation }) => {
       canContinue();
     }
   }, [direction]);
+  function cerrar() {
+    const auth = getAuth();
+    auth
+      .signOut()
+      .then(function () {
+        global.rol = "";
+        global.login = false;
+        console.log("Log Out");
+      })
+      .catch((error) => {
+        const errorCode = error.code;
+        const errorMessage = error.message;
 
+        console.log("Error: ", (errorCode, errorMessage));
+      });
+  }
   let validate = async () => {
     setIsLoading(true);
     if (
@@ -99,16 +115,17 @@ export const KnowScreen = ({ navigation }) => {
       data.date != ""
     ) {
       global.birthdate = data.date;
-      actualizarInformacion()
-        .then(() => {
-          setModalVisibleCorrect(true);
-          setMessageCorrect("Información actualizada con éxito");
-        })
-        .catch((error) => {
-          setModalVisibleError(true);
-          setMessageError(error.message);
-          setIsLoading(false);
-        });
+      try {
+        await actualizarInformacion();
+        setModalVisibleCorrect(true);
+        cerrar();
+        setMessageCorrect("Información actualizada con éxito \n Por favor, inicie sesión con sus credenciales.");
+      } catch (error) {
+        setModalVisibleError(true);
+        setMessageError(error.message);
+        setIsLoading(false);
+      }
+
       setIsLoading(false);
     } else {
       setModalVisibleError(true);
@@ -117,7 +134,7 @@ export const KnowScreen = ({ navigation }) => {
     }
   };
   let actualizarInformacion = async () => {
-    await aniadirDireccionBase(data.direcionBase,data.direccion, data.date);
+    await aniadirDireccionBase(data.direcionBase, data.direccion, data.date);
     await getDireccionBase(setDirection, canContinue);
   };
   let canContinue = () => {
@@ -203,8 +220,8 @@ export const KnowScreen = ({ navigation }) => {
               direcionBase: item.value,
               direccion: item.label,
             });
-            global.direccion=item.label;
-            console.log("--------------------------",global.direccion)
+            global.direccion = item.label;
+            console.log("--------------------------", global.direccion);
           }}
         />
         <Text style={styles.commons.description}>{"\n"}</Text>
