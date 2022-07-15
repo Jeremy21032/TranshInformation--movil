@@ -70,7 +70,7 @@ export const SuggestionEditScreen = ({ navigation, route }) => {
     }
   };
   const handleChangeDescription = (val) => {
-    if (val.length >= 50) {
+    if (val.length >= 20) {
       setData({
         ...data,
         isValidDescription: true,
@@ -220,7 +220,7 @@ export const SuggestionEditScreen = ({ navigation, route }) => {
       {data.isValidDescription ? null : (
         <Animatable.View animation="fadeInLeft" duration={500}>
           <Text style={commonStyles.commons.errorMsg}>
-            La descripción debe cumplir con al menos 50 caracteres.
+            La descripción debe cumplir con al menos 20 caracteres.
           </Text>
         </Animatable.View>
       )}

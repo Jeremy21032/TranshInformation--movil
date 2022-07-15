@@ -103,9 +103,6 @@ export const SignInScreen = ({ navigation }) => {
         const user = userCredential.user;
         console.log(user);
         console.log("Sign in!");
-        // let userData = await getPersonalRol(user.email);
-        // let verify = await getPersonalInfomation();
-        // var userFinal = await Object.assign({}, userData, verify);
         setIsLoading(false);
         setModalVisibleError(false);
       })

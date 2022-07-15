@@ -7,19 +7,21 @@ import {
   View,
   Alert,
   ActivityIndicator,
+  Share,
 } from "react-native";
 import React, { useCallback } from "react";
 import YoutubePlayer from "react-native-youtube-iframe";
 import { useTheme } from "react-native-paper";
 import * as ScreenOrientation from "expo-screen-orientation";
-import * as commonStyles from '../../assets/styles/appStyles'
+import * as commonStyles from "../../assets/styles/appStyles";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
+import { Button } from "react-native";
 
-export const VideosDetailScreen = ({ route,navigation }) => {
-  const  paperTheme = useTheme();
+export const VideosDetailScreen = ({ route, navigation }) => {
+  const paperTheme = useTheme();
 
   const [videoSource, setVideoSource] = React.useState(null);
-  const [ setPlaying] = React.useState(false);
+  const [setPlaying] = React.useState(false);
   if (route != null && route.params != null && route.params.items != null) {
     console.log("params" + route.params.items);
   }
@@ -51,6 +53,25 @@ export const VideosDetailScreen = ({ route,navigation }) => {
       ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
     }
   }
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          "Mira este video: \n"+"*"+route.params.items.title+"*"+"\n"+route.params.items.url,
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          Alert.alert("Compartido");
+        } else {
+          Alert.alert("No compartido");
+        }
+      } else if (result.action === Share.dismissedAction) {
+        Alert.alert("No compartido x1");
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
@@ -58,29 +79,28 @@ export const VideosDetailScreen = ({ route,navigation }) => {
         {
           text: "OK",
           onPress: () => {
-            setOrientation;
+            setOrientation();
           },
         },
       ]);
     }
   }, []);
 
-  const togglePlaying = useCallback(() => {
-    setPlaying((prev) => !prev);
-  }, []);
   return (
     <ScrollView>
       {videoSource == null ? (
         <ActivityIndicator size="large" />
       ) : (
         <View>
-          <Text style={{ color: paperTheme.colors.text }}>VideosDetailScreen</Text>
-          <TouchableOpacity onPress={()=>{navigation.goBack()}}>
-            <FontAwesome name="reply" color={paperTheme.dark?commonStyles.colors.white:commonStyles.colors.black} size={50}/>
-          </TouchableOpacity>
-          <View>
+
+          <View
+            style={{
+              height: Dimensions.get("window").height / 2.5,
+              justifyContent: "center",
+            }}
+          >
             <YoutubePlayer
-              height={200}
+              height={250}
               play={state.shouldPlay}
               videoId={videoSource.urlID}
               onChangeState={onStateChange}
@@ -88,22 +108,7 @@ export const VideosDetailScreen = ({ route,navigation }) => {
               onFullScreenChange={setOrientation}
               volume={state.muted ? 0 : 100}
             />
-            {/* <Button title={state.shouldPlay ? "pause" : "play"} onPress={togglePlaying} /> */}
           </View>
-
-          {/* <View style={styles.button}>
-                <Button title="Play from 5s" onPress={() => video.current.playFromPositionAsync(5000)} />
-                <Button title={status.isLooping ? "Set to not loop" : "Set to loop"} onPress={() => video.current.setIsLoopingAsync(!status.isLooping)} />
-                <Button title={state.muted ? "muted" : "unmuted"} onPress={() => handleVolume()} />
-            </View> */}
-
-          {/* 
-<WebView
-                style={styles.WebViewContainer}
-                javaScriptEnabled={true}
-                domStorageEnabled={true}
-                source={{ uri: 'https://www.youtube.com/watch?v=-8VfKZCOo_I' }}
-            /> */}
 
           <View style={styles.controlBar}>
             <TouchableOpacity
@@ -112,11 +117,9 @@ export const VideosDetailScreen = ({ route,navigation }) => {
                 handlePlayAndPause();
               }}
             >
-              {state.shouldPlay ? (
-                <Text style={styles.controlButton}>Pause</Text>
-              ) : (
-                <Text style={styles.controlButton}>Play</Text>
-              )}
+              <Text style={styles.controlButton}>
+                {state.shouldPlay ? "Pause" : "Play"}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               underlayColor="black"
@@ -124,11 +127,9 @@ export const VideosDetailScreen = ({ route,navigation }) => {
                 handleVolume();
               }}
             >
-              {state.muted ? (
-                <Text style={styles.controlButton}>Unmute</Text>
-              ) : (
-                <Text style={styles.controlButton}>Mute</Text>
-              )}
+              <Text style={styles.controlButton}>
+                {state.muted ? "Unmute" : "Mute"}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               underlayColor="black"
@@ -136,27 +137,15 @@ export const VideosDetailScreen = ({ route,navigation }) => {
                 setOrientation();
               }}
             >
-              {state.fullScreen ? (
-                <Text style={styles.controlButton}>Exit full screen</Text>
-              ) : (
-                <Text style={styles.controlButton}>Go full screen</Text>
-              )}
+              <Text style={styles.controlButton}>
+                {state.fullScreen ? "Exit full screen" : "Go full screen"}
+              </Text>
             </TouchableOpacity>
           </View>
-          {/* <Video
-                    ref={video}
-                    style={styles.video}
-                    source={{
-                        uri: 'https://www.youtube.com/watch?v=-8VfKZCOo_I',
-                    }}
-                    useNativeControls
-                    resizeMode="contain"
-                    isLooping
-                    onFullscreenUpdate={setOrientation}
-                    shouldPlay={state.shouldPlay}
-                    volume={state.muted ? 0 : 100}
-                    onPlaybackStatusUpdate={setStatus}
-                /> */}
+          <View>
+            <Text>{route.params.items.title}</Text>
+            <Button onPress={onShare} title="Share" />
+          </View>
         </View>
       )}
     </ScrollView>

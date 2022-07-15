@@ -2,15 +2,42 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { VideosScreen } from "../screens/VideosScreen";
 import { VideosDetailScreen } from "../screens/VideosDetailScreen";
-
+import * as styles from "../../assets/styles/appStyles";
+import { Platform, TouchableOpacity, useWindowDimensions } from "react-native";
+import Ionicons from "react-native-vector-icons/Ionicons";
 const VideosStack = createStackNavigator();
-export const VideoStackScreen = () => (
+export const VideoStackScreen = ({ navigation }) => (
   <VideosStack.Navigator
     screenOptions={{
-      headerShown: false,
+      headerStyle: { backgroundColor: styles.colors.darkCyan },
+      headerTintColor: styles.colors.cultured,
+      drawerType: useWindowDimensions().width >= 768 ? "permanent" : "back",
+      drawerStyle: useWindowDimensions().width >= 768 ? null : { width: "75%" },
+      overlayColor: "transparent",
+      headerTitle:'VIDEOS'
+
     }}
   >
-    <VideosStack.Screen name="VIDEOSSCREEN" component={VideosScreen} />
+    <VideosStack.Screen
+      name="VIDEOSSCREEN"
+      component={VideosScreen}
+      options={{
+        headerLeft: () => (
+          <TouchableOpacity
+            onPress={() => {
+              navigation.openDrawer();
+            }}
+          >
+            <Ionicons
+              name={Platform.OS === "android" ? "md-menu" : "ios-menu"}
+              size={28}
+              style={{marginHorizontal: 15}}
+              color="white"
+            />
+          </TouchableOpacity>
+        ),
+      }}
+    />
     <VideosStack.Screen name="VIDEOSDETAIL" component={VideosDetailScreen} />
   </VideosStack.Navigator>
 );

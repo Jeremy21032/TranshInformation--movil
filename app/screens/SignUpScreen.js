@@ -17,7 +17,6 @@ import { validateEmail } from "../services/Validations";
 import { getAuth, createUserWithEmailAndPassword, signOut } from "firebase/auth";
 import {
   savePersonal,
-  savePersonalRol,
 } from "../services/InfoServicesPersonal";
 import { ModalInfoError } from "../components/ModalInfoError";
 import { LoadingOverlay } from "../components/LoadingOverlay";
@@ -154,7 +153,7 @@ export const SignUpScreen = ({ navigation }) => {
     });
   };
 
-  const handleCreateAccount = async (persona, personaRol) => {
+  const handleCreateAccount = async (persona) => {
     setIsLoading(true);
 
     createUserWithEmailAndPassword(auth, data.email, data.password)
@@ -164,7 +163,6 @@ export const SignUpScreen = ({ navigation }) => {
         const user = userCredential.user;
         console.log("user created successfully", user);
         await savePersonal(persona);
-        await savePersonalRol(personaRol);
         setModalVisibleCorrect(true);
         setMessageCorrect("Información registrada con éxito");
         setIsLoading(false);
@@ -213,7 +211,7 @@ export const SignUpScreen = ({ navigation }) => {
         rol: "cliente",
       };
       try {
-        await handleCreateAccount(persona, personaRol);
+        await handleCreateAccount(persona);
       } catch (e) {
         console.log("Error saving", e);
       }
