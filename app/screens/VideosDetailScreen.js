@@ -8,6 +8,7 @@ import {
   Alert,
   ActivityIndicator,
   Share,
+  Button,
 } from "react-native";
 import React, { useCallback } from "react";
 import YoutubePlayer from "react-native-youtube-iframe";
@@ -15,8 +16,7 @@ import { useTheme } from "react-native-paper";
 import * as ScreenOrientation from "expo-screen-orientation";
 import * as commonStyles from "../../assets/styles/appStyles";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { Button } from "react-native";
-
+import Video from "react-native-video";
 export const VideosDetailScreen = ({ route, navigation }) => {
   const paperTheme = useTheme();
 
@@ -57,7 +57,12 @@ export const VideosDetailScreen = ({ route, navigation }) => {
     try {
       const result = await Share.share({
         message:
-          "Mira este video: \n"+"*"+route.params.items.title+"*"+"\n"+route.params.items.url,
+          "Mira este video: \n" +
+          "*" +
+          route.params.items.title +
+          "*" +
+          "\n" +
+          route.params.items.url,
       });
       if (result.action === Share.sharedAction) {
         if (result.activityType) {
@@ -71,6 +76,24 @@ export const VideosDetailScreen = ({ route, navigation }) => {
     } catch (error) {
       alert(error.message);
     }
+  };
+  const onFetch = () => {
+    const options = {
+      method: "GET",
+      headers: {
+        "X-RapidAPI-Key": "a3b256c7f0msh1056e487e10ece1p1e0f51jsna3e9c5228ad3",
+        "X-RapidAPI-Host": "youtube-videos.p.rapidapi.com",
+      },
+    };
+
+    fetch(
+      "https://youtube-videos.p.rapidapi.com/mp4?videoId=" +
+        route.params.items.urlID,
+      options
+    )
+      .then((response) => response.json())
+      .then((response) => console.log(response))
+      .catch((err) => console.error(err));
   };
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
@@ -92,7 +115,6 @@ export const VideosDetailScreen = ({ route, navigation }) => {
         <ActivityIndicator size="large" />
       ) : (
         <View>
-
           <View
             style={{
               height: Dimensions.get("window").height / 2.5,
@@ -143,8 +165,12 @@ export const VideosDetailScreen = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
           <View>
-            <Text>{route.params.items.title}</Text>
+            <Text style={{ color: paperTheme.colors.text }}>
+              {route.params.items.title}
+            </Text>
             <Button onPress={onShare} title="Share" />
+          </View>
+          <View>
           </View>
         </View>
       )}
