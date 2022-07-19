@@ -21,6 +21,7 @@ export const RecomendationsScreen = () => {
   const isCarousel = React.useRef(null);
   const [recomendaciones, setRecomendaciones] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
+  const [fontSize, setFontSize] = React.useState(12)
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -79,6 +80,7 @@ export const RecomendationsScreen = () => {
           itemWidth={ITEM_WIDTH}
           onSnapToItem={(ind) => setIndex(ind)}
           useScrollView={true}
+          extraData={fontSize}
         />
        
       </SafeAreaView>

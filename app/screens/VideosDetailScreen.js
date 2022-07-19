@@ -9,14 +9,16 @@ import {
   ActivityIndicator,
   Share,
   Button,
+  Image,
 } from "react-native";
 import React, { useCallback } from "react";
 import YoutubePlayer from "react-native-youtube-iframe";
-import { useTheme } from "react-native-paper";
+import { Avatar, useTheme } from "react-native-paper";
 import * as ScreenOrientation from "expo-screen-orientation";
 import * as commonStyles from "../../assets/styles/appStyles";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
-import Video from "react-native-video";
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import { LinearGradient } from "expo-linear-gradient";
+
 export const VideosDetailScreen = ({ route, navigation }) => {
   const paperTheme = useTheme();
 
@@ -77,24 +79,7 @@ export const VideosDetailScreen = ({ route, navigation }) => {
       alert(error.message);
     }
   };
-  const onFetch = () => {
-    const options = {
-      method: "GET",
-      headers: {
-        "X-RapidAPI-Key": "a3b256c7f0msh1056e487e10ece1p1e0f51jsna3e9c5228ad3",
-        "X-RapidAPI-Host": "youtube-videos.p.rapidapi.com",
-      },
-    };
 
-    fetch(
-      "https://youtube-videos.p.rapidapi.com/mp4?videoId=" +
-        route.params.items.urlID,
-      options
-    )
-      .then((response) => response.json())
-      .then((response) => console.log(response))
-      .catch((err) => console.error(err));
-  };
   const onStateChange = useCallback((state) => {
     if (state === "ended") {
       setPlaying(false);
@@ -127,11 +112,11 @@ export const VideosDetailScreen = ({ route, navigation }) => {
               videoId={videoSource.urlID}
               onChangeState={onStateChange}
               forceAndroidAutoplay={true}
-              onFullScreenChange={setOrientation}
+              
               volume={state.muted ? 0 : 100}
             />
           </View>
-
+{/* 
           <View style={styles.controlBar}>
             <TouchableOpacity
               underlayColor="black"
@@ -163,14 +148,59 @@ export const VideosDetailScreen = ({ route, navigation }) => {
                 {state.fullScreen ? "Exit full screen" : "Go full screen"}
               </Text>
             </TouchableOpacity>
+          </View> */}
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+              maxWidth: Dimensions.get("window").width,
+              paddingVertical: 5,
+            }}
+          >
+            <View style={{ flexDirection: "column", alignSelf: "center" }}>
+              <Avatar.Image
+                source={{ uri: route.params.items.prevImg }}
+                style={{
+                  alignSelf: "center",
+                  marginHorizontal: 10,
+                }}
+              />
+            </View>
+            <View
+              style={{
+                flexDirection: "column",
+                alignSelf: "center",
+                maxWidth: Dimensions.get("window").width / 1.3,
+              }}
+            >
+              <Text
+                style={{
+                  color: paperTheme.colors.text,
+                  fontSize: 16,
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                  textAlign: "justify",
+                }}
+              >
+                {route.params.items.title}
+              </Text>
+            </View>
           </View>
           <View>
-            <Text style={{ color: paperTheme.colors.text }}>
-              {route.params.items.title}
-            </Text>
-            <Button onPress={onShare} title="Share" />
-          </View>
-          <View>
+            <View style={styles.button}>
+              <TouchableOpacity onPress={onShare}>
+                <LinearGradient
+                  colors={[
+                    commonStyles.colors.gradient2,
+                    commonStyles.colors.gradient1,
+                  ]}
+                  style={styles.signIn}
+                >
+                  <Text style={styles.textSign}>Compartir</Text>
+                  <MaterialIcons name="share" color="#fff" size={20} />
+                </LinearGradient>
+              </TouchableOpacity>
+            </View>
           </View>
         </View>
       )}
@@ -184,9 +214,6 @@ const styles = StyleSheet.create({
     minHeight: Dimensions.get("window").height / 2.5,
     alignSelf: "stretch",
     backgroundColor: "transparent",
-  },
-  button: {
-    margin: 10,
   },
   controlBar: {
     position: "relative",
@@ -213,5 +240,21 @@ const styles = StyleSheet.create({
   },
   WebViewContainer: {
     height: Dimensions.get("window").height / 2,
+  },
+  button: {
+    alignItems: "center",
+    marginTop: 30,
+  },
+  signIn: {
+    width: 150,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    borderRadius: 50,
+    flexDirection: "row",
+  },
+  textSign: {
+    color: "white",
+    fontWeight: "bold",
   },
 });
