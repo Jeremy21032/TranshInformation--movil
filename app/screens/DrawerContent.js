@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { View, StyleSheet } from "react-native";
 import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
 import {
@@ -15,8 +15,10 @@ import Icon from "react-native-vector-icons/MaterialCommunityIcons";
 import FontAwesome from "react-native-vector-icons/FontAwesome5";
 import { getAuth } from "firebase/auth";
 import { AuthContext } from "../components/context";
+import AppContext from "../context/AppContext";
 export function DrawerContent(props) {
-  const { toggleTheme } = React.useContext(AuthContext);
+  const {userInfo} =useContext(AppContext);
+  const { toggleTheme } = useContext(AuthContext);
   const paperTheme = useTheme();
   function cerrar() {
     const auth = getAuth();
@@ -40,10 +42,10 @@ export function DrawerContent(props) {
         <View style={styles.drawerContent}>
           <View style={styles.userInfoSection}>
             <View style={{ flexDirection: "row", marginTop: 15 }}>
-              <Avatar.Image source={{ uri: global.profilePic }} size={50} />
+              <Avatar.Image source={{ uri: userInfo.profilePic }} size={50} />
               <View style={{ marginLeft: 10, flexDirection: "column" }}>
                 <Title style={styles.title}>
-                  {global.name} {global.lastName}
+                  {userInfo.name} {userInfo.lastName}
                 </Title>
                 <Caption style={styles.caption}>{global.email}</Caption>
               </View>

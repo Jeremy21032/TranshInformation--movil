@@ -12,28 +12,30 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useTheme } from "react-native-paper";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as commonStyles from "../../assets/styles/appStyles";
 import { getPersonalInfomation } from "../services/InfoServicesPersonal";
+import AppContext from "../context/AppContext";
 
 export const EditProfile = ({ navigation }) => {
   const paperTheme = useTheme();
   const [refreshing, setRefreshing] = React.useState(false);
+  const {userInfo} = useContext(AppContext);
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => {
-      const getUser = async () => {
-        let userData = await getPersonalInfomation();
-        global.name = userData.name;
-        global.lastName = userData.lastName;
-        global.email = userData.email;
-        global.birthdate = userData.birthdate;
-        global.direccion =userData.direccion;
-      };
-      getUser();
+      // const getUser = async () => {
+      //   let userData = await getPersonalInfomation();
+      //   global.name = userData.name;
+      //   global.lastName = userData.lastName;
+      //   global.email = userData.email;
+      //   global.birthdate = userData.birthdate;
+      //   global.direccion =userData.direccion;
+      // };
+      // getUser();
       setRefreshing(false);
     });
   }, []);
@@ -63,19 +65,19 @@ export const EditProfile = ({ navigation }) => {
             },
           ]}
         >
-          <Image source={{ uri: global.profilePic }} style={stylesL.profile} />
+          <Image source={{ uri: userInfo.profilePic }} style={stylesL.profile} />
           <Text style={[stylesL.name, { color: paperTheme.colors.text }]}>
-            {global.name} {global.lastName}
+            {userInfo.name} {userInfo.lastName}
           </Text>
           <Text style={[stylesL.mail, { color: paperTheme.colors.text }]}>
-            {global.email}
+            {userInfo.email}
           </Text>
           <Text style={[stylesL.mail, { color: paperTheme.colors.text }]}>
-            Dirección: {global.direccion}
+            Dirección: {userInfo.direccion}
           </Text>
           <View style={stylesL.bdContainer}>
             <Icon name="party-popper" color="black" size={20} />
-            <Text>{global.birthdate}</Text>
+            <Text>{userInfo.birthdate}</Text>
           </View>
           <View style={stylesL.button}>
             <TouchableOpacity

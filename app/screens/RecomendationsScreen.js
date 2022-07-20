@@ -28,7 +28,7 @@ export const RecomendationsScreen = () => {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => {
-      getRecomendaciones(setRecomendaciones);
+      //getRecomendaciones(setRecomendaciones);
       setRefreshing(false);
     });
   }, []);

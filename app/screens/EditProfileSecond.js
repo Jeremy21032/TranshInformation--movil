@@ -12,7 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useTheme } from "react-native-paper";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Avatar } from "@rneui/themed";
 import * as Animatable from "react-native-animatable";
 import * as styles from "../../assets/styles/appStyles";
@@ -34,6 +34,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { ModalInfoError } from "../components/ModalInfoError";
+import AppContext from "../context/AppContext";
 
 export const EditProfileSecond = ({ navigation }) => {
   const paperTheme = useTheme();
@@ -42,6 +43,7 @@ export const EditProfileSecond = ({ navigation }) => {
   const [messageCorrect, setMessageCorrect] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [messageError, setMessageError] = React.useState("");
+  const { userInfo, handleUserInfo } = useContext(AppContext);
   let component = (
     <LoadingOverlay
       isVisible={isLoading}
@@ -53,9 +55,9 @@ export const EditProfileSecond = ({ navigation }) => {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [data, setData] = React.useState({
-    name: global.name,
-    lastName: global.lastName,
-    email: global.email,
+    name: userInfo.name,
+    lastName: userInfo.lastName,
+    email: userInfo.email,
     password: "",
     confirmPassword: "",
     check_textInputChange: false,
@@ -64,10 +66,8 @@ export const EditProfileSecond = ({ navigation }) => {
     isvalidName: true,
     isvalidLastName: true,
     isvalidEmail: true,
-    isvalidPassword: true,
-    isEqualsPassword: true,
-    date: global.birthdate,
-    profilePic: global.profilePic,
+    date: userInfo.birthdate,
+    profilePic: userInfo.profilePic,
   });
 
   const showDatePicker = () => {
@@ -84,25 +84,6 @@ export const EditProfileSecond = ({ navigation }) => {
     console.warn("A date has been picked: ", finalDate);
     setData({ ...data, date: finalDate });
     hideDatePicker();
-  };
-  const textInputChange = (val) => {
-    let validator = validateEmail(val);
-
-    if (validator.Result && val.trim().length >= 6) {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: true,
-        isvalidEmail: true,
-      });
-    } else {
-      setData({
-        ...data,
-        email: val,
-        check_textInputChange: false,
-        isvalidEmail: false,
-      });
-    }
   };
   const nameInputChange = (val) => {
     if (val.length != 0 && val.length >= 3) {
@@ -168,53 +149,40 @@ export const EditProfileSecond = ({ navigation }) => {
     const storage = getStorage();
     const fileStorage = ref(storage, "userImages/" + empid);
     const uploadResult = await uploadBytes(fileStorage, blob);
-    // console.log("Upload Result:", uploadResult);
     blob.close();
     const url = await getDownloadURL(fileStorage);
     global.url = url;
-    console.log("*/*/*/*/*/*/*/*/*/*/*/*/*/", global.url);
+    setData({
+      ...data,
+      profilePic: url,
+    });
+    console.log("*/*/*/*/*/*/*/*/*/*/*/*/*/", url);
   };
   const saveData = async () => {
     setIsLoading(true);
-    let actualDate = new Date();
-    let year = actualDate.getFullYear().toString().substr(-2);
-    let imageName =
-      global.name.toLowerCase() +
-      "_" +
-      global.lastName.toLowerCase() +
-      "_" +
-      year +
-      ".jpg";
-    await uploadFile(imageName);
-    setData({
-      ...data,
+
+    let persona = {
       name: data.name,
       lastName: data.lastName,
       email: data.email,
-      date: data.date,
+      birthdate: data.date,
       profilePic: global.url,
-    });
-    global.name = data.name;
-    global.lastName = data.lastName;
-    global.email = data.email;
-    global.birthdate = data.date;
-    global.profilePic = global.url;
-    let persona = {
-      name: global.name,
-      lastName: global.lastName,
-      email: global.email,
-      birthdate: global.birthdate,
-      profilePic: global.profilePic,
     };
-    let personaRol = {
-      name: global.name,
-      lastName: global.lastName,
-      email: global.email,
-      profilePic: global.profilePic,
-    };
+
     try {
-      await updatePersona(persona);
-      await updatePersonaRol(personaRol, canContinue);
+      handleUserInfo(persona);
+      let actualDate = new Date();
+      let year = actualDate.getFullYear().toString().substr(-2);
+      let imageName =
+      persona.name.toLowerCase() +
+      "_" +
+      persona.lastName.toLowerCase() +
+      "_" +
+      year +
+      ".jpg";
+      await uploadFile(imageName);
+      await updatePersona(persona, canContinue);
+      
       setModalVisibleCorrect(true);
       setMessageCorrect("Información actualziada con exito");
       setIsLoading(false);
@@ -396,7 +364,6 @@ export const EditProfileSecond = ({ navigation }) => {
                 editable={false}
                 autoCapitalize="none"
                 value={data.email}
-                onChangeText={(val) => textInputChange(val)}
               />
               {data.check_textInputChange ? (
                 <Animatable.View animation="bounceIn">

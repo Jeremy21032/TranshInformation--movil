@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   StatusBar,
 } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
@@ -18,11 +18,9 @@ import {
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoError } from "../components/ModalInfoError";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
-import {
-  getPersonalInfomation,
-  getPersonalRol,
-} from "../services/InfoServicesPersonal";
+import AppContext from "../context/AppContext";
 export const SignInScreen = ({ navigation }) => {
+  const { signInUser } = useContext(AppContext);
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [messageError, setMessageError] = React.useState("");
@@ -84,37 +82,18 @@ export const SignInScreen = ({ navigation }) => {
       secureTextEntry: !data.secureTextEntry,
     });
   };
-  const auth = getAuth();
   const singIn = async (mail) => {
     setIsLoading(true);
     console.log(mail);
     console.log("ENTRA A AUT");
     try {
-      handleSignIn();
+      await signInUser(data.email, data.password);
+      setIsLoading(false);
     } catch (error) {
       setIsLoading(false);
       setText("Correo electrónico incorrecto.");
       setModalVisibleError(true);
     }
-  };
-  const handleSignIn = async () => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
-      .then(async (userCredential) => {
-        const user = userCredential.user;
-        console.log(user);
-        console.log("Sign in!");
-        setIsLoading(false);
-        setModalVisibleError(false);
-      })
-      .catch((error) => {
-        setIsLoading(false);
-
-        const errorCode = error.code;
-        const errorMessage = error.message;
-        setModalVisibleError(true);
-        setMessageError("Constraseña incorrecta.");
-        console.log("Error>>>>: ", (errorCode, errorMessage));
-      });
   };
   return (
     <View style={styles.commons.signContainer}>
@@ -132,7 +111,10 @@ export const SignInScreen = ({ navigation }) => {
           <FontAwesome name="user-o" color={styles.colors.darkBlue} size={20} />
           <TextInput
             placeholder="Tu correo electrónico"
-            style={[styles.commons.textInput,{color: styles.colors.darkBlue,}]}
+            style={[
+              styles.commons.textInput,
+              { color: styles.colors.darkBlue },
+            ]}
             autoCapitalize="none"
             onChangeText={(val) => textInputChange(val)}
           />
@@ -165,10 +147,13 @@ export const SignInScreen = ({ navigation }) => {
         </Text>
 
         <View style={styles.commons.action}>
-          <Feather name="lock" color={styles.colors.darkBlue}size={20} />
+          <Feather name="lock" color={styles.colors.darkBlue} size={20} />
           <TextInput
             placeholder="Tu Contraseña"
-             style={[styles.commons.textInput,{color: styles.colors.darkBlue,}]}
+            style={[
+              styles.commons.textInput,
+              { color: styles.colors.darkBlue },
+            ]}
             autoCapitalize="none"
             secureTextEntry={data.secureTextEntry ? true : false}
             onChangeText={(val) => handlePasswordChange(val)}
@@ -188,9 +173,9 @@ export const SignInScreen = ({ navigation }) => {
         {data.isvalidPassword ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.commons.errorMsg}>
-            La contraseña debe tener al menos 1 numero, minimo 6 caracteres y 1 símbolo
-                obligatorio.{"\n"}
-                Los simbolos obligatorios son !$%&?@*
+              La contraseña debe tener al menos 1 numero, minimo 6 caracteres y
+              1 símbolo obligatorio.{"\n"}
+              Los simbolos obligatorios son !$%&?@*
             </Text>
           </Animatable.View>
         )}
@@ -225,7 +210,12 @@ export const SignInScreen = ({ navigation }) => {
               colors={[styles.colors.gradient2, styles.colors.gradient1]}
               style={styles.commons.signIn}
             >
-              <Text style={[styles.commons.textSign, { color: styles.colors.white }]}>
+              <Text
+                style={[
+                  styles.commons.textSign,
+                  { color: styles.colors.white },
+                ]}
+              >
                 Iniciar sesión
               </Text>
             </LinearGradient>

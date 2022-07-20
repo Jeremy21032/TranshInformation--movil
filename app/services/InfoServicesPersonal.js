@@ -29,8 +29,8 @@ export const savePersonalRol = async (person) => {
   await setDoc(doc(global.dbCon, "/Roles", person.email), person);
 };
 
-export const getPersonalInfomation = async () => {
-  const q = doc(global.dbCon, "/Personas/" + global.email);
+export const getPersonalInfomation = async (email) => {
+  const q = doc(global.dbCon, "/Personas/" + email);
   const docSnap = await getDoc(q);
   let person = docSnap.data();
   console.log("------- TRAE LA INFORMACION PERSONAL ---------");
@@ -69,13 +69,14 @@ export const aniadirDireccionBase = async (direccionBase,direccion, birthdate) =
   });
 };
 
-export const updatePersona =async(persona)=>{
-  const docRef = doc(global.dbCon, "/Personas/" + global.email);
+export const updatePersona =async(persona,canContinue)=>{
+  const docRef = doc(global.dbCon, "/Personas/" + persona.email);
   const docSnapresult = await getDoc(docRef);
 
   let docResultData = docSnapresult.data();
   console.log(docResultData);
   await updateDoc(docRef, persona);
+  canContinue()
 }
 export const updatePersonaRol =async(persona, canContinue)=>{
   const docRef = doc(global.dbCon, "/Roles/" + global.email);
