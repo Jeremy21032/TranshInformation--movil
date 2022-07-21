@@ -20,7 +20,7 @@ import {
 } from "../services/InfoServicesPersonal";
 import { ModalInfoError } from "../components/ModalInfoError";
 import { LoadingOverlay } from "../components/LoadingOverlay";
-import { validateCorrectPassword } from "../services/Validate";
+import { validateCorrectName, validateCorrectPassword } from "../services/Validate";
 import { useTheme } from "react-native-paper";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 export const SignUpScreen = ({ navigation }) => {
@@ -57,7 +57,8 @@ export const SignUpScreen = ({ navigation }) => {
     isEqualsPassword: true,
   });
   const nameInputChange = (val) => {
-    if (val.length != 0 && val.length >= 3) {
+    let validator = validateCorrectName(val);
+    if (validator.Result && val.length != 0 && val.length >= 3) {
       setData({
         ...data,
         name: val,
@@ -199,17 +200,7 @@ export const SignUpScreen = ({ navigation }) => {
         birthdate: null,
         rol: "cliente",
       };
-      let personaRol = {
-        email: data.email.toLowerCase(),
-        name: data.name,
-        lastName: data.lastName,
-        profilePic:
-          "https://ui-avatars.com/api/?background=0B2460&color=fff&size=600&font-size=0.4&name=" +
-          data.name +
-          "+" +
-          data.lastName,
-        rol: "cliente",
-      };
+
       try {
         await handleCreateAccount(persona);
       } catch (e) {

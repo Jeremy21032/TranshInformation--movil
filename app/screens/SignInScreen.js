@@ -173,7 +173,7 @@ export const SignInScreen = ({ navigation }) => {
         {data.isvalidPassword ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.commons.errorMsg}>
-              La contraseña debe tener al menos 1 numero, minimo 6 caracteres y
+              La contraseña debe tener al menos 1 numero, mínimo 6 caracteres y
               1 símbolo obligatorio.{"\n"}
               Los simbolos obligatorios son !$%&?@*
             </Text>
