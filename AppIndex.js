@@ -122,7 +122,7 @@ const auth = getAuth();
   };
 
   const SecondNav = () => {
-    return global.direccionBase == null ? (
+    return userInfo.direccionBase == null ? (
       <KnowStackScreen />
     ) : (
       <RootDrawerScreen />

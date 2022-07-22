@@ -49,8 +49,8 @@ export const SuggestionsScreen = ({navigation}) => {
           progressBackgroundColor={commonStyles.colors.white}
         />
       }>
-      <Text style={[styles.header, { color: paperTheme.colors.text }]}>
-        Historial
+      <Text style={[styles.header, { color: paperTheme.colors.text , alignSelf: "center", fontSize:25, marginVertical:5}]}>
+        Comentarios y sugerencias
       </Text>
       <Text style={[styles.header, { color: paperTheme.colors.text }]}>
         Sus ideas y sugerencias son importantes para nostros, gracias a sus
