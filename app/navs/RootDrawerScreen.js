@@ -28,8 +28,8 @@ export const RootDrawerScreen = ({ items }) => (
         overlayColor: "transparent",
     }}>
         {console.log(".....................ITEMS...................",items)}
-        <RootDrawer.Screen name="RECOMENDACIONES" component={RecomendationsScreen} />
         <RootDrawer.Screen name="INICIO" component={Home} />
+        <RootDrawer.Screen name="RECOMENDACIONES" component={RecomendationsScreen} />
         {/* <RootDrawer.Screen name="PERFIL" component={ProfileScreen} /> */}
         <RootDrawer.Screen name="PERFIL" component={ProfileStackScreen} />
         <RootDrawer.Screen name="SERVICIOS" component={ServicesScreen} />

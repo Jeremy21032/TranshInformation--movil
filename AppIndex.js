@@ -28,6 +28,8 @@ import {
 } from "react-native";
 import Lottie from "lottie-react-native";
 import AppContext from "./app/context/AppContext";
+import { getRecomendaciones } from "./app/services/RecomendacionesServices";
+import { getContacts } from "./app/services/ContactServices";
 LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 LogBox.ignoreAllLogs();
 const CustomDefaultTheme = {
@@ -55,7 +57,7 @@ const AppIndex = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [internetConection, setInternetConection] = useState("");
   const [isConnected, setIsConnected] = useState("");
-  const { userInfo, handleUserInfo, userFirebase } = useContext(AppContext);
+  const { userInfo, handleUserInfo, userFirebase, handleFillRecomendations ,handleFillContacts} = useContext(AppContext);
   const authContext = React.useMemo(
     () => ({
       toggleTheme: () => {
@@ -104,6 +106,10 @@ const AppIndex = () => {
         const email = userFirebase.email;
         global.email = email;
         global.direccionBase = verify.direccionBase;
+        let recomendations=await getRecomendaciones();
+        handleFillRecomendations(recomendations);
+        let services = await getContacts();
+        handleFillContacts(services);
       }
     }
     modifyState();
@@ -112,6 +118,7 @@ const auth = getAuth();
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       setLogin(true);
+      
     } else {
       setLogin(false);
     }

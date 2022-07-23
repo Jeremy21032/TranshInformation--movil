@@ -232,11 +232,10 @@ const stylesL = StyleSheet.create({
   },
   row: {
     flexDirection: "row",
-    width: Dimensions.get("window").width / 2,
+    width: Dimensions.get("window").width/1.5,
   },
   modalView: {
-    margin: 20,
-
+    width:Dimensions.get("window").width-20,
     borderRadius: 20,
     padding: 35,
     alignItems: "center",

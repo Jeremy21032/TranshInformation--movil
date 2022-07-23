@@ -1,31 +1,29 @@
 import { FlatList, View } from "react-native";
-import React, { useEffect, useState } from "react";
-import { getContacts } from "../services/ContactServices";
+import React, { Component, useContext } from "react";
 import { ListContacts } from "./Lists/ListContacts";
+import AppContext from "../context/AppContext";
 
-export const ServicesScreen = () => {
-  const [contactos, setContactos] = useState([]);
+class ServicesScreen extends Component {
+  static contextType = AppContext
 
-
-  useEffect(() => {
-    getContacts(setContactos);
-  }, []);
-  return (
-    <View style={{ flex: 1 }}>
-      <View>
-        <FlatList
-          data={contactos}
-          numColumns={1}
-          renderItem={({ item }) => {
-            return (
-              <ListContacts items={item} />
-            );
-          }}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
-        />
+  render() {
+    const { services } = this.context;
+    return (
+      <View style={{ flex: 1 }}>
+        <View>
+          <FlatList
+            data={services}
+            numColumns={1}
+            renderItem={({ item }) => {
+              return <ListContacts items={item} />;
+            }}
+            keyExtractor={(item) => {
+              return item.id;
+            }}
+          />
+        </View>
       </View>
-    </View>
-  );
-};
+    );
+  }
+}
+export { ServicesScreen };

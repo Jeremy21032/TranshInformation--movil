@@ -53,15 +53,6 @@ export function DrawerContent(props) {
           </View>
           <Drawer.Section style={styles.drawerSection}>
             <DrawerItem
-              label="Recomendaciones"
-              icon={({ color, size }) => (
-                <Icon name="form-select" color={color} size={size} />
-              )}
-              onPress={() => {
-                props.navigation.navigate("RECOMENDACIONES");
-              }}
-            />
-            <DrawerItem
               label="Inicio"
               icon={({ color, size }) => (
                 <Icon name="home-outline" color={color} size={size} />
@@ -70,6 +61,15 @@ export function DrawerContent(props) {
                 props.navigation.navigate("INICIO");
               }}
               activeTintColor="red"
+            />
+            <DrawerItem
+              label="Recomendaciones"
+              icon={({ color, size }) => (
+                <Icon name="form-select" color={color} size={size} />
+              )}
+              onPress={() => {
+                props.navigation.navigate("RECOMENDACIONES");
+              }}
             />
             <DrawerItem
               label="Perfil"

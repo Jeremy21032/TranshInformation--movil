@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -14,26 +14,31 @@ import {
   ITEM_WIDTH,
   CarouselCardItem,
 } from "./Lists/CarouselCardItem";
+import AppContext from "../context/AppContext";
 
 export const RecomendationsScreen = () => {
   const paperTheme = useTheme();
   const [index, setIndex] = React.useState(0);
+  const { recomendations } = useContext(AppContext);
   const isCarousel = React.useRef(null);
   const [recomendaciones, setRecomendaciones] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
-  const [fontSize, setFontSize] = React.useState(12)
+  const [fontSize, setFontSize] = React.useState(12);
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => {
-      getRecomendaciones(setRecomendaciones);
+      //(setRecomendaciones);
       setRefreshing(false);
     });
   }, []);
   useEffect(() => {
-    onRefresh();
+    //onRefresh();
+  }, []);
+  useEffect(() => {
+    console.log("---------------------",recomendations);
   }, []);
 
   return (
@@ -53,8 +58,8 @@ export const RecomendationsScreen = () => {
           { backgroundColor: paperTheme.colors.background },
         ]}
       >
-         <Pagination
-          dotsLength={recomendaciones.length}
+        <Pagination
+          dotsLength={recomendations.length}
           activeDotIndex={index}
           carouselRef={isCarousel}
           dotStyle={{
@@ -71,10 +76,10 @@ export const RecomendationsScreen = () => {
           tappableDots={true}
         />
         <Carousel
-          layout={'default'}
+          layout={"default"}
           layoutCardOffset={`9`}
           ref={isCarousel}
-          data={recomendaciones}
+          data={recomendations}
           renderItem={CarouselCardItem}
           sliderWidth={SLIDER_WIDTH}
           itemWidth={ITEM_WIDTH}
@@ -82,7 +87,6 @@ export const RecomendationsScreen = () => {
           useScrollView={true}
           extraData={fontSize}
         />
-       
       </SafeAreaView>
     </ScrollView>
   );

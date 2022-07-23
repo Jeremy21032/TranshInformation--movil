@@ -2,7 +2,7 @@ import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { useCallback, useReducer } from "react";
 import AppContext from "./AppContext";
 import { AppReducer } from "./AppReducer";
-import { FIREBASE_USER, UPDATE_USER_INFO } from "./AppTypes";
+import { FILL_RECOMENDATIONS, FILL_SERVICES, FIREBASE_USER, UPDATE_USER_INFO } from "./AppTypes";
 
 export const AppStates = ({ children }) => {
   const initialValue = {
@@ -15,7 +15,7 @@ export const AppStates = ({ children }) => {
     suggestions: null,
     notices: null,
   };
-  const [state, dispatch] = useReducer(AppReducer,initialValue);
+  const [state, dispatch] = useReducer(AppReducer, initialValue);
   const signInUser = useCallback(async (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
@@ -44,6 +44,18 @@ export const AppStates = ({ children }) => {
       payload: infoUser,
     });
   }, []);
+  const handleFillRecomendations = useCallback((recomendationsInfo) => {
+    dispatch({
+      type: FILL_RECOMENDATIONS,
+      payload: recomendationsInfo,
+    });
+  }, []);
+  const handleFillContacts = useCallback((contactsInfo) => {
+    dispatch({
+      type:FILL_SERVICES,
+      payload:contactsInfo,
+    })
+  },[]);
   return (
     <AppContext.Provider
       value={{
@@ -58,6 +70,8 @@ export const AppStates = ({ children }) => {
         handleFirebaseUser,
         handleUserInfo,
         signInUser,
+        handleFillRecomendations,
+        handleFillContacts
       }}
     >
       {children}

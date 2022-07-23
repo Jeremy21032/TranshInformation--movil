@@ -58,7 +58,7 @@ export const SignUpScreen = ({ navigation }) => {
   });
   const nameInputChange = (val) => {
     let validator = validateCorrectName(val);
-    if (validator.Result && val.length != 0 && val.length >= 3) {
+    if (   val.length != 0 && val.length >= 3) {
       setData({
         ...data,
         name: val,
