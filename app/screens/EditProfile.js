@@ -12,9 +12,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useTheme } from "react-native-paper";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import React, { useState, useEffect, useContext } from "react";
+import React, {  useEffect, useContext } from "react";
 import * as commonStyles from "../../assets/styles/appStyles";
-import { getPersonalInfomation } from "../services/InfoServicesPersonal";
 import AppContext from "../context/AppContext";
 
 export const EditProfile = ({ navigation }) => {
@@ -27,15 +26,6 @@ export const EditProfile = ({ navigation }) => {
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => {
-      // const getUser = async () => {
-      //   let userData = await getPersonalInfomation();
-      //   global.name = userData.name;
-      //   global.lastName = userData.lastName;
-      //   global.email = userData.email;
-      //   global.birthdate = userData.birthdate;
-      //   global.direccion =userData.direccion;
-      // };
-      // getUser();
       setRefreshing(false);
     });
   }, []);

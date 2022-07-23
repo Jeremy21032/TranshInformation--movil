@@ -1,8 +1,6 @@
 import {
   doc,
   setDoc,
-  getDoc,
-  updateDoc,
   getDocs,
   query,
   collection,
@@ -18,8 +16,8 @@ export const saveSuggestion = async (suggestion, canContinue) => {
   await setDoc(doc(global.dbCon, "/Sugerencias", suggestion.id), suggestion);
   canContinue();
 };
-export const getSuggestion = async (refreshFn) => {
-  const q = query(collection(global.dbCon, "/Sugerencias"), where("email","==",global.email));
+export const getSuggestion = async (email,refreshFn) => {
+  const q = query(collection(global.dbCon, "/Sugerencias"), where("email","==",email));
   const docSnap = await getDocs(q);
   let tmpSuggestions = [];
   docSnap.forEach((docSuggestion) => {

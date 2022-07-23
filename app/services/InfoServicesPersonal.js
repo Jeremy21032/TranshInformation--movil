@@ -45,8 +45,8 @@ export const getPlaces = async () => {
   console.log(places.lugares);
   return places.lugares;
 };
-export const getDireccionBase = async (refreshFn, continueFn) => {
-  const q = doc(global.dbCon, "/Personas/" + global.email);
+export const getDireccionBase = async (email,refreshFn, continueFn) => {
+  const q = doc(global.dbCon, "/Personas/" + email);
   const docSnap = await getDoc(q);
   let person = docSnap.data();
   console.log("------- TRAE LA INFORMACION DIRECCION  ---------");
@@ -55,8 +55,8 @@ export const getDireccionBase = async (refreshFn, continueFn) => {
   continueFn();
 };
 
-export const aniadirDireccionBase = async (direccionBase,direccion, birthdate) => {
-  const docRef = doc(global.dbCon, "/Personas/" + global.email);
+export const aniadirDireccionBase = async (email,direccionBase,direccion, birthdate) => {
+  const docRef = doc(global.dbCon, "/Personas/" + email);
 
   const docSnapresult = await getDoc(docRef);
 
@@ -79,7 +79,7 @@ export const updatePersona =async(persona,canContinue)=>{
   canContinue()
 }
 export const updatePersonaRol =async(persona, canContinue)=>{
-  const docRef = doc(global.dbCon, "/Roles/" + global.email);
+  const docRef = doc(global.dbCon, "/Roles/" + persona.email);
   const docSnapresult = await getDoc(docRef);
 
   let docResultData = docSnapresult.data();

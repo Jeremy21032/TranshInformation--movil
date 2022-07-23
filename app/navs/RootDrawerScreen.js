@@ -1,16 +1,11 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import { HomeScreen } from '../screens/HomeScreen';
-import { VideosScreen } from '../screens/VideosScreen';
 import { BadgesScreen } from '../screens/BadgesScreen';
 import { ServicesScreen } from '../screens/ServicesScreen';
-import { ProfileScreen } from '../screens/ProfileScreen';
 import { DrawerContent } from '../screens/DrawerContent';
 import * as styles from '../../assets/styles/appStyles';
 import { useWindowDimensions } from 'react-native';
 import { VideoStackScreen } from './VideosStackScreen';
-import NoticesBottomScreen from './NoticesBottomScreen';
-import { EditProfile } from '../screens/EditProfile';
 import { Home } from '../screens/Home';
 import { NoticesOrganicStackScreen } from './NoticesOrganicStackScreen';
 import { ProfileStackScreen } from './ProfielStack';

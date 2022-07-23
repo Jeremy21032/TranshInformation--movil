@@ -240,6 +240,26 @@ export const SignInScreen = ({ navigation }) => {
               Registrarse
             </Text>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => setData({ ...data, email: "" })}
+            style={[
+              styles.commons.signIn,
+              {
+                borderColor: styles.colors.darkCyan,
+                borderWidth: 1,
+                marginTop: 15,
+              },
+            ]}
+          >
+            <Text
+              style={[
+                styles.commons.textSign,
+                { color: styles.colors.darkCyan },
+              ]}
+            >
+              clear
+            </Text>
+          </TouchableOpacity>
         </View>
         <TouchableOpacity
           onPress={() => navigation.navigate("FORGOT")}

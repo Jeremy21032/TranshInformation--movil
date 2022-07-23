@@ -25,8 +25,6 @@ export function DrawerContent(props) {
     auth
       .signOut()
       .then(function () {
-        global.rol = "";
-        global.login = false;
         console.log("Log Out");
       })
       .catch((error) => {
@@ -47,7 +45,7 @@ export function DrawerContent(props) {
                 <Title style={styles.title}>
                   {userInfo.name} {userInfo.lastName}
                 </Title>
-                <Caption style={styles.caption}>{global.email}</Caption>
+                <Caption style={styles.caption}>{userInfo.email}</Caption>
               </View>
             </View>
           </View>

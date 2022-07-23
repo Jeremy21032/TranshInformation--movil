@@ -1,46 +1,45 @@
-import { StyleSheet, Text, View, Button, Dimensions } from "react-native";
-import React, { useEffect, useState } from "react";
+import { StyleSheet, Text, View, Dimensions } from "react-native";
+import React, { useContext, useEffect } from "react";
 import { useTheme } from "react-native-paper";
 import MapView, { Polygon, PROVIDER_GOOGLE } from "react-native-maps";
 const height = Dimensions.get("window").height;
-import * as commonStyles from "../../assets/styles/appStyles";
-
 import { mapStyle } from "../../assets/styles/mapStyle";
+import AppContext from "../context/AppContext";
 
 export const Home = () => {
+  const {userInfo} = useContext(AppContext)
   const paperTheme = useTheme();
   let coordinates = [];
   useEffect(() => {
     coordinates = null;
-    if (global.direccionBase == null) {
-      getData(global.direccionBase);
+    if (userInfo.direccionBase == null) {
+      getData(userInfo.direccionBase);
     }
   }, []);
-  const [name, setName] = useState("");
-  var mapLocation = {
+  let mapLocation = {
     alt: require("../json/Altamira.json"),
     lg: require("../json/La Granja.json"),
   };
   const getData = (value) => {
-    global.direccionBase = value;
-    if (global.direccionBase == "alt") {
+    userInfo.direccionBase = value;
+    if (userInfo.direccionBase == "alt") {
       coordinates = mapLocation.alt;
-    } else if (global.direccionBase == "lg") {
+    } else if (userInfo.direccionBase == "lg") {
       coordinates = mapLocation.lg;
     }
   };
 
-  if (global.direccionBase == "alt") {
+  if (userInfo.direccionBase == "alt") {
     coordinates = mapLocation.alt;
-  } else if (global.direccionBase == "lg") {
+  } else if (userInfo.direccionBase == "lg") {
     coordinates = mapLocation.lg;
   }
 
   return (
     <View style={styles.container}>
-      <Text style={[styles.text, { color: paperTheme.colors.text }]}>
-        {global.name}
-      </Text>
+      {/* <Text style={[styles.text, { color: paperTheme.colors.text }]}>
+        {userInfo.name}
+      </Text> */}
       {coordinates.length > 0 ? (
         <MapView
           customMapStyle={mapStyle}

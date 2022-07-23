@@ -103,9 +103,6 @@ const AppIndex = () => {
       if (userFirebase) {
         let verify = await getPersonalInfomation(userFirebase.email);
         handleUserInfo(verify);
-        const email = userFirebase.email;
-        global.email = email;
-        global.direccionBase = verify.direccionBase;
         let recomendations=await getRecomendaciones();
         handleFillRecomendations(recomendations);
         let services = await getContacts();

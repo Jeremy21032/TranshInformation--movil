@@ -1,10 +1,9 @@
 import { StyleSheet, Text, View, ActivityIndicator, Dimensions } from 'react-native'
-import { useTheme, Sc } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 import React from 'react'
-import { getLocation, getLocation2 } from '../services/GeoServices';
+import { getLocation } from '../services/GeoServices';
 import MapView, { Callout, Polygon, PROVIDER_GOOGLE } from 'react-native-maps'
 import { Modal } from 'react-native-paper';
-import SceneView from 'react-native-scene-view';
 
 
 const height = Dimensions.get('window').height;
@@ -17,17 +16,15 @@ export const HomeScreen = ({ route },items) => {
     coordinatesM: [],
 
   })
-  let final = null;
   if (route != null && route.params != null && route.params.items != null) {
     console.log("params" + route.params)
     setCoordinates(route.params.items);
-    final = coordinates.sort((a, b) => a.id - b.id);
   }
 
   React.useEffect(() => {
     console.log("_:::::::::::::ITEMS:::::::::::::::::",items)
     async function getData() {
-      await getLocation(setCoordinates, global.direccionBase).then(() => {
+      await getLocation(setCoordinates, userInfo.direccionBase).then(() => {
         console.log("coordinatesM: " + data.coordinatesM.length);
         console.log("coordinates: " + coordinates.length)
         setName("Hola")
@@ -49,7 +46,7 @@ export const HomeScreen = ({ route },items) => {
         <Text style={{ color: colors.text }}>{name}</Text><ActivityIndicator size="large" />
       </> :
         <>
-          <Text style={{ color: colors.text }}>{name}{global.lastName}</Text>
+          <Text style={{ color: colors.text }}>{name}{userInfo.lastName}</Text>
           <Text style={{ color: colors.text }}>{coordinates.length}</Text>
           <Text style={{ color: colors.text }}>{data.coordinatesM.length}</Text>
           <MapView

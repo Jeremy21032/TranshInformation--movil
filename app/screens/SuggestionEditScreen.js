@@ -4,9 +4,8 @@ import {
   View,
   TextInput,
   TouchableOpacity,
-  ScrollView,
 } from "react-native";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import * as commonStyles from "../../assets/styles/appStyles";
 import { LinearGradient } from "expo-linear-gradient";
 import { Divider, useTheme } from "react-native-paper";
@@ -18,6 +17,8 @@ import { getLastItem, saveLastItem } from "../services/GlobalServices";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { ModalInfoError } from "../components/ModalInfoError";
+import AppContext from "../context/AppContext";
+import { formattedDate } from "../Functions";
 
 export const SuggestionEditScreen = ({ navigation, route }) => {
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
@@ -25,6 +26,7 @@ export const SuggestionEditScreen = ({ navigation, route }) => {
   const [messageCorrect, setMessageCorrect] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
   const [messageError, setMessageError] = React.useState("");
+  const { userInfo } = useContext(AppContext);
   let component = (
     <LoadingOverlay
       isVisible={isLoading}
@@ -85,27 +87,28 @@ export const SuggestionEditScreen = ({ navigation, route }) => {
     }
   };
   const canContinue = () => {
+    setModalVisibleCorrect(true);
+    setMessageCorrect("Sugerencia registrada con exito");
+    setIsLoading(false);
     navigation.goBack();
   };
   const saveData = async () => {
     setIsLoading(true);
     let lastItem = await getLastItem();
     let newLastItem = parseInt(lastItem) + 1 + "s";
+    let actualDate=formattedDate(new Date());
     let suggestion = {
       id: editing == true ? data.id : newLastItem,
       comment: data.description,
       section: data.title,
-      name: global.name,
-      lastName: global.lastName,
-      email: global.email,
+      name: userInfo.name,
+      lastName: userInfo.lastName,
+      email: userInfo.email,
+      timeStamp:actualDate,
     };
     if (data.isValidDescription && data.isValidTitle) {
       await saveLastItem({ lasitemSuggestion: parseInt(lastItem) + 1 });
       await saveSuggestion(suggestion, canContinue);
-
-      setModalVisibleCorrect(true);
-      setMessageCorrect("Sugerencia registrada con exito");
-      setIsLoading(false);
     } else {
       setIsLoading(false);
       setModalVisibleError(true);

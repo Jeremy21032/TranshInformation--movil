@@ -18,19 +18,11 @@ import * as Animatable from "react-native-animatable";
 import * as styles from "../../assets/styles/appStyles";
 import Feather from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
-import { validateEmail } from "../services/Validations";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { formattedDate } from "../Functions";
-import {
-  updatePersona,
-  updatePersonaRol,
-} from "../services/InfoServicesPersonal";
-import {
-  launchImageLibraryAsync,
-  MediaTypeOptions,
-  useMediaLibraryPermissions,
-} from "expo-image-picker";
-import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { updatePersona } from "../services/InfoServicesPersonal";
+import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
+import { getStorage, ref, getDownloadURL } from "firebase/storage";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { ModalInfoError } from "../components/ModalInfoError";
@@ -148,7 +140,6 @@ export const EditProfileSecond = ({ navigation }) => {
     });
     const storage = getStorage();
     const fileStorage = ref(storage, "userImages/" + empid);
-    const uploadResult = await uploadBytes(fileStorage, blob);
     blob.close();
     const url = await getDownloadURL(fileStorage);
     global.url = url;
@@ -169,28 +160,22 @@ export const EditProfileSecond = ({ navigation }) => {
       profilePic: global.url,
     };
 
-    try {
-      handleUserInfo(persona);
-      let actualDate = new Date();
-      let year = actualDate.getFullYear().toString().substr(-2);
-      let imageName =
+    let actualDate = new Date();
+    let year = actualDate.getFullYear().toString().substr(-2);
+    let imageName =
       persona.name.toLowerCase() +
       "_" +
       persona.lastName.toLowerCase() +
       "_" +
       year +
       ".jpg";
-      await uploadFile(imageName);
-      await updatePersona(persona, canContinue);
-      
-      setModalVisibleCorrect(true);
-      setMessageCorrect("Información actualziada con exito");
-      setIsLoading(false);
-    } catch (error) {
-      setIsLoading(false);
-      setModalVisibleError(true);
-      setMessageError(error.message);
-    }
+    await uploadFile(imageName);
+    handleUserInfo(persona);
+    await updatePersona(persona, canContinue);
+
+    setModalVisibleCorrect(true);
+    setMessageCorrect("Información actualziada con exito");
+    setIsLoading(false);
   };
 
   return (

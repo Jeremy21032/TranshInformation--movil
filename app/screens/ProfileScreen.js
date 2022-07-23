@@ -5,7 +5,7 @@ import {
   ScrollView,
   TouchableOpacity,
 } from "react-native";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Avatar } from "react-native-elements";
 import { useTheme, Text } from "react-native-paper";
 import * as styles from "../../assets/styles/appStyles";
@@ -15,15 +15,16 @@ import * as Animatable from "react-native-animatable";
 import { validateEmail } from "../services/Validations";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { formattedDate } from "../Functions";
+import AppContext from "../context/AppContext";
 
 export const ProfileScreen = () => {
   const paperTheme = useTheme();
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
-
+  const {userInfo}= useContext(AppContext);
   const [data, setData] = React.useState({
-    name: global.name,
-    lastName: global.lastName,
-    email: global.email,
+    name: userInfo.name,
+    lastName: userInfo.lastName,
+    email: userInfo.email,
     password: "",
     confirmPassword: "",
     check_textInputChange: false,
@@ -120,7 +121,7 @@ export const ProfileScreen = () => {
           rounded
           containerStyle={{ alignSelf: "center" }}
           source={{
-            uri: global.profilePic,
+            uri: userInfo.profilePic,
           }}
         >
           <Avatar.Accessory size={40} onPress={() => console.log("Works!")} />

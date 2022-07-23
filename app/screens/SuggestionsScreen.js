@@ -25,7 +25,7 @@ export const SuggestionsScreen = ({navigation}) => {
     wait(2000).then(() => {
       const fillSuggestion=async()=>{
 
-        await getSuggestion(setSuggestions);
+        await getSuggestion(userInfo.email,setSuggestions);
       }
       fillSuggestion();
       setRefreshing(false);
@@ -69,7 +69,7 @@ export const SuggestionsScreen = ({navigation}) => {
         ) : (
           <View>
             <FlatList
-          data={suggestions}
+          data={suggestions.sort()}
           numColumns={1}
           renderItem={({ item }) => {
             return (

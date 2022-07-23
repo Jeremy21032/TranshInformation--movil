@@ -1,10 +1,10 @@
 import { FlatList, View } from "react-native";
-import React, { Component, useContext } from "react";
+import React, { Component } from "react";
 import { ListContacts } from "./Lists/ListContacts";
 import AppContext from "../context/AppContext";
 
 class ServicesScreen extends Component {
-  static contextType = AppContext
+  static contextType = AppContext;
 
   render() {
     const { services } = this.context;

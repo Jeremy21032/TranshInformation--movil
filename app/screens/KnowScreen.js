@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   Platform,
 } from "react-native";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import * as Animatable from "react-native-animatable";
 import * as styles from "../../assets/styles/appStyles";
 import { LinearGradient } from "expo-linear-gradient";
@@ -25,8 +25,10 @@ import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { formattedDate } from "../Functions";
 import { useTheme } from "react-native-paper";
 import { getAuth } from "firebase/auth";
+import AppContext from "../context/AppContext";
 
 export const KnowScreen = ({ navigation }) => {
+  const { userInfo } = useContext(AppContext);
   const paperTheme = useTheme();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);
@@ -95,8 +97,7 @@ export const KnowScreen = ({ navigation }) => {
     auth
       .signOut()
       .then(function () {
-        global.rol = "";
-        global.login = false;
+
         console.log("Log Out");
       })
       .catch((error) => {
@@ -114,12 +115,13 @@ export const KnowScreen = ({ navigation }) => {
       data.direcionBase != "" &&
       data.date != ""
     ) {
-      global.birthdate = data.date;
       try {
         await actualizarInformacion();
         setModalVisibleCorrect(true);
         cerrar();
-        setMessageCorrect("Información actualizada con éxito \n Por favor, inicie sesión con sus credenciales.");
+        setMessageCorrect(
+          "Información actualizada con éxito \n Por favor, inicie sesión con sus credenciales."
+        );
       } catch (error) {
         setModalVisibleError(true);
         setMessageError(error.message);
@@ -134,8 +136,8 @@ export const KnowScreen = ({ navigation }) => {
     }
   };
   let actualizarInformacion = async () => {
-    await aniadirDireccionBase(data.direcionBase, data.direccion, data.date);
-    await getDireccionBase(setDirection, canContinue);
+    await aniadirDireccionBase(userInfo.email,data.direcionBase, data.direccion, data.date);
+    await getDireccionBase(userInfo.email,setDirection, canContinue);
   };
   let canContinue = () => {
     navigation.navigate("HOMEKN", { items: map });
@@ -144,7 +146,7 @@ export const KnowScreen = ({ navigation }) => {
     <View style={styles.commons.signContainer}>
       <View style={styles.commons.header}>
         <Text style={styles.commons.text_header}></Text>
-        <Text style={styles.commons.text_header}>Hola, {global.name}.</Text>
+        <Text style={styles.commons.text_header}>Hola, {userInfo.name}.</Text>
         <Text style={styles.commons.text_header}>
           Antes de continuar, queremos conocerte un poco más.
         </Text>
@@ -220,8 +222,6 @@ export const KnowScreen = ({ navigation }) => {
               direcionBase: item.value,
               direccion: item.label,
             });
-            global.direccion = item.label;
-            console.log("--------------------------", global.direccion);
           }}
         />
         <Text style={styles.commons.description}>{"\n"}</Text>
