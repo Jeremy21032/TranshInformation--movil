@@ -4,10 +4,12 @@ import {
   ScrollView,
   StyleSheet,
   RefreshControl,
+  View,
+  Button,
+  Text
 } from "react-native";
 import { useTheme } from "react-native-paper";
 import Carousel, { Pagination } from "react-native-snap-carousel";
-import { getRecomendaciones } from "../services/RecomendacionesServices";
 import * as commonStyles from "../../assets/styles/appStyles";
 import {
   SLIDER_WIDTH,
@@ -18,12 +20,11 @@ import AppContext from "../context/AppContext";
 
 export const RecomendationsScreen = () => {
   const paperTheme = useTheme();
+  const { handleChangeFontSize, fontSize } = useContext(AppContext);
   const [index, setIndex] = React.useState(0);
   const { recomendations } = useContext(AppContext);
   const isCarousel = React.useRef(null);
-  const [recomendaciones, setRecomendaciones] = useState([]);
   const [refreshing, setRefreshing] = React.useState(false);
-  const [fontSize, setFontSize] = React.useState(12);
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
@@ -38,7 +39,7 @@ export const RecomendationsScreen = () => {
     //onRefresh();
   }, []);
   useEffect(() => {
-    console.log("---------------------",recomendations);
+    console.log("---------------------", recomendations);
   }, []);
 
   return (
@@ -52,12 +53,32 @@ export const RecomendationsScreen = () => {
         />
       }
     >
+      <View style={{ flexDirection: "row" }}>
+        <View style={{ flexDirection: "column" }}>
+          <Button
+            title="-A"
+            onPress={() => {
+              handleChangeFontSize(fontSize - 1);
+            }}
+          />
+        </View>
+        <View style={{ flexDirection: "column" }}>
+          <Button
+            title="A+"
+            onPress={() => {
+              handleChangeFontSize(fontSize + 1);
+            }}
+          />
+        </View>
+      </View>
+
       <SafeAreaView
         style={[
           styles.container,
           { backgroundColor: paperTheme.colors.background },
         ]}
       >
+        <Text style={{color:paperTheme.colors.text }}>tamaño {fontSize}</Text>
         <Pagination
           dotsLength={recomendations.length}
           activeDotIndex={index}

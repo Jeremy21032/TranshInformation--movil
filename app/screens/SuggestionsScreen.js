@@ -5,93 +5,104 @@ import {
   Dimensions,
   ScrollView,
   RefreshControl,
-  FlatList
+  FlatList,
 } from "react-native";
 import React, { useEffect, useState } from "react";
 import * as commonStyles from "../../assets/styles/appStyles";
-import {  useTheme } from "react-native-paper";
-import {FAB} from 'react-native-elements'
+import { useTheme } from "react-native-paper";
+import { FAB } from "react-native-elements";
 import { getSuggestion } from "../services/SuggestionsServices";
-import {ListSuggestion} from './Lists/ListSuggestion'
-export const SuggestionsScreen = ({navigation}) => {
+import { ListSuggestion } from "./Lists/ListSuggestion";
+import { useContext } from "react";
+import AppContext from "../context/AppContext";
+export const SuggestionsScreen = ({ navigation }) => {
   const paperTheme = useTheme();
   const [refreshing, setRefreshing] = React.useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const { userInfo } = useContext(AppContext);
   const wait = (timeout) => {
     return new Promise((resolve) => setTimeout(resolve, timeout));
   };
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     wait(2000).then(() => {
-      const fillSuggestion=async()=>{
-
-        await getSuggestion(userInfo.email,setSuggestions);
-      }
+      const fillSuggestion = async () => {
+        await getSuggestion(userInfo.email, setSuggestions);
+      };
       fillSuggestion();
       setRefreshing(false);
     });
   }, []);
   useEffect(() => {
-    const unsubscribe =navigation.addListener('focus',()=>{
-
+    const unsubscribe = navigation.addListener("focus", () => {
       onRefresh();
       return unsubscribe;
     });
-    
   }, [navigation]);
   return (
     <View style={styles.container}>
-      <ScrollView refreshControl={
-        <RefreshControl
-          refreshing={refreshing}
-          onRefresh={onRefresh}
-          colors={[commonStyles.colors.gradient1]}
-          progressBackgroundColor={commonStyles.colors.white}
-        />
-      }>
-      <Text style={[styles.header, { color: paperTheme.colors.text , alignSelf: "center", fontSize:25, marginVertical:5}]}>
-        Comentarios y sugerencias
-      </Text>
-      <Text style={[styles.header, { color: paperTheme.colors.text }]}>
-        Sus ideas y sugerencias son importantes para nostros, gracias a sus
-        comentarios podemos identificar las áreas que podemos mejorar.
-      </Text>
-      
+      <ScrollView
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={onRefresh}
+            colors={[commonStyles.colors.gradient1]}
+            progressBackgroundColor={commonStyles.colors.white}
+          />
+        }
+      >
+        <Text
+          style={[
+            styles.header,
+            {
+              color: paperTheme.colors.text,
+              alignSelf: "center",
+              fontSize: 25,
+              marginVertical: 5,
+            },
+          ]}
+        >
+          Comentarios y sugerencias
+        </Text>
+        <Text style={[styles.header, { color: paperTheme.colors.text }]}>
+          Sus ideas y sugerencias son importantes para nostros, gracias a sus
+          comentarios podemos identificar las áreas que podemos mejorar.
+        </Text>
+
         {suggestions.length <= 0 ? (
           <View style={styles.arrayView}>
-          <Text style={{ color: "red", fontSize: 22, textAlign: "center" }}>
-            Aún no cuentas con sugerencias.
-          </Text>
-          <Text style={{ color: "red", fontSize: 22, textAlign: "center" }}>
-            Si tienes un comentario o sugerencia, por favor háznoslo saber
-          </Text>
-        </View>
+            <Text style={{ color: "red", fontSize: 22, textAlign: "center" }}>
+              Aún no cuentas con sugerencias.
+            </Text>
+            <Text style={{ color: "red", fontSize: 22, textAlign: "center" }}>
+              Si tienes un comentario o sugerencia, por favor háznoslo saber
+            </Text>
+          </View>
         ) : (
           <View>
             <FlatList
-          data={suggestions.sort()}
-          numColumns={1}
-          renderItem={({ item }) => {
-            return (
-              <ListSuggestion
-                infoSuggestion={item}
-               refresh={onRefresh}
-              />
-            );
-          }}
-          keyExtractor={(item) => {
-            return item.id;
-          }}
-        />
+              data={suggestions.sort()}
+              numColumns={1}
+              renderItem={({ item }) => {
+                return (
+                  <ListSuggestion infoSuggestion={item} refresh={onRefresh} />
+                );
+              }}
+              keyExtractor={(item) => {
+                return item.id;
+              }}
+            />
           </View>
         )}
       </ScrollView>
-        <FAB
-          icon={{ name: 'add', color: 'white' }}
-          placement="right"
-          color={commonStyles.colors.darkCyan}
-          onPress={() =>{navigation.navigate("EDITARSUGERENCIAS")}}
-        />
+      <FAB
+        icon={{ name: "add", color: "white" }}
+        placement="right"
+        color={commonStyles.colors.darkCyan}
+        onPress={() => {
+          navigation.navigate("EDITARSUGERENCIAS");
+        }}
+      />
     </View>
   );
 };
@@ -99,7 +110,7 @@ export const SuggestionsScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   container: {
     margin: 20,
-    flex:1,
+    flex: 1,
   },
   input: {
     margin: 12,

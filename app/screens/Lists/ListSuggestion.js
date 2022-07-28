@@ -18,12 +18,14 @@ export const ListSuggestion = ({ infoSuggestion, refresh }) => {
   const [visible, isVisible] = useState(false);
   const [messageSelected, setMessageSelected] = useState("false");
   const [titleSelected, setTitleSelected] = useState("false");
+  const [date,setDate]=useState("");
   const paperTheme = useTheme();
   const showModal = () => {
     console.log("Entra")
     isVisible(true)
     setMessageSelected(infoSuggestion.comment);
     setTitleSelected(infoSuggestion.section);
+    setDate(infoSuggestion.timeStamp)
     console.log("Sale")
   };
   return (
@@ -59,21 +61,6 @@ export const ListSuggestion = ({ infoSuggestion, refresh }) => {
           />
         </TouchableOpacity>
       </View>
-      {/* <View style={[{ flex: 1 }, styles.columnR]}>
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate("EDITARSUGERENCIAS", {
-              suggestionSelected: infoSuggestion,
-            });
-          }}
-        >
-          <MaterialCommunityIcons
-            name="comment-edit-outline"
-            size={30}
-            color={paperTheme.colors.text}
-          />
-        </TouchableOpacity>
-      </View> */}
       <View style={[{ flex: 1 }, styles.columnR]}>
         <TouchableOpacity
           onPress={() => {
@@ -93,6 +80,7 @@ export const ListSuggestion = ({ infoSuggestion, refresh }) => {
         setModalVisible={isVisible}
         message={messageSelected}
         title={titleSelected}
+        date={date}
       ></ModalInformation>
     </View>
   );

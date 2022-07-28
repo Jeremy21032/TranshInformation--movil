@@ -1,8 +1,19 @@
-import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getAuth,
+  sendPasswordResetEmail,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useCallback, useReducer } from "react";
 import AppContext from "./AppContext";
 import { AppReducer } from "./AppReducer";
-import { FILL_RECOMENDATIONS, FILL_SERVICES, FIREBASE_USER, UPDATE_USER_INFO } from "./AppTypes";
+import {
+  FILL_RECOMENDATIONS,
+  FILL_SERVICES,
+  SEND_EMAIL,
+  FIREBASE_USER,
+  UPDATE_USER_INFO,
+  FONT_SIZE,
+} from "./AppTypes";
 
 export const AppStates = ({ children }) => {
   const initialValue = {
@@ -14,6 +25,8 @@ export const AppStates = ({ children }) => {
     videos: null,
     suggestions: null,
     notices: null,
+    sendEmail: null,
+    fontSize: 12,
   };
   const [state, dispatch] = useReducer(AppReducer, initialValue);
   const signInUser = useCallback(async (email, password) => {
@@ -31,7 +44,11 @@ export const AppStates = ({ children }) => {
         console.log("Error>>>>: ", (errorCode, errorMessage));
       });
   }, []);
+  const sendEmail = useCallback(async (email) => {
+    const auth = getAuth();
 
+    await sendPasswordResetEmail(auth, email);
+  }, []);
   const handleFirebaseUser = useCallback((firebaseUser) => {
     dispatch({
       type: FIREBASE_USER,
@@ -52,10 +69,25 @@ export const AppStates = ({ children }) => {
   }, []);
   const handleFillContacts = useCallback((contactsInfo) => {
     dispatch({
-      type:FILL_SERVICES,
-      payload:contactsInfo,
-    })
-  },[]);
+      type: FILL_SERVICES,
+      payload: contactsInfo,
+    });
+  }, []);
+  const handleSendEmail = useCallback((emailInfo) => {
+    dispatch({
+      type: SEND_EMAIL,
+      payload: emailInfo,
+    });
+  }, []);
+  const handleChangeFontSize = useCallback((value) => {
+    handleSetFontSize(value);
+  }, []);
+  const handleSetFontSize = useCallback((fontSize) => {
+    dispatch({
+      type: FONT_SIZE,
+      payload: fontSize,
+    });
+  }, []);
   return (
     <AppContext.Provider
       value={{
@@ -67,11 +99,15 @@ export const AppStates = ({ children }) => {
         videos: state.videos,
         suggestions: state.suggestions,
         notices: state.notices,
+        fontSize: state.fontSize,
         handleFirebaseUser,
         handleUserInfo,
         signInUser,
         handleFillRecomendations,
-        handleFillContacts
+        handleFillContacts,
+        sendEmail,
+        handleSetFontSize,
+        handleChangeFontSize
       }}
     >
       {children}

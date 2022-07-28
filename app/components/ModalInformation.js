@@ -6,6 +6,7 @@ export const ModalInformation = ({
   setModalVisible,
   message,
   title,
+  date,
 }) => {
   return (
     <Modal
@@ -37,7 +38,8 @@ export const ModalInformation = ({
               />
             </View>
           </View>
-          <Text style={styles.modalTitle}>{title}</Text>
+          <Text style={styles.modalTitle}>{title.toUpperCase()}</Text>
+          <Text style={[styles.modalSubtitle,{fontWeight:"bold"}]}>Fecha de emisión: {date}</Text>
           <View style={[styles.viewFlex]}>
             <Text style={styles.modalSubtitle}>{message}</Text>
           </View>
