@@ -6,7 +6,8 @@ import {
   RefreshControl,
   View,
   Button,
-  Text
+  Text,
+  Image,
 } from "react-native";
 import { useTheme } from "react-native-paper";
 import Carousel, { Pagination } from "react-native-snap-carousel";
@@ -38,9 +39,7 @@ export const RecomendationsScreen = () => {
   useEffect(() => {
     //onRefresh();
   }, []);
-  useEffect(() => {
-    console.log("---------------------", recomendations);
-  }, []);
+  useEffect(() => {}, []);
 
   return (
     <ScrollView
@@ -78,7 +77,6 @@ export const RecomendationsScreen = () => {
           { backgroundColor: paperTheme.colors.background },
         ]}
       >
-        <Text style={{color:paperTheme.colors.text }}>tamaño {fontSize}</Text>
         <Pagination
           dotsLength={recomendations.length}
           activeDotIndex={index}
@@ -101,7 +99,15 @@ export const RecomendationsScreen = () => {
           layoutCardOffset={`9`}
           ref={isCarousel}
           data={recomendations}
-          renderItem={CarouselCardItem}
+          renderItem={({ item, index }) => (
+            <View style={styles.containerCard} key={index}>
+              <Image source={{ uri: item.urlImage }} style={styles.image} />
+              <Text style={styles.header}>{item.title}</Text>
+              <Text style={[styles.body, { fontSize: fontSize }]}>
+                {item.content}
+              </Text>
+            </View>
+          )}
           sliderWidth={SLIDER_WIDTH}
           itemWidth={ITEM_WIDTH}
           onSnapToItem={(ind) => setIndex(ind)}
@@ -119,5 +125,35 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 0,
     alignSelf: "center",
+  },
+  containerCard: {
+    backgroundColor: "white",
+    borderRadius: 8,
+    width: ITEM_WIDTH,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 3,
+    },
+    shadowOpacity: 0.29,
+    shadowRadius: 4.65,
+    elevation: 7,
+    paddingBottom: 10,
+  },
+  image: {
+    width: ITEM_WIDTH,
+    height: 300,
+  },
+  header: {
+    color: "#222",
+    fontSize: 28,
+    fontWeight: "bold",
+    paddingLeft: 20,
+    paddingTop: 20,
+  },
+  body: {
+    paddingLeft: 20,
+    paddingRight: 20,
+    textAlign: "justify",
   },
 });

@@ -26,7 +26,7 @@ export const AppStates = ({ children }) => {
     suggestions: null,
     notices: null,
     sendEmail: null,
-    fontSize: 12,
+    fontSize: 18,
   };
   const [state, dispatch] = useReducer(AppReducer, initialValue);
   const signInUser = useCallback(async (email, password) => {
