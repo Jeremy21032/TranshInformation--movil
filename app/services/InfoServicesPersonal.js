@@ -70,6 +70,7 @@ export const aniadirDireccionBase = async (email,direccionBase,direccion, birthd
 };
 
 export const updatePersona =async(persona,canContinue)=>{
+  console.log("-----------ENTRA A updatePersona------------",persona)
   const docRef = doc(global.dbCon, "/Personas/" + persona.email);
   const docSnapresult = await getDoc(docRef);
 

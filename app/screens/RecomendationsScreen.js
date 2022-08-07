@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -8,6 +8,7 @@ import {
   Button,
   Text,
   Image,
+  TouchableOpacity,
 } from "react-native";
 import { useTheme } from "react-native-paper";
 import Carousel, { Pagination } from "react-native-snap-carousel";
@@ -18,6 +19,7 @@ import {
   CarouselCardItem,
 } from "./Lists/CarouselCardItem";
 import AppContext from "../context/AppContext";
+import { LinearGradient } from "expo-linear-gradient";
 
 export const RecomendationsScreen = () => {
   const paperTheme = useTheme();
@@ -52,22 +54,46 @@ export const RecomendationsScreen = () => {
         />
       }
     >
-      <View style={{ flexDirection: "row" }}>
-        <View style={{ flexDirection: "column" }}>
-          <Button
-            title="-A"
+      <View
+        style={{
+          flexDirection: "row-reverse",
+          marginLeft: 40,
+          marginVertical: 10,
+        }}
+      >
+        <View style={styles.internalButton}>
+          <TouchableOpacity
             onPress={() => {
               handleChangeFontSize(fontSize - 1);
             }}
-          />
+          >
+            <LinearGradient
+              colors={[
+                commonStyles.colors.gradient2,
+                commonStyles.colors.gradient1,
+              ]}
+              style={styles.buttonChange}
+            >
+              <Text style={{ color: paperTheme.colors.text }}>-A</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
-        <View style={{ flexDirection: "column" }}>
-          <Button
-            title="A+"
+        <View style={styles.internalButton}>
+          <TouchableOpacity
             onPress={() => {
               handleChangeFontSize(fontSize + 1);
             }}
-          />
+          >
+            <LinearGradient
+              colors={[
+                commonStyles.colors.gradient2,
+                commonStyles.colors.gradient1,
+              ]}
+              style={styles.buttonChange}
+            >
+              <Text style={{ color: paperTheme.colors.text }}>A+</Text>
+            </LinearGradient>
+          </TouchableOpacity>
         </View>
       </View>
 
@@ -125,6 +151,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingBottom: 0,
     alignSelf: "center",
+  },
+  internalButton: { flexDirection: "column", marginLeft: 20 },
+  buttonChange: {
+    width: 40,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    padding: 10,
+    borderRadius: 100,
   },
   containerCard: {
     backgroundColor: "white",

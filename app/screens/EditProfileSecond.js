@@ -121,10 +121,10 @@ export const EditProfileSecond = ({ navigation }) => {
     };
     let response = await launchImageLibraryAsync(options);
     console.log("Respuesta: ", response);
-    setData({ ...data, profilePic: response.uri });
   };
 
   const uploadFile = async (empid) => {
+    console.log("--------------ENTRA A updloadFile", empid);
     const blob = await new Promise((resolve, reject) => {
       const xhr = new XMLHttpRequest();
       xhr.onload = function () {
@@ -145,13 +145,12 @@ export const EditProfileSecond = ({ navigation }) => {
     global.url = url;
     setData({
       ...data,
-      profilePic: url,
+      profilePic: global.url,
     });
     console.log("*/*/*/*/*/*/*/*/*/*/*/*/*/", url);
   };
   const saveData = async () => {
     setIsLoading(true);
-
     let persona = {
       name: data.name,
       lastName: data.lastName,
@@ -163,18 +162,18 @@ export const EditProfileSecond = ({ navigation }) => {
     let actualDate = new Date();
     let year = actualDate.getFullYear().toString().substr(-2);
     let imageName =
-      persona.name.toLowerCase() +
+      data.name.toLowerCase() +
       "_" +
-      persona.lastName.toLowerCase() +
+      data.lastName.toLowerCase() +
       "_" +
       year +
       ".jpg";
     await uploadFile(imageName);
-    handleUserInfo(persona);
     await updatePersona(persona, canContinue);
+    handleUserInfo(persona);
 
     setModalVisibleCorrect(true);
-    setMessageCorrect("Información actualziada con exito");
+    setMessageCorrect("Información actualizada con exito");
     setIsLoading(false);
   };
 

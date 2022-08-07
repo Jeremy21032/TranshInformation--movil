@@ -192,7 +192,7 @@ class ForgotScreen extends Component {
                 </LinearGradient>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={() => navigation.navigate("SIGNIN")}
+                onPress={() => this.props.navigation.navigate("SIGNIN")}
                 style={[
                   styles.commons.signIn,
                   {
