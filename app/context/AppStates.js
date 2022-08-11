@@ -55,7 +55,8 @@ export const AppStates = ({ children }) => {
       payload: firebaseUser,
     });
   }, []);
-  const handleUserInfo = useCallback((infoUser) => {
+  const handleUserInfo = useCallback(async(infoUser) => {
+    console.log("datos a actualizar",infoUser)
     dispatch({
       type: UPDATE_USER_INFO,
       payload: infoUser,

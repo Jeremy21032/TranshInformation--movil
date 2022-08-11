@@ -27,7 +27,6 @@ export const OrganicsScreen = () => {
 
   return (
     <View>
-      <Text>OrganicsScreen</Text>
       <ScrollView
         refreshControl={
           <RefreshControl

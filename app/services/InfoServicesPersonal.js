@@ -77,7 +77,7 @@ export const updatePersona =async(persona,canContinue)=>{
   let docResultData = docSnapresult.data();
   console.log(docResultData);
   await updateDoc(docRef, persona);
-  canContinue()
+  canContinue();
 }
 export const updatePersonaRol =async(persona, canContinue)=>{
   const docRef = doc(global.dbCon, "/Roles/" + persona.email);

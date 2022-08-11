@@ -22,7 +22,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { formattedDate } from "../Functions";
 import { updatePersona } from "../services/InfoServicesPersonal";
 import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
-import { getStorage, ref, getDownloadURL } from "firebase/storage";
+import { getStorage, ref, getDownloadURL,uploadBytes } from "firebase/storage";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { ModalInfoError } from "../components/ModalInfoError";
@@ -36,16 +36,6 @@ export const EditProfileSecond = ({ navigation }) => {
   const [isLoading, setIsLoading] = React.useState(false);
   const [messageError, setMessageError] = React.useState("");
   const { userInfo, handleUserInfo } = useContext(AppContext);
-  let component = (
-    <LoadingOverlay
-      isVisible={isLoading}
-      setIsLoading={setIsLoading}
-      setModalVisibleError={setModalVisibleError}
-      setMessageError={setMessageError}
-    />
-  );
-
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [data, setData] = React.useState({
     name: userInfo.name,
     lastName: userInfo.lastName,
@@ -62,10 +52,40 @@ export const EditProfileSecond = ({ navigation }) => {
     profilePic: userInfo.profilePic,
   });
 
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  React.useEffect(()=>{
+    console.log("userInfo updated",userInfo)
+    const data ={
+      name: userInfo.name,
+      lastName: userInfo.lastName,
+      email: userInfo.email,
+      password: "",
+      confirmPassword: "",
+      check_textInputChange: false,
+      check_nameInputChange: false,
+      check_lastnameInputChange: false,
+      isvalidName: true,
+      isvalidLastName: true,
+      isvalidEmail: true,
+      date: userInfo.birthdate,
+      profilePic: userInfo.profilePic,
+    }
+    setData(data)
+  },[userInfo])
+
+
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
-
+  let component = (
+    <LoadingOverlay
+      isVisible={isLoading}
+      setIsLoading={setIsLoading}
+      setModalVisibleError={setModalVisibleError}
+      setMessageError={setMessageError}
+    />
+  );
   const hideDatePicker = () => {
     setDatePickerVisibility(false);
   };
@@ -112,7 +132,7 @@ export const EditProfileSecond = ({ navigation }) => {
     }
   };
   const canContinue = () => {
-    navigation.goBack();
+    //navigation.goBack();
   };
 
   const chooseFile = async () => {
@@ -120,37 +140,69 @@ export const EditProfileSecond = ({ navigation }) => {
       mediaTypes: MediaTypeOptions.Images,
     };
     let response = await launchImageLibraryAsync(options);
-    console.log("Respuesta: ", response);
+    if (response) {
+      setData({ ...data, profilePic: response.uri });
+      console.log("Respuesta: ", response);
+    }
   };
 
   const uploadFile = async (empid) => {
     console.log("--------------ENTRA A updloadFile", empid);
-    const blob = await new Promise((resolve, reject) => {
-      const xhr = new XMLHttpRequest();
-      xhr.onload = function () {
-        resolve(xhr.response);
-      };
-      xhr.onerror = function (e) {
-        console.log(e);
-        reject(new TypeError("Network request failed"));
-      };
-      xhr.responseType = "blob";
-      xhr.open("GET", data.profilePic, true);
-      xhr.send(null);
-    });
-    const storage = getStorage();
-    const fileStorage = ref(storage, "userImages/" + empid);
-    blob.close();
-    const url = await getDownloadURL(fileStorage);
-    global.url = url;
-    setData({
-      ...data,
-      profilePic: global.url,
-    });
-    console.log("*/*/*/*/*/*/*/*/*/*/*/*/*/", url);
+    console.log("........Data........",data)
+    try {
+      console.log("**************************0*********************")
+      const blob = await new Promise((resolve, reject) => {
+        const xhr = new XMLHttpRequest();
+        xhr.onload = function () {
+          resolve(xhr.response);
+        };
+        xhr.onerror = function (e) {
+          console.log(e);
+          reject(new TypeError("Network request failed"));
+        };
+        xhr.responseType = "blob";
+        xhr.open("GET", data.profilePic, true);
+        xhr.send(null);
+      });
+      console.log("***************************1********************")
+      const storage = getStorage();
+      console.log("***************************2********************")
+      const fileStorage = ref(storage, "userImages/" + empid);
+      console.log("***************************3********************")
+      const uploadResult = await uploadBytes(fileStorage, blob);
+
+      console.log("***************************4********************")
+      const url = await getDownloadURL(fileStorage);
+
+      blob.close();
+
+      console.log("***************************5********************")
+      global.url = url;
+      console.log("***************************6********************")
+      console.log("global.url",global.url)
+      setData({
+        ...data,
+        profilePic: global.url,
+      });
+      console.log("*/*/*/*/*/*/*/*/*/*/*/*/*/", url);
+    } catch (e) {
+      setIsLoading(false);
+      console.log("---UPLOAD ERROR--", e);
+    }
   };
   const saveData = async () => {
     setIsLoading(true);
+    
+    let actualDate = new Date();
+    let year = actualDate.getFullYear().toString().substr(-2);
+    let imageName =
+    data.name.toLowerCase() +
+    "_" +
+    data.lastName.toLowerCase() +
+    "_" +
+    year +
+    ".jpg";
+    await uploadFile(imageName);
     let persona = {
       name: data.name,
       lastName: data.lastName,
@@ -158,23 +210,12 @@ export const EditProfileSecond = ({ navigation }) => {
       birthdate: data.date,
       profilePic: global.url,
     };
-
-    let actualDate = new Date();
-    let year = actualDate.getFullYear().toString().substr(-2);
-    let imageName =
-      data.name.toLowerCase() +
-      "_" +
-      data.lastName.toLowerCase() +
-      "_" +
-      year +
-      ".jpg";
-    await uploadFile(imageName);
     await updatePersona(persona, canContinue);
-    handleUserInfo(persona);
-
+  
+    setIsLoading(false);
     setModalVisibleCorrect(true);
     setMessageCorrect("Información actualizada con exito");
-    setIsLoading(false);
+    handleUserInfo(persona);
   };
 
   return (
