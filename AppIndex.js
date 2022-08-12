@@ -57,7 +57,13 @@ const AppIndex = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [internetConection, setInternetConection] = useState("");
   const [isConnected, setIsConnected] = useState("");
-  const { userInfo, handleUserInfo, userFirebase, handleFillRecomendations ,handleFillContacts} = useContext(AppContext);
+  const {
+    userInfo,
+    handleUserInfo,
+    userFirebase,
+    handleFillRecomendations,
+    handleFillContacts,
+  } = useContext(AppContext);
   const authContext = React.useMemo(
     () => ({
       toggleTheme: () => {
@@ -103,7 +109,7 @@ const AppIndex = () => {
       if (userFirebase) {
         let verify = await getPersonalInfomation(userFirebase.email);
         handleUserInfo(verify);
-        let recomendations=await getRecomendaciones();
+        let recomendations = await getRecomendaciones();
         handleFillRecomendations(recomendations);
         let services = await getContacts();
         handleFillContacts(services);
@@ -111,18 +117,21 @@ const AppIndex = () => {
     }
     modifyState();
   }, [userFirebase]);
-const auth = getAuth();
+  const auth = getAuth();
   onAuthStateChanged(auth, async (user) => {
     if (user) {
       setLogin(true);
-      
     } else {
       setLogin(false);
     }
   });
 
   const FirstNav = () => {
-    return  userInfo&&userInfo.rol == "cliente" ? <SecondNav /> : <RootStackScreen />;
+    return userInfo && userInfo.rol == "cliente" ? (
+      <SecondNav />
+    ) : (
+      <RootStackScreen />
+    );
   };
 
   const SecondNav = () => {
