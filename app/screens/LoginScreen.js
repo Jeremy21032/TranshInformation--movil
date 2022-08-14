@@ -90,7 +90,7 @@ class LoginScreen extends Component {
       } catch (error) {
         this.setState({ isLoading: false });
         setText("Correo electrónico incorrecto.");
-        this.setState({ modalVisibleError: true });
+        this.setState({ modalVisibleError: true , setIsLoading:false});
       }
     };
     return (
@@ -268,7 +268,7 @@ class LoginScreen extends Component {
                 { color: styles.colors.darkCyan },
               ]}
             >
-              Olvidaste tu contraseña?
+              Olvidaste tu contraseña?a
             </Text>
           </TouchableOpacity>
           {this.state.isLoading ? component : <View></View>}

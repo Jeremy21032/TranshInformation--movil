@@ -9,11 +9,12 @@ export const loadFirebaseConfiguration = () => {
   };
 
   const firebaseConfig = {
-    apiKey: "XXXXXXXXXXXXXXXXXXX",
-    authDomain: "XXXXXXXXXXXXXXXXX",
-    projectId: "XXXXXXXXXXXXXXXXXX",
-    storageBucket: "XXXXXXXXXXXXXXX",
-    messagingSenderId: "XXXXXXXXXXXXXXXXXXX",
-    appId: "XXXXXXXXXXXXXXXXXXXXXXX",
-    measurementId: "XXXXXXXXX"
+
+    apiKey: "AIzaSyCIf2v5jQ2VJBl9eGXLgSFPpJBOcFyWgw8",
+    authDomain: "testinsercionjson.firebaseapp.com",
+    projectId: "testinsercionjson",
+    storageBucket: "testinsercionjson.appspot.com",
+    messagingSenderId: "75693568897",
+    appId: "1:75693568897:web:cc2531e471b91af0adee80",
+    measurementId: "G-J94ZZ61WBV"
   };

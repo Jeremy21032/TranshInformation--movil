@@ -205,9 +205,9 @@ export const SignUpScreen = ({ navigation }) => {
         await handleCreateAccount(persona);
       } catch (e) {
         console.log("Error saving", e);
+        setIsLoading(false);
       }
     }
-    setIsLoading(false);
   };
 
   return (

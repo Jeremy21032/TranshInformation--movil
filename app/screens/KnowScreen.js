@@ -87,17 +87,17 @@ export const KnowScreen = ({ navigation }) => {
     }
     getItems();
   }, [items]);
-  useEffect(() => {
-    if (direction != null) {
-      canContinue();
-    }
-  }, [direction]);
+  // useEffect(() => {
+  //   if (direction != null) {
+  //     canContinue();
+  //   }
+  // }, [direction]);
   function cerrar() {
     const auth = getAuth();
     auth
       .signOut()
       .then(function () {
-
+        clearTimeout();
         console.log("Log Out");
       })
       .catch((error) => {
@@ -117,11 +117,6 @@ export const KnowScreen = ({ navigation }) => {
     ) {
       try {
         await actualizarInformacion();
-        setModalVisibleCorrect(true);
-        cerrar();
-        setMessageCorrect(
-          "Información actualizada con éxito \n Por favor, inicie sesión con sus credenciales."
-        );
       } catch (error) {
         setModalVisibleError(true);
         setMessageError(error.message);
@@ -136,11 +131,22 @@ export const KnowScreen = ({ navigation }) => {
     }
   };
   let actualizarInformacion = async () => {
-    await aniadirDireccionBase(userInfo.email,data.direcionBase, data.direccion, data.date);
-    await getDireccionBase(userInfo.email,setDirection, canContinue);
+    await aniadirDireccionBase(
+      userInfo.email,
+      data.direcionBase,
+      data.direccion,
+      data.date
+    );
+    await getDireccionBase(
+      userInfo.email,
+      setDirection,
+      setModalVisibleCorrect,
+      setMessageCorrect,
+      canContinue
+    );
   };
   let canContinue = () => {
-    navigation.navigate("HOMEKN", { items: map });
+    setTimeout( cerrar,2000);
   };
   return (
     <View style={styles.commons.signContainer}>

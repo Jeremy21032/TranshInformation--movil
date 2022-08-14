@@ -15,8 +15,8 @@ export const RootStackScreen = ({ navigation }) => (
     headerShown: false
   }}>
     <RootStack.Screen name="SPLASH" component={SplashScreen} />
-    {/* <RootStack.Screen name="SIGNIN" component={SignInScreen} /> */}
-    <RootStack.Screen name="SIGNIN" component={LoginScreen} />
+    <RootStack.Screen name="SIGNIN" component={SignInScreen} />
+    {/* <RootStack.Screen name="SIGNIN" component={LoginScreen} /> */}
     <RootStack.Screen name="SIGNUP" component={SignUpScreen} />
     <RootStack.Screen name="FORGOT" component={ForgotScreen} />
     <RootStack.Screen name="HOMEIN" component={RootDrawerScreen} />

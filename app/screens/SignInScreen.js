@@ -18,12 +18,16 @@ import {
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoError } from "../components/ModalInfoError";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import {
+  getPersonalInfomation,
+  getPersonalRol,
+} from "../services/InfoServicesPersonal";
 import AppContext from "../context/AppContext";
 export const SignInScreen = ({ navigation }) => {
-  const { signInUser } = useContext(AppContext);
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [messageError, setMessageError] = React.useState("");
+  const { signInUser } = useContext(AppContext);
 
   let component = (
     <LoadingOverlay
@@ -82,18 +86,38 @@ export const SignInScreen = ({ navigation }) => {
       secureTextEntry: !data.secureTextEntry,
     });
   };
+  const auth = getAuth();
   const singIn = async (mail) => {
     setIsLoading(true);
     console.log(mail);
     console.log("ENTRA A AUT");
     try {
-      await signInUser(data.email, data.password);
-      setIsLoading(false);
+      setIsLoading(true);
+      signInUser(data.email, data.password);
     } catch (error) {
       setIsLoading(false);
       setText("Correo electrónico incorrecto.");
       setModalVisibleError(true);
     }
+  };
+  const handleSignIn = async () => {
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(async (userCredential) => {
+        const user = userCredential.user;
+        console.log(user);
+        console.log("Sign in!");
+        setIsLoading(false);
+        setModalVisibleError(false);
+      })
+      .catch((error) => {
+        setIsLoading(false);
+
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        setModalVisibleError(true);
+        setMessageError("Constraseña incorrecta.");
+        console.log("Error>>>>: ", (errorCode, errorMessage));
+      });
   };
   return (
     <View style={styles.commons.signContainer}>
@@ -110,6 +134,7 @@ export const SignInScreen = ({ navigation }) => {
         <View style={styles.commons.action}>
           <FontAwesome name="user-o" color={styles.colors.darkBlue} size={20} />
           <TextInput
+            value={data.email}
             placeholder="Tu correo electrónico"
             style={[
               styles.commons.textInput,
@@ -154,6 +179,7 @@ export const SignInScreen = ({ navigation }) => {
               styles.commons.textInput,
               { color: styles.colors.darkBlue },
             ]}
+            value={data.password}
             autoCapitalize="none"
             secureTextEntry={data.secureTextEntry ? true : false}
             onChangeText={(val) => handlePasswordChange(val)}
@@ -173,7 +199,7 @@ export const SignInScreen = ({ navigation }) => {
         {data.isvalidPassword ? null : (
           <Animatable.View animation="fadeInLeft" duration={500}>
             <Text style={styles.commons.errorMsg}>
-              La contraseña debe tener al menos 1 numero, mínimo 6 caracteres y
+              La contraseña debe tener al menos 1 numero, minimo 6 caracteres y
               1 símbolo obligatorio.{"\n"}
               Los simbolos obligatorios son !$%&?@*
             </Text>
@@ -185,6 +211,7 @@ export const SignInScreen = ({ navigation }) => {
           <TouchableOpacity
             style={styles.commons.signIn}
             onPress={() => {
+              setIsLoading(true);
               if (
                 data.email != null &&
                 data.password != null &&
@@ -221,7 +248,20 @@ export const SignInScreen = ({ navigation }) => {
             </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={() => navigation.navigate("SIGNUP")}
+            onPress={() => {
+              setData({
+                email: "",
+                password: "",
+                check_textInputChange: false,
+                secureTextEntry: true,
+                isvalidEmail: true,
+                isvalidPassword: true,
+                modalVisibleError: false,
+                isLoading: false,
+                messageError: "",
+              })
+              navigation.navigate("SIGNUP");
+            }}
             style={[
               styles.commons.signIn,
               {
@@ -240,29 +280,11 @@ export const SignInScreen = ({ navigation }) => {
               Registrarse
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => setData({ ...data, email: "" })}
-            style={[
-              styles.commons.signIn,
-              {
-                borderColor: styles.colors.darkCyan,
-                borderWidth: 1,
-                marginTop: 15,
-              },
-            ]}
-          >
-            <Text
-              style={[
-                styles.commons.textSign,
-                { color: styles.colors.darkCyan },
-              ]}
-            >
-              clear
-            </Text>
-          </TouchableOpacity>
         </View>
         <TouchableOpacity
-          onPress={() => navigation.navigate("FORGOT")}
+          onPress={() => {
+            navigation.navigate("FORGOT");
+          }}
           style={{ alignSelf: "center", marginVertical: 20 }}
         >
           <Text

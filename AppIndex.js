@@ -30,6 +30,8 @@ import Lottie from "lottie-react-native";
 import AppContext from "./app/context/AppContext";
 import { getRecomendaciones } from "./app/services/RecomendacionesServices";
 import { getContacts } from "./app/services/ContactServices";
+import { ModalInfoError } from "./app/components/ModalInfoError";
+import { LoadingOverlay } from "./app/components/LoadingOverlay";
 LogBox.ignoreLogs(["Warning: ..."]); // Ignore log notification by message
 LogBox.ignoreAllLogs();
 const CustomDefaultTheme = {
@@ -49,7 +51,7 @@ const CustomDarkTheme = {
     ...NavigationDarkTheme.colors,
     ...PaperDarkTheme.colors,
     text: styles.colors.cultured,
-    background: styles.colors.black,
+    background: styles.colors.lightGray,
   },
 };
 
@@ -57,6 +59,9 @@ const AppIndex = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(false);
   const [internetConection, setInternetConection] = useState("");
   const [isConnected, setIsConnected] = useState("");
+  const [modalVisibleError, setModalVisibleError] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [messageError, setMessageError] = useState("");
   const {
     userInfo,
     handleUserInfo,
@@ -107,13 +112,22 @@ const AppIndex = () => {
   useEffect(() => {
     async function modifyState() {
       if (userFirebase) {
+        setIsLoading(true);
         let verify = await getPersonalInfomation(userFirebase.email);
         handleUserInfo(verify);
-        let recomendations = await getRecomendaciones();
-        handleFillRecomendations(recomendations);
-        let services = await getContacts();
-        handleFillContacts(services);
+        if (verify.rol != "cliente") {
+          console.log("No vale ingresar con ese ");
+          setModalVisibleError(true);
+          setMessageError("El usuario No está admitido para utilizar esta aplicación");
+          handleUserInfo(null);
+        } else {
+          let recomendations = await getRecomendaciones();
+          handleFillRecomendations(recomendations);
+          let services = await getContacts();
+          handleFillContacts(services);
+        }
       }
+      setIsLoading(false)
     }
     modifyState();
   }, [userFirebase]);
@@ -144,6 +158,14 @@ const AppIndex = () => {
   const InternetNav = () => {
     return login == true ? <FirstNav /> : <RootStackScreen />;
   };
+  let component = (
+    <LoadingOverlay
+      isVisible={isLoading}
+      setIsLoading={setIsLoading}
+      setModalVisibleError={setModalVisibleError}
+      setMessageError={setMessageError}
+    />
+  );
   return (
     <PaperProvider theme={theme}>
       <AuthContext.Provider value={authContext}>
@@ -179,6 +201,12 @@ const AppIndex = () => {
               </View>
             </View>
           )}
+          {isLoading ? component : <View></View>}
+          <ModalInfoError
+            modalVisible={modalVisibleError}
+            setModalVisible={setModalVisibleError}
+            message={messageError}
+          ></ModalInfoError>
         </NavigationContainer>
       </AuthContext.Provider>
     </PaperProvider>

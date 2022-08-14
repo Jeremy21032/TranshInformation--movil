@@ -29,6 +29,7 @@ export const AppStates = ({ children }) => {
     fontSize: 18,
   };
   const [state, dispatch] = useReducer(AppReducer, initialValue);
+
   const signInUser = useCallback(async (email, password) => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
