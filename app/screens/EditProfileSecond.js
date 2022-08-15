@@ -12,7 +12,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useTheme } from "react-native-paper";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Avatar } from "@rneui/themed";
 import * as Animatable from "react-native-animatable";
 import * as styles from "../../assets/styles/appStyles";
@@ -20,13 +20,15 @@ import Feather from "react-native-vector-icons/Feather";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { formattedDate } from "../Functions";
-import { updatePersona } from "../services/InfoServicesPersonal";
+import { getPlaces, updatePersona } from "../services/InfoServicesPersonal";
 import { launchImageLibraryAsync, MediaTypeOptions } from "expo-image-picker";
 import { getStorage, ref, getDownloadURL, uploadBytes } from "firebase/storage";
 import { LoadingOverlay } from "../components/LoadingOverlay";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { ModalInfoError } from "../components/ModalInfoError";
 import AppContext from "../context/AppContext";
+import { getAuth } from "firebase/auth";
+import DropDownPicker from "react-native-dropdown-picker";
 
 export const EditProfileSecond = () => {
   const paperTheme = useTheme();
@@ -34,8 +36,13 @@ export const EditProfileSecond = () => {
   const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
   const [messageCorrect, setMessageCorrect] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
   const [messageError, setMessageError] = React.useState("");
-  const { userInfo, handleUserInfo } = useContext(AppContext);
+  const [items, setItems] = useState([]);
+
+  const { userInfo, handleUserInfo, handleFirebaseUser } =
+    useContext(AppContext);
   const [data, setData] = React.useState({
     name: userInfo.name,
     lastName: userInfo.lastName,
@@ -50,6 +57,8 @@ export const EditProfileSecond = () => {
     isvalidEmail: true,
     date: userInfo.birthdate,
     profilePic: userInfo.profilePic,
+    direcionBase: null,
+    direccion: null,
   });
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
@@ -69,12 +78,30 @@ export const EditProfileSecond = () => {
       isvalidEmail: true,
       date: userInfo.birthdate,
       profilePic: userInfo.profilePic,
+      direcionBase: null,
+      direccion: null,
     });
   }, [userInfo]);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
   };
+  let getItems = async () => {
+    let places = await getPlaces();
+    for (const element of places) {
+      if (!items.includes(element.value)) {
+        items.push(element);
+      }
+    }
+    console.log("items", items);
+  };
+
+  useEffect(() => {
+    if (items.length > 0) {
+      setItems([]);
+    }
+    getItems();
+  }, [items]);
   let component = (
     <LoadingOverlay
       isVisible={isLoading}
@@ -168,10 +195,7 @@ export const EditProfileSecond = () => {
       console.log("***************************3********************");
       const uploadResult = await uploadBytes(fileStorage, blob);
 
-      console.log(
-        "***************************4********************",
-        uploadResult
-      );
+      console.log("***************************4********************");
       const url = await getDownloadURL(fileStorage);
 
       blob.close();
@@ -190,6 +214,7 @@ export const EditProfileSecond = () => {
       console.log("---UPLOAD ERROR--", e);
     }
   };
+  const auth = getAuth();
   const saveData = async () => {
     setIsLoading(true);
     try {
@@ -209,6 +234,8 @@ export const EditProfileSecond = () => {
         email: data.email,
         birthdate: data.date,
         profilePic: global.url,
+        direccionBase: data.direcionBase,
+        direccion: data.direccion,
       };
       await updatePersona(persona, canContinue);
 
@@ -217,10 +244,11 @@ export const EditProfileSecond = () => {
       setMessageCorrect(
         "Información actualizada con exito, la sesión se cerrará por seguridad."
       );
-      handleFirebaseUser(true)
+      console.log(".........................ATUH.................", auth);
       setTimeout(() => {
+        handleFirebaseUser(auth.currentUser);
         handleUserInfo(persona);
-      }, 2000);
+      }, 5000);
     } catch (e) {
       setModalVisibleError(true);
       setMessageError(e.message);
@@ -229,7 +257,7 @@ export const EditProfileSecond = () => {
 
   return (
     <>
-      <ScrollView>
+      <View>
         <Image
           source={{
             uri: "https://images.unsplash.com/photo-1440342359743-84fcb8c21f21?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
@@ -255,24 +283,24 @@ export const EditProfileSecond = () => {
           >
             <Avatar.Accessory size={35} onPress={() => chooseFile()} />
           </Avatar>
-          <View style={stylesL.bdContainer}>
-            <Icon name="information-outline" color="black" size={20} />
-            <Text>
-              Recuerda, el único campo que no podrás modificar es tu correo
-              electrónico.
-            </Text>
-          </View>
           <ScrollView
             style={{
               width: Dimensions.get("window").width - 50,
-              bottom: "8%",
+              bottom: "6%",
             }}
           >
+            <View style={stylesL.bdContainer}>
+              <Icon name="information-outline" color="black" size={20} />
+              <Text>
+                Recuerda, el único campo que no podrás modificar es tu correo
+                electrónico.
+              </Text>
+            </View>
             <Text
               style={[
                 styles.commons.text_footer,
                 {
-                  marginTop: 35,
+                  marginTop: 25,
                   color: paperTheme.dark
                     ? styles.colors.white
                     : styles.colors.darkBlue,
@@ -315,7 +343,7 @@ export const EditProfileSecond = () => {
               style={[
                 styles.commons.text_footer,
                 {
-                  marginTop: 35,
+                  marginTop: 25,
                   color: paperTheme.dark
                     ? styles.colors.white
                     : styles.colors.darkBlue,
@@ -362,7 +390,7 @@ export const EditProfileSecond = () => {
               >
                 <Text style={styles.commons.errorMsg}>
                   {" "}
-                  Last Name must be at least 4 characters
+                  El apellido debe tener al menos 4 caracteres
                 </Text>
               </Animatable.View>
             )}
@@ -370,7 +398,7 @@ export const EditProfileSecond = () => {
               style={[
                 styles.commons.text_footer,
                 {
-                  marginTop: 35,
+                  marginTop: 25,
                   color: paperTheme.dark
                     ? styles.colors.white
                     : styles.colors.darkBlue,
@@ -388,7 +416,7 @@ export const EditProfileSecond = () => {
                 size={20}
               />
               <TextInput
-                placeholder="Your Email"
+                placeholder="Tu correo electrónico"
                 style={[
                   styles.commons.textInput,
                   {
@@ -410,7 +438,7 @@ export const EditProfileSecond = () => {
             {data.isvalidEmail ? null : (
               <Animatable.View animation="fadeInLeft" duration={500}>
                 <Text style={styles.commons.errorMsg}>
-                  Email must have the correct format
+                  El correo debe tener el formato correcto
                 </Text>
               </Animatable.View>
             )}
@@ -418,7 +446,7 @@ export const EditProfileSecond = () => {
               style={[
                 styles.commons.text_footer,
                 {
-                  marginTop: 35,
+                  marginTop: 25,
                   color: paperTheme.dark
                     ? styles.colors.white
                     : styles.colors.darkBlue,
@@ -470,6 +498,41 @@ export const EditProfileSecond = () => {
               minimumDate={new Date("01/01/1920")}
               display={Platform.OS === "ios" ? "spinner" : "default"}
             />
+          </ScrollView>
+          <View
+            style={{
+              width: Dimensions.get("window").width - 50,
+              bottom: "6%",
+            }}
+          >
+            <Text
+              style={[
+                styles.commons.text_footer,
+                {
+                  color: paperTheme.dark
+                    ? styles.colors.white
+                    : styles.colors.darkBlue,
+                },
+              ]}
+            >
+              Seleccione el sector donde vive
+            </Text>
+            <DropDownPicker
+              open={open}
+              value={value}
+              items={items}
+              setItems={setItems}
+              setOpen={setOpen}
+              setValue={setValue}
+              onSelectItem={(item) => {
+                console.log(item);
+                setData({
+                  ...data,
+                  direcionBase: item.value,
+                  direccion: item.label,
+                });
+              }}
+            />
             <View style={stylesL.button}>
               <TouchableOpacity
                 onPress={() => {
@@ -485,7 +548,7 @@ export const EditProfileSecond = () => {
                 </LinearGradient>
               </TouchableOpacity>
             </View>
-          </ScrollView>
+          </View>
         </View>
         {isLoading ? component : <View></View>}
         <ModalInfoError
@@ -498,22 +561,21 @@ export const EditProfileSecond = () => {
           setModalVisible={setModalVisibleCorrect}
           message={messageCorrect}
         ></ModalInfoCorrect>
-      </ScrollView>
+      </View>
     </>
   );
 };
 
 const stylesL = StyleSheet.create({
   bgImg: {
-    flex: 1,
     position: "absolute",
     width: Dimensions.get("window").width,
     height: "100%",
     opacity: 0.7,
   },
   bottomContainer: {
-    marginTop: "52%",
-    height: "90%",
+    marginTop: "12%",
+    height: "95%",
     width: Dimensions.get("window").width,
     borderTopStartRadius: 50,
     borderTopEndRadius: 50,
@@ -523,7 +585,7 @@ const stylesL = StyleSheet.create({
     height: 130,
     width: 130,
     borderRadius: 18,
-    bottom: "10%",
+    bottom: "8%",
   },
   name: {
     fontSize: 30,
@@ -562,6 +624,5 @@ const stylesL = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center",
-    bottom: "12%",
   },
 });

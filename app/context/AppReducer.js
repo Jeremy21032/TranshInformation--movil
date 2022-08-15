@@ -1,4 +1,4 @@
-import { FILL_NOTICES,SEND_EMAIL,FONT_SIZE, FILL_RECOMENDATIONS, FILL_SERVICES, FILL_SUGGESTIONS, FILL_VIDEOS, FIREBASE_USER, IS_LOADING, UPDATE_USER_INFO } from "./AppTypes";
+import { FILL_NOTICES,SEND_EMAIL,FONT_SIZE, FILL_RECOMENDATIONS, FILL_SERVICES,FILL_ITEMS, FILL_SUGGESTIONS, FILL_VIDEOS, FIREBASE_USER, IS_LOADING, UPDATE_USER_INFO } from "./AppTypes";
 
 export const AppReducer = (state, action) => {
   const { payload, type } = action;
@@ -18,6 +18,11 @@ export const AppReducer = (state, action) => {
       return {
         ...state,
         services: payload,
+      };
+    case FILL_ITEMS:
+      return {
+        ...state,
+        items: payload,
       };
     case FILL_VIDEOS:
       return {

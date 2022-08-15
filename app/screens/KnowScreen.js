@@ -30,7 +30,7 @@ import { getAuth } from "firebase/auth";
 import AppContext from "../context/AppContext";
 
 export const KnowScreen = ({ navigation }) => {
-  const { userInfo } = useContext(AppContext);
+  const { userInfo, handleFillItems } = useContext(AppContext);
   const paperTheme = useTheme();
   const [open, setOpen] = useState(false);
   const [value, setValue] = useState(null);

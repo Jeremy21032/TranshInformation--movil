@@ -26,6 +26,7 @@ export const AppStates = ({ children }) => {
     notices: null,
     sendEmail: null,
     fontSize: 18,
+    items: null,
   };
   const [state, dispatch] = useReducer(AppReducer, initialValue);
 
@@ -39,6 +40,7 @@ export const AppStates = ({ children }) => {
         console.log("Sign in!");
       })
       .catch((error) => {
+        
         const errorCode = error.code;
         const errorMessage = error.message;
         console.log("Error>>>>: ", (errorCode, errorMessage));
@@ -55,8 +57,8 @@ export const AppStates = ({ children }) => {
       payload: firebaseUser,
     });
   }, []);
-  const handleUserInfo = useCallback(async(infoUser) => {
-    console.log("datos a actualizar",infoUser)
+  const handleUserInfo = useCallback(async (infoUser) => {
+    console.log("datos a actualizar", infoUser);
     dispatch({
       type: UPDATE_USER_INFO,
       payload: infoUser,
@@ -72,6 +74,12 @@ export const AppStates = ({ children }) => {
     dispatch({
       type: FILL_SERVICES,
       payload: contactsInfo,
+    });
+  }, []);
+  const handleFillItems = useCallback((items) => {
+    dispatch({
+      type: FILL_ITEMS,
+      payload: items,
     });
   }, []);
 
@@ -96,6 +104,7 @@ export const AppStates = ({ children }) => {
         suggestions: state.suggestions,
         notices: state.notices,
         fontSize: state.fontSize,
+        items: state.items,
         handleFirebaseUser,
         handleUserInfo,
         signInUser,
@@ -103,7 +112,8 @@ export const AppStates = ({ children }) => {
         handleFillContacts,
         sendEmail,
         handleSetFontSize,
-        handleChangeFontSize
+        handleChangeFontSize,
+        handleFillItems,
       }}
     >
       {children}

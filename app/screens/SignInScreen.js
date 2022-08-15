@@ -27,7 +27,7 @@ export const SignInScreen = ({ navigation }) => {
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [messageError, setMessageError] = React.useState("");
-  const { signInUser } = useContext(AppContext);
+  const { handleFirebaseUser } = useContext(AppContext);
 
   let component = (
     <LoadingOverlay
@@ -87,38 +87,33 @@ export const SignInScreen = ({ navigation }) => {
     });
   };
   const auth = getAuth();
+ 
   const singIn = async (mail) => {
-    setIsLoading(true);
     console.log(mail);
     console.log("ENTRA A AUT");
-    try {
-      setIsLoading(true);
-      signInUser(data.email, data.password);
-    } catch (error) {
-      setIsLoading(false);
-      setText("Correo electrónico incorrecto.");
-      setModalVisibleError(true);
-    }
-  };
-  const handleSignIn = async () => {
-    signInWithEmailAndPassword(auth, data.email, data.password)
+      signInWithEmailAndPassword(auth, data.email, data.password)
       .then(async (userCredential) => {
         const user = userCredential.user;
+        handleFirebaseUser(user);
         console.log(user);
         console.log("Sign in!");
-        setIsLoading(false);
-        setModalVisibleError(false);
       })
       .catch((error) => {
         setIsLoading(false);
-
+        setModalVisibleError(true);
         const errorCode = error.code;
         const errorMessage = error.message;
-        setModalVisibleError(true);
-        setMessageError("Constraseña incorrecta.");
+        if(errorMessage=="Firebase: Error (auth/user-not-found)."){
+          setMessageError("El correo ingresado no existe")
+        }else if(errorMessage=="Firebase: Error (auth/wrong-password)."){
+          setMessageError("La contraseña no coincide")
+          
+        }
         console.log("Error>>>>: ", (errorCode, errorMessage));
       });
+   
   };
+
   return (
     <View style={styles.commons.signContainer}>
       <StatusBar

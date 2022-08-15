@@ -23,7 +23,9 @@ import { LoadingOverlay } from "../components/LoadingOverlay";
 import { validateCorrectName, validateCorrectPassword } from "../services/Validate";
 import { useTheme } from "react-native-paper";
 import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
+import AppContext from "../context/AppContext";
 export const SignUpScreen = ({ navigation }) => {
+  const {handleFirebaseUser} = React.useContext(AppContext)
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [isLoading, setIsLoading] = React.useState(false);
   const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
@@ -160,12 +162,12 @@ export const SignUpScreen = ({ navigation }) => {
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(async (userCredential) => {
         console.log("Account created successfully");
-        savePersonal();
         const user = userCredential.user;
         console.log("user created successfully", user);
         await savePersonal(persona);
         setModalVisibleCorrect(true);
         setMessageCorrect("Información registrada con éxito");
+        handleFirebaseUser(userCredential.user)
         setIsLoading(false);
       })
       .catch((error) => {
@@ -327,7 +329,7 @@ export const SignUpScreen = ({ navigation }) => {
           {data.isvalidEmail ? null : (
             <Animatable.View animation="fadeInLeft" duration={500}>
               <Text style={styles.commons.errorMsg}>
-                Email must have the correct format
+                El correo debe tener el formato correcto
               </Text>
             </Animatable.View>
           )}
@@ -348,7 +350,7 @@ export const SignUpScreen = ({ navigation }) => {
           <View style={styles.commons.action}>
             <Feather name="lock" color={styles.colors.darkBlue} size={20} />
             <TextInput
-              placeholder="Your Password"
+              placeholder="Tu Contraseña"
               style={[
                 styles.commons.textInput,
                 { color: styles.colors.darkBlue },
@@ -393,7 +395,7 @@ export const SignUpScreen = ({ navigation }) => {
           <View style={styles.commons.action}>
             <Feather name="lock" color={styles.colors.darkBlue} size={20} />
             <TextInput
-              placeholder="Confirm Your Password"
+              placeholder="Confirm Tu Contraseña"
               style={[
                 styles.commons.textInput,
                 { color: styles.colors.darkBlue },

@@ -8,3 +8,4 @@ export const IS_LOADING = 'IS_LOADING';
 export const FIREBASE_USER= 'FIREBASE_USER';
 export const SEND_EMAIL= 'SEND_EMAIL';
 export const FONT_SIZE= 'FONT_SIZE';
+export const FILL_ITEMS= 'FILL_ITEMS';

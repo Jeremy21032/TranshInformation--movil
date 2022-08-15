@@ -33,6 +33,7 @@ export const Home = () => {
     prds: require("../json/Periodistas.json"),
     pdra: require("../json/Pradera.json"),
     tmyo: require("../json/Tamayo.json"),
+    lmac:require("../json/La Mariscal.json")
   };
   const getData = (value) => {
     userInfo.direccionBase = value;
@@ -72,6 +73,9 @@ export const Home = () => {
         break;
       case "lgsa":
         coordinates = mapLocation.lgsa;
+        break;
+      case "lmac":
+        coordinates = mapLocation.lmac;
         break;
       case "lcom":
         coordinates = mapLocation.lcom;

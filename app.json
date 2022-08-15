@@ -2,7 +2,7 @@
   "expo": {
     "name": "TrashInformation",
     "slug": "TrashInformation",
-    "version": "1.0.0(001)",
+    "version": "1.0.0(006)",
     "orientation": "portrait",
     "icon": "./assets/icon_logo.png",
     "userInterfaceStyle": "automatic",
