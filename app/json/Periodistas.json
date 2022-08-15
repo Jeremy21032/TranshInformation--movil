@@ -1,0 +1,59 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "Periodistas",
+        "frecuencia": "Martes, Jueves, Sábado",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.47517,
+        "latitude": -0.16347,
+        "calloutlatitude": -78.47811,
+        "calloutlongitude": -0.16915,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.48311,
+        "latitude": -0.16194,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.4835,
+        "latitude": -0.16421,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.47894,
+        "latitude": -0.16505,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.48092,
+        "latitude": -0.17639,
+        "id": "5"
+        
+    },
+    {
+        "longitude": -78.47787,
+        "latitude": -0.17703,
+        "id": "6"
+        
+    },
+    {
+        "longitude": -78.47624,
+        "latitude": -0.17096,
+        "id": "7"
+        
+    },
+    {
+        "longitude": -78.47625,
+        "latitude": -0.16918,
+        "id": "8"
+        
+    }
+]

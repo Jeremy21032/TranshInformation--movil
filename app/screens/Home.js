@@ -7,7 +7,7 @@ import { mapStyle } from "../../assets/styles/mapStyle";
 import AppContext from "../context/AppContext";
 
 export const Home = () => {
-  const {userInfo} = useContext(AppContext)
+  const { userInfo } = useContext(AppContext);
   const paperTheme = useTheme();
   let coordinates = [];
   useEffect(() => {
@@ -18,22 +18,76 @@ export const Home = () => {
   }, []);
   let mapLocation = {
     alt: require("../json/Altamira.json"),
+    batal: require("../json/Batan Alto.json"),
+    bat: require("../json/Batan.json"),
+    bel: require("../json/Belisario.json"),
+    chori: require("../json/Centro Historico Oriental.json"),
+    eggo: require("../json/El Giron-Guapulo.json"),
+    frta: require("../json/Floresta.json"),
+    jpjp: require("../json/Jipijapa.json"),
+    lgsa: require("../json/La Gasca.json"),
     lg: require("../json/La Granja.json"),
+    lcom: require("../json/laComuna.json"),
+    mlsc: require("../json/Manuel Larrea-Santa Clara.json"),
+    pnclo: require("../json/Panecillo.json"),
+    prds: require("../json/Periodistas.json"),
+    pdra: require("../json/Pradera.json"),
+    tmyo: require("../json/Tamayo.json"),
   };
   const getData = (value) => {
     userInfo.direccionBase = value;
-    if (userInfo.direccionBase == "alt") {
-      coordinates = mapLocation.alt;
-    } else if (userInfo.direccionBase == "lg") {
-      coordinates = mapLocation.lg;
+    switch (userInfo.direccionBase) {
+      case "alt":
+        coordinates = mapLocation.alt;
+        break;
+      case "lg":
+        coordinates = mapLocation.lg;
+        break;
+      case "pdra":
+        coordinates = mapLocation.pdra;
+        break;
+      case "pnclo":
+        coordinates = mapLocation.pnclo;
+        break;
+      case "bat":
+        coordinates = mapLocation.bat;
+        break;
+      case "batal":
+        coordinates = mapLocation.batal;
+        break;
+      case "bel":
+        coordinates = mapLocation.bel;
+        break;
+      case "chori":
+        coordinates = mapLocation.chori;
+        break;
+      case "eggo":
+        coordinates = mapLocation.eggo;
+        break;
+      case "frta":
+        coordinates = mapLocation.frta;
+        break;
+      case "jpjp":
+        coordinates = mapLocation.jpjp;
+        break;
+      case "lgsa":
+        coordinates = mapLocation.lgsa;
+        break;
+      case "lcom":
+        coordinates = mapLocation.lcom;
+        break;
+      case "mlsc":
+        coordinates = mapLocation.mlsc;
+        break;
+      case "prds":
+        coordinates = mapLocation.prds;
+        break;
+      default:
+        break;
     }
   };
 
-  if (userInfo.direccionBase == "alt") {
-    coordinates = mapLocation.alt;
-  } else if (userInfo.direccionBase == "lg") {
-    coordinates = mapLocation.lg;
-  }
+  getData(userInfo.direccionBase);
 
   return (
     <View style={styles.container}>
@@ -41,26 +95,28 @@ export const Home = () => {
         {userInfo.name}
       </Text> */}
       {coordinates.length > 0 ? (
-        <MapView
-          customMapStyle={mapStyle}
-          provider={PROVIDER_GOOGLE}
-          style={styles.mapStyle}
-          initialRegion={{
-            latitude: coordinates[0].calloutlatitude,
-            longitude: coordinates[0].calloutlongitude,
-            latitudeDelta: 0.01922,
-            longitudeDelta: 0.00421,
-          }}
-          mapType="standard"
-        >
-          <Polygon
-            coordinates={coordinates}
-            fillColor={"rgba(100,200,200,0.3)"}
-            strokeColor="coral"
-            strokeWidth={3}
-            tappable={true}
-          ></Polygon>
-        </MapView>
+        <View>
+          <MapView
+            customMapStyle={mapStyle}
+            provider={PROVIDER_GOOGLE}
+            style={styles.mapStyle}
+            initialRegion={{
+              latitude: coordinates[0].calloutlatitude,
+              longitude: coordinates[0].calloutlongitude,
+              latitudeDelta: 0.01922,
+              longitudeDelta: 0.00421,
+            }}
+            mapType="standard"
+          >
+            <Polygon
+              coordinates={coordinates}
+              fillColor={"rgba(100,200,200,0.3)"}
+              strokeColor="coral"
+              strokeWidth={3}
+              tappable={true}
+            ></Polygon>
+          </MapView>
+        </View>
       ) : (
         <MapView
           customMapStyle={mapStyle}

@@ -1,0 +1,691 @@
+[
+  {
+    "centroLogistico": "COC",
+    "horas": "19h00-03h00",
+    "adm_zonal": "Eugenio Espejo",
+    "ruta": "La Comuna",
+    "frecuencia": "Lunes-Miércoles-Viernes",
+    "horario": "nocturno",
+    "servicio": "Pie de vereda",
+    "longitude": -78.50497,
+    "latitude": -0.18131,
+    "calloutlatitude": -78.51167,
+    "calloutlongitude": -19347,
+    "id": "1",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50551,
+    "latitude": -0.18183,
+    "id": "2",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5057,
+    "latitude": -0.18209,
+    "id": "3",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50588,
+    "latitude": -0.18228,
+    "id": "4",
+    "__collections__": {}
+  },
+  {
+    "latitude": -78.50607,
+    "longitude": -0.18247,
+    "id": "5",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50624,
+    "latitude": -0.18256,
+    "id": "6",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50829,
+    "latitude": -0.18285,
+    "id": "7",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50864,
+    "latitude": -0.18301,
+    "id": "8",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50894,
+    "latitude": -0.18337,
+    "id": "9",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50994,
+    "latitude": -0.18506,
+    "id": "10",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51053,
+    "latitude": -0.18471,
+    "id": "11",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51066,
+    "latitude": -0.18495,
+    "id": "12",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51072,
+    "latitude": -0.18496,
+    "id": "13",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51087,
+    "latitude": -0.18496,
+    "id": "14",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5117,
+    "latitude": -0.18435,
+    "id": "15",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51206,
+    "latitude": -0.18415,
+    "id": "16",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51255,
+    "latitude": -0.18371,
+    "id": "17",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51311,
+    "latitude": -0.18351,
+    "id": "18",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51342,
+    "latitude": -0.18337,
+    "id": "19",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5138,
+    "latitude": -0.18332,
+    "id": "20",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51409,
+    "latitude": -0.18342,
+    "id": "21",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51457,
+    "latitude": -0.18432,
+    "id": "22",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51483,
+    "latitude": -0.18457,
+    "id": "23",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51505,
+    "latitude": -0.18459,
+    "id": "24",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5158,
+    "latitude": -0.18496,
+    "id": "25",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51609,
+    "latitude": -0.18515,
+    "id": "26",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51615,
+    "latitude": -0.18541,
+    "id": "27",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51637,
+    "latitude": -0.18579,
+    "id": "28",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5174,
+    "latitude": -0.18622,
+    "id": "29",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51776,
+    "latitude": -0.1866,
+    "id": "30",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51788,
+    "latitude": -0.1869,
+    "id": "31",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51793,
+    "latitude": -0.18681,
+    "id": "32",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51831,
+    "latitude": -0.18756,
+    "id": "33",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51826,
+    "latitude": -0.18782,
+    "id": "34",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51841,
+    "latitude": -0.18797,
+    "id": "35",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51914,
+    "latitude": -0.18807,
+    "id": "36",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51936,
+    "latitude": -0.18829,
+    "id": "37",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51929,
+    "latitude": -0.18846,
+    "id": "38",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51964,
+    "latitude": -0.18859,
+    "id": "39",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51944,
+    "latitude": -0.18902,
+    "id": "40",
+    "__collections__": {}
+  },
+   {
+    "longitude": -78.51887,
+    "latitude": -0.18919,
+    "id": "41",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51885,
+    "latitude": -0.1895,
+    "id": "42",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51917,
+    "latitude": -0.18954,
+    "id": "43",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51914,
+    "latitude": -0.1901,
+    "id": "44",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5187,
+    "latitude": -0.19029,
+    "id": "45",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51835,
+    "latitude": -0.19018,
+    "id": "46",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51813,
+    "latitude": -0.19023,
+    "id": "47",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51771,
+    "latitude": -0.19016,
+    "id": "48",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51727,
+    "latitude": -0.19037,
+    "id": "49",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51727,
+    "latitude": -0.19037,
+    "id": "50",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51698,
+    "latitude": -0.19012,
+    "id": "51",
+    "__collections__": {}
+  },
+   {
+    "longitude": -78.51678,
+    "latitude": -0.19015,
+    "id": "52",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5167,
+    "latitude": -0.19,
+    "id": "53",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51646,
+    "latitude": -0.1898,
+    "id": "54",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5163,
+    "latitude": -0.18976,
+    "id": "55",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51619,
+    "latitude": -0.18972,
+    "id": "56",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51572,
+    "latitude": -0.18959,
+    "id": "57",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51547,
+    "latitude": -0.18981,
+    "id": "58",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51496,
+    "latitude": -0.18975,
+    "id": "59",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51442,
+    "latitude": -0.18988,
+    "id": "60",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51442,
+    "latitude": -0.19012,
+    "id": "61",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51405,
+    "latitude": -0.19021,
+    "id": "62",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51408,
+    "latitude": -0.19036,
+    "id": "63",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51401,
+    "latitude": -0.19045,
+    "id": "64",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51345,
+    "latitude": -0.19055,
+    "id": "65",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51344,
+    "latitude": -0.19035,
+    "id": "66",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51295,
+    "latitude": -0.19498,
+    "id": "67",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51267,
+    "latitude": -0.19724,
+    "id": "68",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51223,
+    "latitude": -0.19865,
+    "id": "69",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51105,
+    "latitude": -0.20247,
+    "id": "70",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51084,
+    "latitude": -0.20341,
+    "id": "71",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51076,
+    "latitude": -0.20368,
+    "id": "72",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51074,
+    "latitude": -0.20382,
+    "id": "73",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51075,
+    "latitude": -0.20394,
+    "id": "74",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5108,
+    "latitude": -0.20419,
+    "id": "75",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51093,
+    "latitude": -0.20454,
+    "id": "76",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51186,
+    "latitude": -0.20555,
+    "id": "77",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51197,
+    "latitude": -0.20563,
+    "id": "78",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51247,
+    "latitude": -0.20575,
+    "id": "79",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51272,
+    "latitude": -0.20578,
+    "id": "80",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51278,
+    "latitude": -0.20579,
+    "id": "81",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51287,
+    "latitude": -0.20584,
+    "id": "82",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51298,
+    "latitude": -0.20593,
+    "id": "83",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51304,
+    "latitude": -0.20609,
+    "id": "84",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51304,
+    "latitude": -0.2062,
+    "id": "85",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51303,
+    "latitude": -0.2063,
+    "id": "86",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.513,
+    "latitude": -0.20637,
+    "id": "87",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51294,
+    "latitude": -0.20644,
+    "id": "88",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51282,
+    "latitude": -0.20653,
+    "id": "89",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51272,
+    "latitude": -0.20655,
+    "id": "90",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51219,
+    "latitude": -0.20652,
+    "id": "91",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51208,
+    "latitude": -0.20647,
+    "id": "92",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51209,
+    "latitude": -0.20637,
+    "id": "93",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5116,
+    "latitude": -0.20557,
+    "id": "94",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51121,
+    "latitude": -0.20534,
+    "id": "95",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51084,
+    "latitude": -0.20497,
+    "id": "96",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51053,
+    "latitude": -0.20427,
+    "id": "97",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51047,
+    "latitude": -0.20393,
+    "id": "98",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5105,
+    "latitude": -0.20366,
+    "id": "99",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51179,
+    "latitude": -0.19911,
+    "id": "100",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51166,
+    "latitude": -0.19764,
+    "id": "101",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51229,
+    "latitude": -0.19745,
+    "id": "102",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51255,
+    "latitude": -0.19626,
+    "id": "103",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51265,
+    "latitude": -0.19466,
+    "id": "104",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51054,
+    "latitude": -0.19438,
+    "id": "105",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.51006,
+    "latitude": -0.19277,
+    "id": "106",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.5107,
+    "latitude": -0.19236,
+    "id": "107",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50924,
+    "latitude": -0.18869,
+    "id": "108",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50903,
+    "latitude": -0.18844,
+    "id": "109",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50877,
+    "latitude": -0.18775,
+    "id": "110",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50838,
+    "latitude": -0.18683,
+    "id": "111",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50803,
+    "latitude": -0.18606,
+    "id": "112",
+    "__collections__": {}
+  },
+  {
+    "longitude": -78.50507,
+    "latitude": -0.18146,
+    "id": "113",
+    "__collections__": {}
+  }
+]
+                
+            

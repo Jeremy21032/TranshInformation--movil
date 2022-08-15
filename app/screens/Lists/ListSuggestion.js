@@ -12,21 +12,28 @@ import { useTheme } from "react-native-paper";
 import { useNavigation } from "@react-navigation/native";
 import { removeSuggestion } from "../../services/SuggestionsServices";
 import { ModalInformation } from "../../components/ModalInformation";
+import { ModalInfoAlerta } from "../../components/ModalInfoAlerta";
 
 export const ListSuggestion = ({ infoSuggestion, refresh }) => {
-  const navigation = useNavigation();
   const [visible, isVisible] = useState(false);
+  const [modalVisibleAlert, setModalVisibleAlert] = useState(false);
+  const [messageAlert, setMessageAlert] = useState("");
   const [messageSelected, setMessageSelected] = useState("false");
+  const [selectedTitle, setSelectedTitle] = useState("");
   const [titleSelected, setTitleSelected] = useState("false");
-  const [date,setDate]=useState("");
+  const [date, setDate] = useState("");
   const paperTheme = useTheme();
   const showModal = () => {
-    console.log("Entra")
-    isVisible(true)
+    console.log("Entra");
+    isVisible(true);
     setMessageSelected(infoSuggestion.comment);
     setTitleSelected(infoSuggestion.section);
-    setDate(infoSuggestion.timeStamp)
-    console.log("Sale")
+    setDate(infoSuggestion.timeStamp);
+    console.log("Sale");
+  };
+  const onConfirm = () => {
+    removeSuggestion(infoSuggestion);
+    refresh();
   };
   return (
     <View
@@ -64,8 +71,9 @@ export const ListSuggestion = ({ infoSuggestion, refresh }) => {
       <View style={[{ flex: 1 }, styles.columnR]}>
         <TouchableOpacity
           onPress={() => {
-            removeSuggestion(infoSuggestion);
-            refresh();
+            setModalVisibleAlert(true);
+            setSelectedTitle(infoSuggestion.section);
+            setMessageAlert(infoSuggestion.comment);
           }}
         >
           <MaterialCommunityIcons
@@ -82,6 +90,13 @@ export const ListSuggestion = ({ infoSuggestion, refresh }) => {
         title={titleSelected}
         date={date}
       ></ModalInformation>
+      <ModalInfoAlerta
+        modalVisible={modalVisibleAlert}
+        setModalVisible={setModalVisibleAlert}
+        message={messageAlert}
+        functionE={onConfirm}
+        title={selectedTitle}
+      ></ModalInfoAlerta>
     </View>
   );
 };

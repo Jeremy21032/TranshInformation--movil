@@ -13,5 +13,6 @@ export const SuggestionsStackScreen = () => (
   >
     <SuggestionStack.Screen name="SUGERENCIAS" component={SuggestionsScreen} />
     <SuggestionStack.Screen name="EDITARSUGERENCIAS" component={SuggestionEditScreen} />
+
   </SuggestionStack.Navigator>
 );

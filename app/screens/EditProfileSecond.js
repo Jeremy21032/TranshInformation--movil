@@ -28,7 +28,7 @@ import { ModalInfoCorrect } from "../components/ModalInfoCorrect";
 import { ModalInfoError } from "../components/ModalInfoError";
 import AppContext from "../context/AppContext";
 
-export const EditProfileSecond = ({ navigation }) => {
+export const EditProfileSecond = () => {
   const paperTheme = useTheme();
   const [modalVisibleError, setModalVisibleError] = React.useState(false);
   const [modalVisibleCorrect, setModalVisibleCorrect] = React.useState(false);
@@ -55,7 +55,7 @@ export const EditProfileSecond = ({ navigation }) => {
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   React.useEffect(() => {
     console.log("userInfo updated", userInfo);
-    const data = {
+    setData({
       name: userInfo.name,
       lastName: userInfo.lastName,
       email: userInfo.email,
@@ -69,8 +69,7 @@ export const EditProfileSecond = ({ navigation }) => {
       isvalidEmail: true,
       date: userInfo.birthdate,
       profilePic: userInfo.profilePic,
-    };
-    setData(data);
+    });
   }, [userInfo]);
 
   const showDatePicker = () => {
@@ -130,7 +129,7 @@ export const EditProfileSecond = ({ navigation }) => {
     }
   };
   const canContinue = () => {
-    //navigation.goBack();
+    // TODO document why this arrow function is empty
   };
 
   const chooseFile = async () => {
@@ -169,7 +168,10 @@ export const EditProfileSecond = ({ navigation }) => {
       console.log("***************************3********************");
       const uploadResult = await uploadBytes(fileStorage, blob);
 
-      console.log("***************************4********************");
+      console.log(
+        "***************************4********************",
+        uploadResult
+      );
       const url = await getDownloadURL(fileStorage);
 
       blob.close();
@@ -215,6 +217,7 @@ export const EditProfileSecond = ({ navigation }) => {
       setMessageCorrect(
         "Información actualizada con exito, la sesión se cerrará por seguridad."
       );
+      handleFirebaseUser(true)
       setTimeout(() => {
         handleUserInfo(persona);
       }, 2000);

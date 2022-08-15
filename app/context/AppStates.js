@@ -9,7 +9,6 @@ import { AppReducer } from "./AppReducer";
 import {
   FILL_RECOMENDATIONS,
   FILL_SERVICES,
-  SEND_EMAIL,
   FIREBASE_USER,
   UPDATE_USER_INFO,
   FONT_SIZE,
@@ -75,12 +74,7 @@ export const AppStates = ({ children }) => {
       payload: contactsInfo,
     });
   }, []);
-  const handleSendEmail = useCallback((emailInfo) => {
-    dispatch({
-      type: SEND_EMAIL,
-      payload: emailInfo,
-    });
-  }, []);
+
   const handleChangeFontSize = useCallback((value) => {
     handleSetFontSize(value);
   }, []);

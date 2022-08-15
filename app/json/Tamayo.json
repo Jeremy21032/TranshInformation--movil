@@ -1,0 +1,72 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "Tamayo",
+        "frecuencia": "Diario",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.48101,
+        "latitude": -0.2026,
+        "calloutlatitude": -78.48469,
+        "calloutlongitude": -0.20187,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.48215,
+        "latitude": -0.20033,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.48429,
+        "latitude": -0.19882,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.49502,
+        "latitude": -0.19586,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.49598,
+        "latitude": -0.19811,
+        "id": "5"
+        
+    },
+    {
+        "longitude": -78.4866,
+        "latitude": -0.2021,
+        "id": "6"
+        
+    },
+    {
+        "longitude": -78.48713,
+        "latitude": -0.20277,
+        "id": "7"
+        
+    },
+    {
+        "longitude": -78.49129,
+        "latitude": -0.20504,
+        "id": "8"
+        
+    },
+    {
+        "longitude": -78.49564,
+        "latitude": -0.20864,
+        "id": "9"
+        
+    },
+    {
+        "longitude": -78.49357,
+        "latitude": -0.2104,
+        "id": "10"
+        
+    }
+
+]

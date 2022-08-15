@@ -1,6 +1,5 @@
 import React from 'react'
 import { createDrawerNavigator } from '@react-navigation/drawer'
-import { BadgesScreen } from '../screens/BadgesScreen';
 import { ServicesScreen } from '../screens/ServicesScreen';
 import { DrawerContent } from '../screens/DrawerContent';
 import * as styles from '../../assets/styles/appStyles';
@@ -25,13 +24,11 @@ export const RootDrawerScreen = ({ items }) => (
         {console.log(".....................ITEMS...................",items)}
         <RootDrawer.Screen name="INICIO" component={Home} />
         <RootDrawer.Screen name="RECOMENDACIONES" component={RecomendationsScreen} />
-        {/* <RootDrawer.Screen name="PERFIL" component={ProfileScreen} /> */}
         <RootDrawer.Screen name="PERFIL" component={ProfileStackScreen} />
         <RootDrawer.Screen name="SERVICIOS" component={ServicesScreen} />
         <RootDrawer.Screen name="NOTICIAS" component={NoticesOrganicStackScreen} options={{headerShown:false }}  />
         <RootDrawer.Screen name="VIDEOS" component={VideoStackScreen} options={{headerShown:false }} />
         <RootDrawer.Screen name="SUGERENCIAS" component={SuggestionsStackScreen} />
-        <RootDrawer.Screen name="BADGES" component={BadgesScreen} />
     </RootDrawer.Navigator>
 )
 

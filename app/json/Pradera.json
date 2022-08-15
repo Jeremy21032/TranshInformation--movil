@@ -1,0 +1,72 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "Pradera",
+        "frecuencia": "Martes, Jueves, Sábado",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.47956,
+        "latitude": -0.1869,
+        "calloutlatitude": -78.48609,
+        "calloutlongitude": -0.19422,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.48604,
+        "latitude": -0.19086,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.4876,
+        "latitude": -0.18738,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.48848,
+        "latitude": -0.19222,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.49479,
+        "latitude": -0.19528,
+        "id": "5"
+        
+    },
+    {
+        "longitude": -78.49502,
+        "latitude": -0.19586,
+        "id": "6"
+        
+    },
+    {
+        "longitude": -78.48429,
+        "latitude": -0.19882,
+        "id": "7"
+        
+    },
+    {
+        "longitude": -78.48082,
+        "latitude": -0.19134,
+        "id": "8"
+        
+    },
+    {
+        "longitude": -78.48075,
+        "latitude": -0.19055,
+        "id": "9"
+        
+    },
+    {
+        "longitude": -78.48103,
+        "latitude": -0.19028,
+        "id": "10"
+        
+    }
+
+]

@@ -13,6 +13,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import * as Animatable from "react-native-animatable";
 import { colors } from "../../assets/styles/appStyles";
 import * as commonStyles from "../../assets/styles/appStyles";
+import * as json from "../../app.json";
 const height_logo = height * 0.28;
 export const SplashScreen = ({ navigation }) => {
   return (
@@ -56,10 +57,10 @@ export const SplashScreen = ({ navigation }) => {
             color: commonStyles.colors.ashGray,
             bottom: "0%",
             position: "absolute",
-            alignSelf:'center'
+            alignSelf: "center",
           }}
         >
-          versión 0.0.17(002)
+          versión {json.expo.version}
         </Text>
       </Animatable.View>
     </View>
@@ -72,12 +73,12 @@ const styles = StyleSheet.create({
     backgroundColor: colors.darkCyan,
   },
   header: {
-    flex: 2,
+    flex:1.5,
     justifyContent: "center",
     alignItems: "center",
   },
   footer: {
-    flex: 1,
+    flex: 1.2,
     backgroundColor: "#fff",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

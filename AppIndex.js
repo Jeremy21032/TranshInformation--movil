@@ -51,7 +51,7 @@ const CustomDarkTheme = {
     ...NavigationDarkTheme.colors,
     ...PaperDarkTheme.colors,
     text: styles.colors.cultured,
-    background: styles.colors.lightGray,
+    background: styles.colors.black,
   },
 };
 

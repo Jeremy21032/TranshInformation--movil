@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext,useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
   RefreshControl,
   View,
-  Button,
   Text,
   Image,
   TouchableOpacity,
@@ -16,16 +15,19 @@ import * as commonStyles from "../../assets/styles/appStyles";
 import {
   SLIDER_WIDTH,
   ITEM_WIDTH,
-  CarouselCardItem,
 } from "./Lists/CarouselCardItem";
 import AppContext from "../context/AppContext";
 import { LinearGradient } from "expo-linear-gradient";
+import { ModalInfoError } from "../components/ModalInfoError";
 
 export const RecomendationsScreen = () => {
   const paperTheme = useTheme();
   const { handleChangeFontSize, fontSize } = useContext(AppContext);
   const [index, setIndex] = React.useState(0);
   const { recomendations } = useContext(AppContext);
+  const [modalVisibleError, setModalVisibleError] = useState(false);
+  const [messageError, setMessageError] = useState("");
+
   const isCarousel = React.useRef(null);
   const [refreshing, setRefreshing] = React.useState(false);
   const wait = (timeout) => {
@@ -38,10 +40,6 @@ export const RecomendationsScreen = () => {
       setRefreshing(false);
     });
   }, []);
-  useEffect(() => {
-    //onRefresh();
-  }, []);
-  useEffect(() => {}, []);
 
   return (
     <ScrollView
@@ -64,7 +62,13 @@ export const RecomendationsScreen = () => {
         <View style={styles.internalButton}>
           <TouchableOpacity
             onPress={() => {
-              handleChangeFontSize(fontSize - 1);
+              console.log(fontSize)
+              if (fontSize <= 16) {
+                setModalVisibleError(true);
+                setMessageError("Ha llegado al límite, no se puede disminuir más el tamaño de la letra.")
+              } else {
+                handleChangeFontSize(fontSize - 1);
+              }
             }}
           >
             <LinearGradient
@@ -81,7 +85,12 @@ export const RecomendationsScreen = () => {
         <View style={styles.internalButton}>
           <TouchableOpacity
             onPress={() => {
-              handleChangeFontSize(fontSize + 1);
+              if (fontSize >= 22) {
+                setModalVisibleError(true);
+                setMessageError("Ha llegado al límite, no se puede aumentar más el tamaño de la letra.")
+              } else {
+                handleChangeFontSize(fontSize + 1);
+              }
             }}
           >
             <LinearGradient
@@ -141,6 +150,11 @@ export const RecomendationsScreen = () => {
           extraData={fontSize}
         />
       </SafeAreaView>
+      <ModalInfoError
+        modalVisible={modalVisibleError}
+        setModalVisible={setModalVisibleError}
+        message={messageError}
+      ></ModalInfoError>
     </ScrollView>
   );
 };

@@ -1,0 +1,79 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "03h00-11h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "La Mariscal",
+        "frecuencia": "Diario",
+        "horario": "diurno",
+        "servicio": "Contenerización",
+        "longitude": -78.49396,
+        "latitude": -0.19894,
+        "calloutlatitude": -78.49326,
+        "calloutlongitude": -0.20379,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.49092,
+        "latitude": -0.20021,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.4866,
+        "latitude": -0.2021,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.48713,
+        "latitude": -0.20277,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.48934,
+        "latitude": -0.20403,
+        "id": "5"
+        
+    },
+    {
+        "longitude": -78.49129,
+        "latitude": -0.20504,
+        "id": "6"
+        
+    },
+    {
+        "longitude": -78.49322,
+        "latitude": -0.20651,
+        "id": "7"
+        
+    },
+    {
+        "longitude": -78.49564,
+        "latitude": -0.20864,
+        "id": "8"
+        
+    },
+    {
+        "longitude": -78.49784,
+        "latitude": -0.20734,
+        "id": "9"
+        
+    },
+    {
+        "longitude": -78.4951,
+        "latitude": -0.20242,
+        "id": "10"
+        
+    },
+    {
+        "longitude": -78.49452,
+        "latitude": -0.20087,
+        "id": "11"
+        
+    }
+
+
+]

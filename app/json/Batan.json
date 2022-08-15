@@ -1,0 +1,47 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "Batan",
+        "frecuencia": "Martes, Jueves, Sábado",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.47787,
+        "latitude": -0.17703,
+        "calloutlatitude": -78.48042,
+        "calloutlongitude": -0.18214,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.48092,
+        "latitude": -0.17639,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.48331,
+        "latitude": -0.18916,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.4828,
+        "latitude": -0.18895,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.47956,
+        "latitude": -0.1869,
+        "id": "5"
+        
+    },
+    {
+        "longitude": -78.47899,
+        "latitude": -0.18397,
+        "id": "6"
+        
+    }
+]

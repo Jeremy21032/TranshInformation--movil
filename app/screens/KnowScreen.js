@@ -5,6 +5,8 @@ import {
   TextInput,
   TouchableOpacity,
   Platform,
+  ScrollView,
+  Dimensions,
 } from "react-native";
 import React, { useState, useEffect, useContext } from "react";
 import * as Animatable from "react-native-animatable";
@@ -146,122 +148,128 @@ export const KnowScreen = ({ navigation }) => {
     );
   };
   let canContinue = () => {
-    setTimeout( cerrar,2000);
+    setTimeout(cerrar, 2000);
   };
   return (
-    <View style={styles.commons.signContainer}>
-      <View style={styles.commons.header}>
-        <Text style={styles.commons.text_header}></Text>
-        <Text style={styles.commons.text_header}>Hola, {userInfo.name}.</Text>
-        <Text style={styles.commons.text_header}>
-          Antes de continuar, queremos conocerte un poco más.
-        </Text>
-      </View>
-      <Animatable.View style={stylesK.footer} animation="fadeInUpBig">
-        <Text style={styles.commons.description}>
-          Por que para nosotros eres importante, queremos formar parte de tus
-          momentos importantes
-        </Text>
-        <Text
-          style={[
-            styles.commons.text_footer,
-            {
-              marginTop: 35,
-            },
-          ]}
-        >
-          Fecha de Nacimiento
-        </Text>
-        <View style={[styles.commons.action, { marginBottom: 35 }]}>
-          <FontAwesome
-            name="birthday-cake"
-            color={styles.colors.darkBlue}
-            size={20}
-          />
-          <TextInput
-            placeholder={
-              data.date != "" && data.date != null
-                ? data.date
-                : "Ingresa tu fecha de nacimiento"
-            }
+      <View style={[styles.commons.signContainer,{maxHeight:Dimensions.get("window").height}]}>
+        <View style={styles.commons.header}>
+          <Text style={styles.commons.text_header}></Text>
+          <Text style={styles.commons.text_header}>Hola, {userInfo.name}.</Text>
+          <Text style={styles.commons.text_header}>
+            Antes de continuar, queremos conocerte un poco más.
+          </Text>
+        </View>
+        <Animatable.View style={stylesK.footer} animation="fadeInUpBig">
+          <Text style={styles.commons.description}>
+            Por que para nosotros eres importante, queremos formar parte de tus
+            momentos importantes
+          </Text>
+          <Text
             style={[
-              styles.commons.textInput,
+              styles.commons.text_footer,
               {
-                color: paperTheme.dark
-                  ? styles.colors.white
-                  : styles.colors.darkBlue,
+                marginTop: 35,
               },
             ]}
-            autoCapitalize="none"
-            editable={false}
-            placeholderTextColor={
-              data.date != "" ? styles.colors.black : styles.colors.lightGray
-            }
-          />
-          <TouchableOpacity onPress={showDatePicker}>
-            <Feather name="calendar" color="grey" size={20} />
-          </TouchableOpacity>
-        </View>
-        <DateTimePickerModal
-          isVisible={isDatePickerVisible}
-          mode="date"
-          onConfirm={handleConfirm}
-          onCancel={hideDatePicker}
-          maximumDate={new Date("01/01/2005")}
-          minimumDate={new Date("01/01/1920")}
-          display={Platform.OS === "ios" ? "spinner" : "default"}
-        />
-        <Text style={styles.commons.description}>
-          Selecciona el sector donde vives.
-        </Text>
-        <DropDownPicker
-          open={open}
-          value={value}
-          items={items}
-          setOpen={setOpen}
-          setValue={setValue}
-          setItems={setItems}
-          onSelectItem={(item) => {
-            console.log(item);
-            setData({
-              ...data,
-              direcionBase: item.value,
-              direccion: item.label,
-            });
-          }}
-        />
-        <Text style={styles.commons.description}>{"\n"}</Text>
-        <TouchableOpacity onPress={() => validate()} style={{ width: "100%" }}>
-          <LinearGradient
-            colors={[styles.colors.gradient2, styles.colors.gradient1]}
-            style={styles.commons.signIn}
           >
-            <Text
-              style={[styles.commons.textSign, { color: styles.colors.white }]}
+            Fecha de Nacimiento
+          </Text>
+          <View style={[styles.commons.action, { marginBottom: 35 }]}>
+            <FontAwesome
+              name="birthday-cake"
+              color={styles.colors.darkBlue}
+              size={20}
+            />
+            <TextInput
+              placeholder={
+                data.date != "" && data.date != null
+                  ? data.date
+                  : "Ingresa tu fecha de nacimiento"
+              }
+              style={[
+                styles.commons.textInput,
+                {
+                  color: paperTheme.dark
+                    ? styles.colors.white
+                    : styles.colors.darkBlue,
+                },
+              ]}
+              autoCapitalize="none"
+              editable={false}
+              placeholderTextColor={
+                data.date != "" ? styles.colors.black : styles.colors.lightGray
+              }
+            />
+            <TouchableOpacity onPress={showDatePicker}>
+              <Feather name="calendar" color="grey" size={20} />
+            </TouchableOpacity>
+          </View>
+          <DateTimePickerModal
+            isVisible={isDatePickerVisible}
+            mode="date"
+            onConfirm={handleConfirm}
+            onCancel={hideDatePicker}
+            maximumDate={new Date("01/01/2005")}
+            minimumDate={new Date("01/01/1920")}
+            display={Platform.OS === "ios" ? "spinner" : "default"}
+          />
+          <Text style={styles.commons.description}>
+            Selecciona el sector donde vives.
+          </Text>
+          <DropDownPicker
+            open={open}
+            value={value}
+            items={items}
+            setOpen={setOpen}
+            setValue={setValue}
+            setItems={setItems}
+            onSelectItem={(item) => {
+              console.log(item);
+              setData({
+                ...data,
+                direcionBase: item.value,
+                direccion: item.label,
+              });
+            }}
+          />
+          <Text style={styles.commons.description}>{"\n"}</Text>
+          <TouchableOpacity
+            onPress={() => validate()}
+            style={{ width: "100%" }}
+          >
+            <LinearGradient
+              colors={[styles.colors.gradient2, styles.colors.gradient1]}
+              style={styles.commons.signIn}
             >
-              Continuar
-            </Text>
-          </LinearGradient>
-        </TouchableOpacity>
-      </Animatable.View>
-      {isLoading ? component : <View></View>}
-      <ModalInfoError
-        modalVisible={modalVisibleError}
-        setModalVisible={setModalVisibleError}
-        message={messageError}
-      ></ModalInfoError>
-      <ModalInfoCorrect
-        modalVisible={modalVisibleCorrect}
-        setModalVisible={setModalVisibleCorrect}
-        message={messageCorrect}
-      ></ModalInfoCorrect>
-    </View>
+              <Text
+                style={[
+                  styles.commons.textSign,
+                  { color: styles.colors.white },
+                ]}
+              >
+                Continuar
+              </Text>
+            </LinearGradient>
+          </TouchableOpacity>
+        </Animatable.View>
+        {isLoading ? component : <View></View>}
+        <ModalInfoError
+          modalVisible={modalVisibleError}
+          setModalVisible={setModalVisibleError}
+          message={messageError}
+        ></ModalInfoError>
+        <ModalInfoCorrect
+          modalVisible={modalVisibleCorrect}
+          setModalVisible={setModalVisibleCorrect}
+          message={messageCorrect}
+        ></ModalInfoCorrect>
+      </View>
   );
 };
 
 export const stylesK = StyleSheet.create({
   footer: {
-    flex: 2,
+    maxHeight:Dimensions.get("window").height/1.5,
     backgroundColor: styles.colors.white,
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,

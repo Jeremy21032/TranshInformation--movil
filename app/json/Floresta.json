@@ -1,0 +1,126 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "Floresta",
+        "frecuencia": "Lunes, Miércoles, Viernes",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.48101,
+        "latitude": -0.2026,
+        "calloutlatitude": -78.48235,
+        "calloutlongitude": -0.20741,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.48792,
+        "latitude": -0.20668,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.4822,
+        "latitude": -0.21125,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.48281,
+        "latitude": -0.21139,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.48464,
+        "latitude": -0.21253,
+        "id": "5"
+        
+    },
+
+    {
+        "longitude": -78.48339,
+        "latitude": -0.2132,
+        "id": "6"
+        
+    },
+    {
+        "longitude": -78.48206,
+        "latitude": -0.21319,
+        "id": "7"
+        
+    },
+    {
+        "longitude": -78.48145,
+        "latitude": -0.21305,
+        "id": "8"
+        
+    },
+    {
+        "longitude": -78.48068,
+        "latitude": -0.2132,
+        "id": "9"
+        
+    },
+    {
+        "longitude": -78.48034,
+        "latitude": -0.21296,
+        "id": "10"
+        
+    },
+    {
+        "longitude": -78.47943,
+        "latitude": -0.21045,
+        "id": "11"
+        
+    },
+    {
+        "longitude": -78.47921,
+        "latitude": -0.2088,
+        "id": "12"
+        
+    },
+    {
+        "longitude": -78.47899,
+        "latitude": -0.20798,
+        "id": "13"
+        
+    },
+    {
+        "longitude": -78.47913,
+        "latitude": -0.20711,
+        "id": "14"
+        
+    },
+    {
+        "longitude": -78.47965,
+        "latitude": -0.2068,
+        "id": "15"
+        
+    },
+    {
+        "longitude": -78.47944,
+        "latitude": -0.2057,
+        "id": "16"
+        
+    },
+    {
+        "longitude": -78.48105,
+        "latitude": -0.20449,
+        "id": "17"
+        
+    },
+    {
+        "longitude": -78.48041,
+        "latitude": -0.20352,
+        "id": "18"
+        
+    },
+    {
+        "longitude": -78.48015,
+        "latitude": -0.20368,
+        "id": "19"
+        
+    }
+]

@@ -1,0 +1,59 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "Batan Alto",
+        "frecuencia": "Martes, Jueves, Sábado",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.47091,
+        "latitude": -0.17203,
+        "calloutlatitude": -78.47594,
+        "calloutlongitude": -0.17747,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.47624,
+        "latitude": -0.17096,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.47787,
+        "latitude": -0.17703,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.47956,
+        "latitude": -0.1869,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.47598,
+        "latitude": -0.18326,
+        "id": "5"
+        
+    },
+    {
+        "longitude": -78.47416,
+        "latitude": -0.17955,
+        "id": "6"
+        
+    },
+    {
+        "longitude": -78.47325,
+        "latitude": -0.17679,
+        "id": "7"
+        
+    },
+    {
+        "longitude": -78.47205,
+        "latitude": -0.1747,
+        "id": "8"
+        
+    }
+]

@@ -1,0 +1,41 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Eugenio Espejo",
+        "ruta": "Jipijapa",
+        "frecuencia": "Martes, Jueves, Sábado",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.47894,
+        "latitude": -0.16505,
+        "calloutlatitude": -78.48232,
+        "calloutlongitude": -0.16981,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.4835,
+        "latitude": -0.16421,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.48557,
+        "latitude": -0.17583,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.48098,
+        "latitude": -0.1767,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.47959,
+        "latitude": -0.16885,
+        "id": "5"
+        
+    }
+]

@@ -8,8 +8,6 @@ import {
   Alert,
   ActivityIndicator,
   Share,
-  Button,
-  Image,
 } from "react-native";
 import React, { useCallback } from "react";
 import YoutubePlayer from "react-native-youtube-iframe";
@@ -19,7 +17,7 @@ import * as commonStyles from "../../assets/styles/appStyles";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import { LinearGradient } from "expo-linear-gradient";
 
-export const VideosDetailScreen = ({ route, navigation }) => {
+export const VideosDetailScreen = ({ route }) => {
   const paperTheme = useTheme();
 
   const [videoSource, setVideoSource] = React.useState(null);
@@ -35,19 +33,6 @@ export const VideosDetailScreen = ({ route, navigation }) => {
     fullScreen: false,
     shouldPlay: true,
   });
-  const handlePlayAndPause = () => {
-    setState({
-      ...state,
-      shouldPlay: !state.shouldPlay,
-    });
-  };
-
-  const handleVolume = () => {
-    setState({
-      ...state,
-      muted: !state.muted,
-    });
-  };
   function setOrientation() {
     if (Dimensions.get("window").height > Dimensions.get("window").width) {
       ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.LANDSCAPE);
@@ -112,43 +97,9 @@ export const VideosDetailScreen = ({ route, navigation }) => {
               videoId={videoSource.urlID}
               onChangeState={onStateChange}
               forceAndroidAutoplay={true}
-              
               volume={state.muted ? 0 : 100}
             />
           </View>
-{/* 
-          <View style={styles.controlBar}>
-            <TouchableOpacity
-              underlayColor="black"
-              onPress={() => {
-                handlePlayAndPause();
-              }}
-            >
-              <Text style={styles.controlButton}>
-                {state.shouldPlay ? "Pause" : "Play"}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              underlayColor="black"
-              onPress={() => {
-                handleVolume();
-              }}
-            >
-              <Text style={styles.controlButton}>
-                {state.muted ? "Unmute" : "Mute"}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              underlayColor="black"
-              onPress={() => {
-                setOrientation();
-              }}
-            >
-              <Text style={styles.controlButton}>
-                {state.fullScreen ? "Exit full screen" : "Go full screen"}
-              </Text>
-            </TouchableOpacity>
-          </View> */}
           <View
             style={{
               flexDirection: "row",

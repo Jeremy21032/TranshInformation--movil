@@ -1,0 +1,203 @@
+[
+    {
+        "centroLogistico": "COC",
+        "horas": "19h00-03h00",
+        "adm_zonal": "Manuela Saenz",
+        "ruta": "Panecillo",
+        "frecuencia": "Diario",
+        "horario": "nocturno",
+        "servicio": "Pie de vereda",
+        "longitude": -78.51539,
+        "latitude": -0.22102,
+        "calloutlatitude": -78.51894,
+        "calloutlongitude": -0.22638,
+        "id": "1"
+        
+    },
+    {
+        "longitude": -78.51889,
+        "latitude": -0.21871,
+        "id": "2"
+        
+    },
+    {
+        "longitude": -78.52088,
+        "latitude": -0.21794,
+        "id": "3"
+        
+    },
+    {
+        "longitude": -78.52172,
+        "latitude": -0.2185,
+        "id": "4"
+        
+    },
+    {
+        "longitude": -78.52232,
+        "latitude": -0.2204,
+        "id": "5"
+        
+    },
+    {
+        "longitude": -78.52361,
+        "latitude": -0.21982,
+        "id": "6"
+        
+    },
+    {
+        "longitude": -78.52449,
+        "latitude": -0.22162,
+        "id": "7"
+        
+    },
+    {
+        "longitude": -78.52383,
+        "latitude": -0.22382,
+        "id": "8"
+        
+    },
+    {
+        "longitude": -78.52391,
+        "latitude": -0.22467,
+        "id": "9"
+        
+    },
+    {
+        "longitude": -78.52532,
+        "latitude": -0.22407,
+        "id": "10"
+        
+    },
+    {
+        "longitude": -78.52533,
+        "latitude": -0.22501,
+        "id": "11"
+        
+    },
+    {
+        "longitude": -78.52587,
+        "latitude": -0.22526,
+        "id": "12"
+        
+    },
+    {
+        "longitude": -78.52604,
+        "latitude": -0.22695,
+        "id": "13"
+        
+    },
+    {
+        "longitude": -78.52557,
+        "latitude": -0.22864,
+        "id": "14"
+        
+    },
+    {
+        "longitude": -78.52488,
+        "latitude": -0.22997,
+        "id": "15"
+        
+    },
+    {
+        "longitude": -78.52448,
+        "latitude": -0.23272,
+        "id": "16"
+        
+    },
+    {
+        "longitude": -78.52347,
+        "latitude": -0.23041,
+        "id": "17"
+        
+    },
+    {
+        "longitude": -78.52176,
+        "latitude": -0.22537,
+        "id": "18"
+        
+    },
+    {
+        "longitude": -78.521,
+        "latitude": -0.22628,
+        "id": "19"
+        
+    },
+    {
+        "longitude": -78.52188,
+        "latitude": -0.22682,
+        "id": "20"
+        
+    },
+    {
+        "longitude": -78.52197,
+        "latitude": -0.2292,
+        "id": "21"
+        
+    },
+    {
+        "longitude": -78.52283,
+        "latitude": -0.23011,
+        "id": "22"
+        
+    },
+    {
+        "longitude": -78.52346,
+        "latitude": -0.23439,
+        "id": "23"
+        
+    },
+    {
+        "longitude": -78.52135,
+        "latitude": -0.23619,
+        "id": "24"
+        
+    },
+    {
+        "longitude": -78.51803,
+        "latitude": -0.23417,
+        "id": "25"
+        
+    },
+    {
+        "longitude": -78.51518,
+        "latitude": -0.22994,
+        "id": "26"
+        
+    },
+    {
+        "longitude": -78.51451,
+        "latitude": -0.22806,
+        "id": "27"
+        
+    },
+    {
+        "longitude": -78.51668,
+        "latitude": -0.22464,
+        "id": "28"
+        
+    },
+    {
+        "longitude": -78.51576,
+        "latitude": -0.22361,
+        "id": "29"
+        
+    },
+    {
+        "longitude": -78.51646,
+        "latitude": -0.22303,
+        "id": "30"
+        
+    },
+    {
+        "longitude": -78.51561,
+        "latitude": -0.22208,
+        "id": "31"
+        
+    },
+    {
+        "longitude": -78.516,
+        "latitude": -0.00176,
+        "id": "32"
+        
+    }
+]
