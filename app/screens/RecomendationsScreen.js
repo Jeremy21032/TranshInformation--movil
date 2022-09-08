@@ -1,4 +1,4 @@
-import React, { useContext,useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   SafeAreaView,
   ScrollView,
@@ -6,21 +6,27 @@ import {
   RefreshControl,
   View,
   Text,
+  Dimensions,
+  Animated,
   Image,
   TouchableOpacity,
 } from "react-native";
 import { useTheme } from "react-native-paper";
-import Carousel, { Pagination } from "react-native-snap-carousel";
+//  import Carousel, { Pagination } from "react-native-snap-carousel";
 import * as commonStyles from "../../assets/styles/appStyles";
-import {
-  SLIDER_WIDTH,
-  ITEM_WIDTH,
-} from "./Lists/CarouselCardItem";
+import { SLIDER_WIDTH, ITEM_WIDTH } from "./Lists/CarouselCardItem";
 import AppContext from "../context/AppContext";
 import { LinearGradient } from "expo-linear-gradient";
 import { ModalInfoError } from "../components/ModalInfoError";
+import Carousel from "react-native-reanimated-carousel";
+import { ExpandingDot } from "react-native-animated-pagination-dots";
 
 export const RecomendationsScreen = () => {
+  const width = Dimensions.get("window").width;
+  const height = Dimensions.get("window").height;
+  const [pagingEnabled, setPagingEnabled] = React.useState(true);
+  const scrollX = React.useRef(new Animated.Value(0)).current;
+
   const paperTheme = useTheme();
   const { handleChangeFontSize, fontSize } = useContext(AppContext);
   const [index, setIndex] = React.useState(0);
@@ -62,10 +68,12 @@ export const RecomendationsScreen = () => {
         <View style={styles.internalButton}>
           <TouchableOpacity
             onPress={() => {
-              console.log(fontSize)
+              console.log(fontSize);
               if (fontSize <= 16) {
                 setModalVisibleError(true);
-                setMessageError("Ha llegado al límite, no se puede disminuir más el tamaño de la letra.")
+                setMessageError(
+                  "Ha llegado al límite, no se puede disminuir más el tamaño de la letra."
+                );
               } else {
                 handleChangeFontSize(fontSize - 1);
               }
@@ -87,7 +95,9 @@ export const RecomendationsScreen = () => {
             onPress={() => {
               if (fontSize >= 22) {
                 setModalVisibleError(true);
-                setMessageError("Ha llegado al límite, no se puede aumentar más el tamaño de la letra.")
+                setMessageError(
+                  "Ha llegado al límite, no se puede aumentar más el tamaño de la letra."
+                );
               } else {
                 handleChangeFontSize(fontSize + 1);
               }
@@ -112,7 +122,7 @@ export const RecomendationsScreen = () => {
           { backgroundColor: paperTheme.colors.background },
         ]}
       >
-        <Pagination
+        {/* <Pagination
           dotsLength={recomendations.length}
           activeDotIndex={index}
           carouselRef={isCarousel}
@@ -128,8 +138,8 @@ export const RecomendationsScreen = () => {
           inactiveDotOpacity={0.4}
           inactiveDotScale={0.6}
           tappableDots={true}
-        />
-        <Carousel
+        /> */}
+        {/* <Carousel
           layout={"default"}
           layoutCardOffset={`9`}
           ref={isCarousel}
@@ -148,6 +158,47 @@ export const RecomendationsScreen = () => {
           onSnapToItem={(ind) => setIndex(ind)}
           useScrollView={true}
           extraData={fontSize}
+        />  */}
+
+        <Carousel
+          loop
+          layoutCardOffset={`9`}
+          height={height - 20}
+          // autoPlay={true}
+          ref={isCarousel}
+          pagingEnabled={true}
+          style={{ marginHorizontal: 20 , top:30}}
+          width={SLIDER_WIDTH}
+          // scrollAnimationDuration={1000}
+          onSnapToItem={(index) => console.log("current index:", index)}
+          data={recomendations}
+          renderItem={({ item, index }) => (
+            <View style={styles.containerCard} key={index}>
+              <Image source={{ uri: item.urlImage }} style={styles.image} />
+              <Text style={styles.header}>{item.title}</Text>
+              <Text style={[styles.body, { fontSize: fontSize }]}>
+                {item.content}
+              </Text>
+            </View>
+          )}
+        />
+        <ExpandingDot
+          data={recomendations}
+          expandingDotWidth={30}
+          scrollX={scrollX}
+          inActiveDotOpacity={0.6}
+          dotStyle={{
+            width: 10,
+            height: 10,
+            backgroundColor: paperTheme.dark
+            ? commonStyles.colors.white
+            : "rgba(0, 0, 0, 0.92)",
+            borderRadius: 5,
+            marginHorizontal: 5,
+          }}
+          containerStyle={{
+            top: 10,
+          }}
         />
       </SafeAreaView>
       <ModalInfoError

@@ -1,4 +1,4 @@
-package com.trashinformation.newarchitecture.components;
+package com.zantycb89.TrashInformation.newarchitecture.components;
 
 import com.facebook.jni.HybridData;
 import com.facebook.proguard.annotations.DoNotStrip;

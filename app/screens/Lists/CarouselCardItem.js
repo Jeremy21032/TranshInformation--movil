@@ -1,8 +1,8 @@
 import React, { useEffect } from "react";
 import { View, Text, StyleSheet, Dimensions, Image } from "react-native";
 
-export const SLIDER_WIDTH = Dimensions.get("window").width + 80;
-export const ITEM_WIDTH = Math.round(SLIDER_WIDTH * 0.7);
+export const SLIDER_WIDTH = Dimensions.get("window").width;
+export const ITEM_WIDTH = Math.round(SLIDER_WIDTH -50);
 export const CarouselCardItem = ({ item, index , props}) => { 
   return (
     <View style={styles.container} key={index}>
@@ -29,6 +29,7 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.29,
     shadowRadius: 4.65,
+    alignSelf:'center',
     elevation: 7,
     paddingBottom: 10,
   },
